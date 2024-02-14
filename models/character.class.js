@@ -27,12 +27,12 @@ class Character extends MovableObject {
   constructor() {
     super().loadImage("../img/1.Sharkie/1.IDLE/1.png");
     this.loadStandingImages(this.IMAGES_STANDING);
-    this.animate();
+    this.animate(); 
   }
 
   animate() {
     setInterval(() => {
-      let i = this.currentImage % this.IMAGES_STANDING.length
+      let i = this.currentImage % this.IMAGES_STANDING.length;
       let path = this.IMAGES_STANDING[i];
       this.img = this.imageCache[path];
       this.currentImage++;

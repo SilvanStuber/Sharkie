@@ -4,20 +4,21 @@ class MovableObject {
     img;
     height = 200;
     width = 300;
-    imageCache = {};
+    imageCacheStanding = {};
+    imageCacheSwim = {};
     speed = 0.15;
-
+    currentImage = 0;
 
     loadImage(path) {
         this.img = new Image();
         this.img.src = path;
     }
 
-    loadStandingImages(arr) { 
+    loadImages(arr, cacheTyp) { 
       arr.forEach((path) => {
         let img = new Image();
-        img.src = path; 
-        this.imageCache[path] = img;
+        img.src = path;
+        this[cacheTyp][path] = img;
       });
     }
 

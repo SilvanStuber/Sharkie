@@ -3,6 +3,7 @@ class Character extends MovableObject {
   y = 220;
   height = 200;
   width = 300;
+  speed = 1;
   IMAGES_STANDING = [
     "../img/1.Sharkie/1.IDLE/2.png",
     "../img/1.Sharkie/1.IDLE/3.png",
@@ -42,20 +43,29 @@ class Character extends MovableObject {
   animate() {
     setInterval(() => {
       if (this.world.keyboard.RIGHT) {
-        let i = this.currentImage % this.IMAGES_SWIM.length;
-        let path = this.IMAGES_SWIM[i];
-        this.img = this.imageCacheSwim[path];
-        this.currentImage++;
-      } else {
-        this.animateStanding();
+        this.x += this.speed;
+        this.otherDirection = false;
       }
-    }, 400);
+      if (this.world.keyboard.LEFT) {
+        this.x -= this.speed;
+        this.otherDirection = true;
+      }
+    }, 1000 / 60);
+    setInterval(() => {
+      if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
+        this.animateCharacter("IMAGES_SWIM", "imageCacheSwim");
+      } else {
+        this.animateCharacter("IMAGES_STANDING", "imageCacheStanding");
+      }
+    }, 250);
   }
 
-  animateStanding() {
-    let i = this.currentImage % this.IMAGES_STANDING.length;
-    let path = this.IMAGES_STANDING[i];
-    this.img = this.imageCacheStanding[path];
+  animateCharacter(imgArray, imgCache) {
+    this.imgArray = imgArray;
+    this.imgCache = imgCache;
+    let i = this.currentImage % this[imgArray].length;
+    let path = this[imgArray][i];
+    this.img = this[imgCache][path];
     this.currentImage++;
   }
 }

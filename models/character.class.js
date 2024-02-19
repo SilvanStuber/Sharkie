@@ -32,6 +32,7 @@ class Character extends MovableObject {
     "../img/1.Sharkie/3.Swim/6.png",
   ];
   world;
+  swimming_sound = new Audio('../audio/swim.mp3');
 
   constructor() {
     super().loadImage("../img/1.Sharkie/1.IDLE/1.png");
@@ -42,13 +43,16 @@ class Character extends MovableObject {
 
   animate() {
     setInterval(() => {
+      this.swimming_sound.pause();
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.x += this.speed;
         this.otherDirection = false;
+        this.swimming_sound.play();
       }
       if (this.world.keyboard.LEFT && this.x > 0) {
         this.x -= this.speed;
         this.otherDirection = true;
+        this.swimming_sound.play();
       }
       this.world.cemera_x = -this.x +100;
     }, 1000 / 60);

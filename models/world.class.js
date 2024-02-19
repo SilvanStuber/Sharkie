@@ -1,7 +1,6 @@
 class World{
   character = new Character();
-  enemies = level1.enemies;
-  backgroundObjects = level1.backgroundObjects;
+  level = level1;
   canvas;
   ctx;
   keyboard;
@@ -22,9 +21,9 @@ class World{
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.cemera_x, 0);
-    this.addObjectsToMap(this.backgroundObjects);
+    this.addObjectsToMap(this.level.backgroundObjects);
     this.addToMap(this.character);
-    this.addObjectsToMap(this.enemies);
+    this.addObjectsToMap(this.level.enemies);
     this.ctx.translate(-this.cemera_x, 0);
     let self = this;
     requestAnimationFrame(function () {

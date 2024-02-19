@@ -3,7 +3,7 @@ class Character extends MovableObject {
   y = 220;
   height = 200;
   width = 300;
-  speed = 1;
+  speed = 2;
   IMAGES_STANDING = [
     "../img/1.Sharkie/1.IDLE/2.png",
     "../img/1.Sharkie/1.IDLE/3.png",
@@ -42,15 +42,15 @@ class Character extends MovableObject {
 
   animate() {
     setInterval(() => {
-      if (this.world.keyboard.RIGHT) {
+      if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.x += this.speed;
         this.otherDirection = false;
       }
-      if (this.world.keyboard.LEFT) {
+      if (this.world.keyboard.LEFT && this.x > 0) {
         this.x -= this.speed;
         this.otherDirection = true;
       }
-      this.world.cemera_x = -this.x;
+      this.world.cemera_x = -this.x +100;
     }, 1000 / 60);
     setInterval(() => {
       if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {

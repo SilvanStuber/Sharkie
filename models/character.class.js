@@ -47,30 +47,21 @@ class Character extends MovableObject {
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.x += this.speed;
         this.otherDirection = false;
-        this.swimming_sound.play();
+        this.swimming_sound.pause();
       }
       if (this.world.keyboard.LEFT && this.x > 0) {
         this.x -= this.speed;
         this.otherDirection = true;
-        this.swimming_sound.play();
+        this.swimming_sound.pause();
       }
-      this.world.cemera_x = -this.x +100;
+      this.world.cemera_x = -this.x;
     }, 1000 / 60);
     setInterval(() => {
       if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
-        this.animateCharacter("IMAGES_SWIM", "imageCacheSwim");
+        this.playAnimation("IMAGES_SWIM", "imageCacheSwim");
       } else {
-        this.animateCharacter("IMAGES_STANDING", "imageCacheStanding");
+        this.playAnimation("IMAGES_STANDING", "imageCacheStanding");
       }
     }, 250);
-  }
-
-  animateCharacter(imgArray, imgCache) {
-    this.imgArray = imgArray;
-    this.imgCache = imgCache;
-    let i = this.currentImage % this[imgArray].length;
-    let path = this[imgArray][i];
-    this.img = this[imgCache][path];
-    this.currentImage++;
   }
 }

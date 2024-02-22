@@ -34,12 +34,33 @@ class MovableObject {
   }
 
   moveLeft() {
+    this.x -= this.speed;
+    this.otherDirection = true;
+    this.swimming_sound.play();
+  }
+
+  moveRight() {
+    this.x += this.speed;
+    this.otherDirection = false;
+    this.swimming_sound.play();
+  }
+
+  moveDown() {
+    this.y += this.speed;
+    this.swimming_sound.play();
+  }
+
+  moveUp() {
+    this.y -= this.speed;
+    this.swimming_sound.play();
+  }
+  enemyMoveLeft() {
     setInterval(() => {
       this.x -= this.speed;
     }, 1000 / 60);
   }
-
-  moveRight() {
-    console.log("Moving Right");
-  }
 }
+
+  
+
+  

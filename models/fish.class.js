@@ -26,13 +26,15 @@ class Fish extends MovableObject {
     super().loadImage("../img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png");
     this.loadImages(this.IMAGES_GREEN_FISH, "imageCacheEnemies");
     this.x = 320 + Math.random() * 500;
-    this.y = 250 + Math.random() * 200;
+    this.y = 200 + Math.random() * 200;
     this.speed = 0.15 + Math.random() * 0.3;
     this.animate();
   }
 
   animate() {
-    this.enemyMoveLeft();
+    setInterval(() => {
+     this.moveLeft();
+    }, 1000 / 60);
     setInterval(() => {
       this.playAnimation("IMAGES_GREEN_FISH", "imageCacheEnemies")
     }, 250); 

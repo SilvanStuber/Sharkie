@@ -43,19 +43,24 @@ class Character extends MovableObject {
 
   animate() {
     setInterval(() => {
-      console.log(this.y)
       this.swimming_sound.pause();
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.moveRight();
+        this.otherDirection = false;
+        this.swimming_sound.play();
       }
       if (this.world.keyboard.LEFT && this.x > 0) {
         this.moveLeft();
+        this.otherDirection = true;
+        this.swimming_sound.play();
       }
       if (this.world.keyboard.UP && this.y > -50) {
         this.moveUp();
+        this.swimming_sound.play();
       }
       if (this.world.keyboard.DOWN && this.y < 250) {
         this.moveDown();
+        this.swimming_sound.play();
       }
       this.world.cemera_x = -this.x;
     }, 1000 / 60);

@@ -33,34 +33,33 @@ class MovableObject {
     });
   }
 
+  draw(ctx) {
+    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+  }
+
+  drawFrame(ctx) {
+    ////////Rechteck///////////////////////
+    ctx.beginPath();
+    ctx.lineWidth = '5';
+    ctx.strokeStyle = 'blue';
+    ctx.rect(this.x, this.y, this.width, this.height);
+    ctx.stroke();
+    //////////////////////////////
+  }
+
   moveLeft() {
     this.x -= this.speed;
-    this.otherDirection = true;
-    this.swimming_sound.play();
   }
 
   moveRight() {
     this.x += this.speed;
-    this.otherDirection = false;
-    this.swimming_sound.play();
   }
 
   moveDown() {
     this.y += this.speed;
-    this.swimming_sound.play();
   }
 
   moveUp() {
     this.y -= this.speed;
-    this.swimming_sound.play();
-  }
-  enemyMoveLeft() {
-    setInterval(() => {
-      this.x -= this.speed;
-    }, 1000 / 60);
   }
 }
-
-  
-
-  

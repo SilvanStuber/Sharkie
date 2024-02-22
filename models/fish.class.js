@@ -1,5 +1,5 @@
 class Fish extends MovableObject {
-  height = 80;
+  height = 60;
   width = 100;
   IMAGES_GREEN_FISH = [
     "../img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png",
@@ -36,7 +36,7 @@ class Fish extends MovableObject {
      this.moveLeft();
     }, 1000 / 60);
     setInterval(() => {
-      this.playAnimation("IMAGES_GREEN_FISH", "imageCacheEnemies")
+      this.playAnimation(this.IMAGES_GREEN_FISH)
     }, 250); 
   }
 }

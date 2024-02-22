@@ -34,19 +34,19 @@ class Endboss extends MovableObject {
 
   constructor() {
     super().loadImage("../img/2.Enemy/3 Final Enemy/1.Introduce/1.png");
-    this.loadImages(this.IMAGE_INTRODUCE, "imageCacheEnemies");
-    this.loadImages(this.IMAGES_SWIM, "imageCacheEnemies");
+    this.loadImages(this.IMAGE_INTRODUCE);
+    this.loadImages(this.IMAGES_SWIM);
+    this.loadImages(this.IMAGES_SWIM);
     this.x = 2450;
     this.animate();
   }
 
   animate() {
     setInterval(() => {
-        this.playAnimation("IMAGE_INTRODUCE", "imageCacheEnemies")
+      this.playAnimation(this.IMAGE_INTRODUCE);
     }, 250);
     setInterval(() => {
-      this.playAnimation("IMAGES_SWIM", "imageCacheEnemies")
-    }, 250); 
+      this.playAnimation(this.IMAGES_SWIM);
+    }, 250);
   }
-
 }

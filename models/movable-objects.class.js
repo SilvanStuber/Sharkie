@@ -4,32 +4,30 @@ class MovableObject {
   img;
   height = 200;
   width = 300;
-  imageCacheStanding = {};
-  imageCacheSwim = {};
-  imageCacheEnemies = {};
+  imageCache = {};
   speed = 0.15;
   currentImage = 0;
   otherDirection = false;
+  energy = 100;
 
   loadImage(path) {
     this.img = new Image();
     this.img.src = path;
   }
 
-  playAnimation(imgArray, imgCache) {
+  playAnimation(imgArray) {
     this.imgArray = imgArray;
-    this.imgCache = imgCache;
-    let i = this.currentImage % this[imgArray].length;
-    let path = this[imgArray][i];
-    this.img = this[imgCache][path];
+    let i = this.currentImage % this.imgArray.length;
+    let path = this.imgArray[i];
+    this.img = this.imageCache[path];
     this.currentImage++;
   }
 
-  loadImages(arr, cacheTyp) {
+  loadImages(arr) {
     arr.forEach((path) => {
       let img = new Image();
       img.src = path;
-      this[cacheTyp][path] = img;
+      this.imageCache[path] = img;
     });
   }
 
@@ -39,12 +37,34 @@ class MovableObject {
 
   drawFrame(ctx) {
     ////////Rechteck///////////////////////
-    ctx.beginPath();
-    ctx.lineWidth = '5';
-    ctx.strokeStyle = 'blue';
-    ctx.rect(this.x, this.y, this.width, this.height);
-    ctx.stroke();
+    if (this instanceof Character || this instanceof Fish) {
+      ctx.beginPath();
+      ctx.lineWidth = "5";
+      ctx.strokeStyle = "blue";
+      ctx.rect(this.x, this.y, this.width, this.height);
+      ctx.stroke();
+    }
     //////////////////////////////
+  }
+
+  isColliding(mo) {
+    return (
+      this.x + this.width > mo.x &&
+      this.y + this.height > mo.y &&
+      this.x < mo.x &&
+      this.y < mo.y + mo.height
+    );
+  }
+
+  hit() {
+    this.energy -= 5;
+    if (this.energy < 0) {
+      this.energy = 0;
+    }
+  }
+
+  isDead() {
+    return this.energy == 0;
   }
 
   moveLeft() {

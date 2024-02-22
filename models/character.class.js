@@ -3,6 +3,10 @@ class Character extends MovableObject {
   y = 220;
   height = 200;
   width = 300;
+  offsetX = -50;
+  offsetY = -90;
+  offsetWidht= 100;
+  offsetHeight = 130;
   speed = 2;
   IMAGES_STANDING = [
     "../img/1.Sharkie/1.IDLE/2.png",

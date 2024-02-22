@@ -1,6 +1,10 @@
 class MovableObject {
   x = 120;
   y = 300;
+  offsetX;
+  offsetY;
+  offsetWidht;
+  offsetHeight;
   img;
   height = 200;
   width = 300;
@@ -41,7 +45,7 @@ class MovableObject {
       ctx.beginPath();
       ctx.lineWidth = "5";
       ctx.strokeStyle = "blue";
-      ctx.rect(this.x, this.y, this.width, this.height);
+      ctx.rect(this.x-this.offsetX, this.y-this.offsetY, this.width-this.offsetWidht, this.height-this.offsetHeight);
       ctx.stroke();
     }
     //////////////////////////////
@@ -49,8 +53,8 @@ class MovableObject {
 
   isColliding(mo) {
     return (
-      this.x + this.width > mo.x &&
-      this.y + this.height > mo.y &&
+      this.x-this.offsetX + this.width-this.offsetWidht > mo.x &&
+      this.y-this.offsetY + this.height-this.offsetHeight > mo.y &&
       this.x < mo.x &&
       this.y < mo.y + mo.height
     );

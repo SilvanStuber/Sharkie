@@ -1,6 +1,10 @@
 class Fish extends MovableObject {
   height = 60;
   width = 100;
+  offsetX = 0;
+  offsetY = 2;
+  offsetWidht= 0;
+  offsetHeight = 10;
   IMAGES_GREEN_FISH = [
     "../img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png",
     "../img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim2.png",

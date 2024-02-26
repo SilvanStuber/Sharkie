@@ -5,7 +5,7 @@ class Character extends MovableObject {
   width = 300;
   offsetX = 50;
   offsetY = -90;
-  offsetWidht= 10;
+  offsetWidht = 10;
   offsetHeight = 130;
   speed = 2;
   IMAGES_STANDING = [
@@ -34,6 +34,18 @@ class Character extends MovableObject {
     "../img/1.Sharkie/3.Swim/4.png",
     "../img/1.Sharkie/3.Swim/5.png",
     "../img/1.Sharkie/3.Swim/6.png",
+  ];
+  IMAGES_POISON_HURT = [
+    "../img/1.Sharkie/5.Hurt/1.Poisoned/2.png",
+    "../img/1.Sharkie/5.Hurt/1.Poisoned/3.png",
+    "../img/1.Sharkie/5.Hurt/1.Poisoned/4.png",
+    "../img/1.Sharkie/5.Hurt/1.Poisoned/5.png",
+  ];
+
+  IMAGES_ELECTRO_HURT = [
+    "../img/1.Sharkie/5.Hurt/2.Electric shock/1.png",
+    "../img/1.Sharkie/5.Hurt/2.Electric shock/2.png",
+    "../img/1.Sharkie/5.Hurt/2.Electric shock/3.png",
   ];
   IMAGES_POISON_DEAD = [
     "../img/1.Sharkie/6.dead/1.Poisoned/1.png",
@@ -68,6 +80,8 @@ class Character extends MovableObject {
     super().loadImage("../img/1.Sharkie/1.IDLE/1.png");
     this.loadImages(this.IMAGES_STANDING);
     this.loadImages(this.IMAGES_SWIM);
+    this.loadImages(this.IMAGES_POISON_HURT);
+    this.loadImages(this.IMAGES_ELECTRO_HURT);
     this.loadImages(this.IMAGES_POISON_DEAD);
     this.loadImages(this.IMAGES_ELECTRO_DEAD);
     this.animate();
@@ -99,8 +113,9 @@ class Character extends MovableObject {
     setInterval(() => {
       if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
         this.playAnimation(this.IMAGES_SWIM);
-      }
-      if (this.isDead()) {
+      } else if (this.isHurt()) {
+        this.playAnimation(this.IMAGES_ELECTRO_HURT);
+      } else if (this.isDead()) {
         this.playAnimation(this.IMAGES_POISON_DEAD);
       } else {
         this.playAnimation(this.IMAGES_STANDING);

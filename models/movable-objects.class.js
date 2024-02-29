@@ -9,7 +9,8 @@ class MovableObject extends DrawableObject {
   acceleration = 2.5;
   energy = 100;
   lastHit = 0;
-  intervalIds = [];
+  endbossIsPublished = false;
+
   
 
   playAnimation(images) {
@@ -61,14 +62,5 @@ class MovableObject extends DrawableObject {
 
   moveUp() {
     this.y -= this.speed;
-  }
-
-  setStoppableInterval(fn, time) {
-    let id = setInterval(fn, time);
-    this.intervalIds.push(id);
-  }
-
-  stopGame() {
-    this.intervalIds.forEach(intervalId => clearInterval(intervalId));
   }
 }

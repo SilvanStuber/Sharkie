@@ -4,6 +4,7 @@ class Endboss extends MovableObject {
   height = 500;
   width = 400;
   speed = 1;
+  world;
   IMAGE_INTRODUCE = [
     "./img/2.Enemy/3 Final Enemy/1.Introduce/1.png",
     "./img/2.Enemy/3 Final Enemy/1.Introduce/2.png",
@@ -42,11 +43,11 @@ class Endboss extends MovableObject {
   }
 
   animate() {
-    setInterval(() => {
-      this.playAnimation(this.IMAGE_INTRODUCE);
-    }, 250);
-    setInterval(() => {
-      this.playAnimation(this.IMAGES_SWIM);
-    }, 250);
+      this.stopGameSound();
+      setInterval(() => {
+        this.playAnimation(this.IMAGE_INTRODUCE);
+        this.playAnimation(this.IMAGES_SWIM);
+      }, 250);
+  
   }
 }

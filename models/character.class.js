@@ -88,11 +88,12 @@ class Character extends MovableObject {
   }
 
   animate() {
-    this.setStoppableInterval(() => this.moveCharacter(), 1000 / 60);
-    this.setStoppableInterval(() => this.animationCharacter(), 250);
+    setStoppableInterval(() => this.moveCharacter(), 1000 / 60);
+    setStoppableInterval(() => this.animationCharacter(), 250);
+    this.playGameSound();
   }
 
-  moveCharacter() {
+   moveCharacter() {
     this.swimming_sound.pause();
     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
       this.moveRight();
@@ -112,7 +113,7 @@ class Character extends MovableObject {
       this.moveDown();
       this.swimming_sound.play();
     }
-    this.world.cemera_x = -this.x;
+    this.world.camera_x = -this.x;
   }
 
   animationCharacter() {
@@ -122,10 +123,10 @@ class Character extends MovableObject {
       this.playAnimation(this.IMAGES_ELECTRO_HURT);
     } else if (this.isDead()) {
       this.playAnimation(this.IMAGES_POISON_DEAD);
-      setTimeout(() => this.stopGame(), 1050)
+      setTimeout(stopGame, 1050);
+      this.stopGameSound();
     } else {
       this.playAnimation(this.IMAGES_STANDING);
     }
   }
-  
 }

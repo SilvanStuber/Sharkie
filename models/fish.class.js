@@ -32,11 +32,11 @@ class Fish extends MovableObject {
     this.x = 320 + Math.random() * 500;
     this.y = 200 + Math.random() * 200;
     this.speed = 0.15 + Math.random() * 0.3;
-    this.animate
+    this.animate();
   }
 
   animate() {
-    this.setStoppableInterval(() => this.moveLeft(), 1000 / 60);
-    this.setStoppableInterval(() => this.playAnimation(this.IMAGES_GREEN_FISH), 250);
+    setStoppableInterval(() => this.moveLeft(), 1000 / 60);
+    setStoppableInterval(() => this.playAnimation(this.IMAGES_GREEN_FISH), 250);
   }
 }

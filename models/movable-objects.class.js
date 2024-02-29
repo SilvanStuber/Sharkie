@@ -5,8 +5,12 @@ class MovableObject extends DrawableObject {
   offsetHeight;
   speed = 0.15;
   otherDirection = false;
+  speedY = 0;
+  acceleration = 2.5;
   energy = 100;
   lastHit = 0;
+  intervalIds = [];
+  
 
   playAnimation(images) {
     let i = this.currentImage % images.length;
@@ -29,14 +33,14 @@ class MovableObject extends DrawableObject {
     if (this.energy < 0) {
       this.energy = 0;
     } else {
-      this.lastHit = new Date().getTime(); 
+      this.lastHit = new Date().getTime();
     }
   }
 
   isHurt() {
-    let timepassed = new Date().getTime() - this.lastHit; 
-    timepassed = timepassed / 1000; 
-    return timepassed < 0.5; 
+    let timepassed = new Date().getTime() - this.lastHit;
+    timepassed = timepassed / 1000;
+    return timepassed < 0.5;
   }
 
   isDead() {
@@ -57,5 +61,14 @@ class MovableObject extends DrawableObject {
 
   moveUp() {
     this.y -= this.speed;
+  }
+
+  setStoppableInterval(fn, time) {
+    let id = setInterval(fn, time);
+    this.intervalIds.push(id);
+  }
+
+  stopGame() {
+    this.intervalIds.forEach(intervalId => clearInterval(intervalId));
   }
 }

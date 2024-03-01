@@ -32,6 +32,7 @@ class Endboss extends MovableObject {
     "./img/2.Enemy/3 Final Enemy/2.floating/12.png",
     "./img/2.Enemy/3 Final Enemy/2.floating/13.png",
   ];
+  hadFirstContact = false;
 
   constructor() {
     super().loadImage("./img/2.Enemy/3 Final Enemy/1.Introduce/1.png");
@@ -43,11 +44,21 @@ class Endboss extends MovableObject {
   }
 
   animate() {
-      this.stopGameSound();
+      let i = 0;
       setInterval(() => {
-        this.playAnimation(this.IMAGE_INTRODUCE);
-        this.playAnimation(this.IMAGES_SWIM);
+        if (world.character.x > 1800) {
+          if (i < 10 ) {
+            this.playAnimation(this.IMAGE_INTRODUCE);
+            } else {
+            this.playAnimation(this.IMAGES_SWIM);
+            }
+            i++
+            if(!this.hadFirstContact) {
+              playGameSoundEndboss();
+              this.hadFirstContact = true;
+            } 
+        }
       }, 250);
-  
+    
   }
 }

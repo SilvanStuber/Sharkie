@@ -1,4 +1,4 @@
-class DrawableObject extends GameSound{
+class DrawableObject {
   x;
   y;
   img;

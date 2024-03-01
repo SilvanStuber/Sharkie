@@ -85,12 +85,12 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_POISON_DEAD);
     this.loadImages(this.IMAGES_ELECTRO_DEAD);
     this.animate();
+    playGameSound();
   }
 
   animate() {
     setStoppableInterval(() => this.moveCharacter(), 1000 / 60);
     setStoppableInterval(() => this.animationCharacter(), 250);
-    this.playGameSound();
   }
 
    moveCharacter() {
@@ -124,7 +124,7 @@ class Character extends MovableObject {
     } else if (this.isDead()) {
       this.playAnimation(this.IMAGES_POISON_DEAD);
       setTimeout(stopGame, 1050);
-      this.stopGameSound();
+      stopGameSound();
     } else {
       this.playAnimation(this.IMAGES_STANDING);
     }

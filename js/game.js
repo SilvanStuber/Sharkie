@@ -2,7 +2,6 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 
-
 function init() {
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);
@@ -49,5 +48,7 @@ window.addEventListener("keyup", (e) => {
   if (e.keyCode == 68) {
     keyboard.D = false;
   }
+
+
 });
 

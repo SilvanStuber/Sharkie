@@ -5,8 +5,12 @@ class World {
   ctx;
   keyboard;
   camera_x = 0;
-  statusBar = new StatusBar();
+  valueOfLife = new ValueOfLife();
+  valueOfCoin = new ValueOfCoin();
+  valueOfPoison = new ValueOfPoison();
   throwableObjects = [];
+  coinsValue = 0;
+  poisonValue = 0;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -23,24 +27,44 @@ class World {
 
   run() {
     setInterval(() => {
-      this.checkCollisions();
+      this.checkCollisionsEnemy();
+      this.checkCollisionsCoins();
+      this.checkCollisionsPoison();
       this.checkThrowObjects();
     }, 100);
   }
 
-  checkCollisions() {
+  checkCollisionsEnemy() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
         this.character.hit();
-        this.statusBar.setPercentage(this.character.energy);
+        this.valueOfLife.setValueOfLife(this.character.energy);
+      }
+    });
+  }
+
+  checkCollisionsCoins() {
+    this.level.coins.forEach((coin) => {
+      if (this.character.isColliding(coin)) {
+        this.coinsValue += 10;
+        this.valueOfCoin.setValueOfCoin(this.coinsValue);
+      }
+    });
+  }
+
+  checkCollisionsPoison() {
+    this.level.poisonBottle.forEach((bottle) => {
+      if (this.character.isColliding(bottle)) {
+        this.poisonValue += 20;
+        this.valueOfPoison.setValueOfPoison(this.poisonValue);
       }
     });
   }
 
   checkThrowObjects() {
-    if(this.keyboard.D) {
+    if (this.keyboard.D) {
       let bubble = new ThrowableObject(this.character.x + 230, this.character.y + 80);
-      this.throwableObjects.push(bubble)
+      this.throwableObjects.push(bubble);
     }
   }
 
@@ -50,10 +74,14 @@ class World {
     this.addObjectsToMap(this.level.backgroundObjects);
     this.ctx.translate(-this.camera_x, 0);
     //----------Space for fixed objects--------------------
-    this.addToMap(this.statusBar);
+    this.addToMap(this.valueOfLife);
+    this.addToMap(this.valueOfCoin);
+    this.addToMap(this.valueOfPoison);
     this.ctx.translate(this.camera_x, 0);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
+    this.addObjectsToMap(this.level.coins);
+    this.addObjectsToMap(this.level.poisonBottle);
     this.addObjectsToMap(this.throwableObjects);
     this.ctx.translate(-this.camera_x, 0);
     let self = this;

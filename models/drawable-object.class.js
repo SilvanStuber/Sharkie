@@ -18,7 +18,7 @@ class DrawableObject {
 
   drawFrame(ctx) {
     ////////Rechteck///////////////////////
-    if (this instanceof Character || this instanceof Fish) {
+    if (this instanceof Character || this instanceof Fish  || this instanceof Coins || this instanceof Poison) {
       ctx.beginPath();
       ctx.lineWidth = "5";
       ctx.strokeStyle = "blue";

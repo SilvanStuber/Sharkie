@@ -11,8 +11,6 @@ class MovableObject extends DrawableObject {
   lastHit = 0;
   endbossIsPublished = false;
 
-  
-
   playAnimation(images) {
     let i = this.currentImage % images.length;
     let path = images[i];

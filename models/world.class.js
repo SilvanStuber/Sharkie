@@ -47,7 +47,9 @@ class World {
     this.level.coins.forEach((coin) => {
       if (this.character.isColliding(coin)) {
         this.coinsValue += 10;
+        stopIntervalFromObject(coin.intervalId);
         this.valueOfCoin.setValueOfCoin(this.coinsValue);
+        this.ctx.clearRect(coin.x, coin.y, coin.width, coin.height);
       }
     });
   }

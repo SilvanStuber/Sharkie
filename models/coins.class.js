@@ -16,7 +16,7 @@ class Coins extends ImmovableObject {
     this.animate();
   }
   animate() {
-    setStoppableInterval(() => this.setCoin(), 220);
+  this.intervalId = setStoppableInterval(() => this.setCoin(), 220);
   }
 
   setCoin() {

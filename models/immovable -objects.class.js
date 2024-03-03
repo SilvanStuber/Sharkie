@@ -5,6 +5,5 @@ class ImmovableObject extends MovableObject {
  offsetY = 0;
  offsetWidht = 0;
  offsetHeight = 0;
- intervalId;
 }
 

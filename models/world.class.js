@@ -31,7 +31,7 @@ class World {
       this.checkCollisionsCoins();
       this.checkCollisionsPoison();
       this.checkThrowObjects();
-    }, 100);
+    }, 250);
   }
 
   checkCollisionsEnemy() {
@@ -44,22 +44,26 @@ class World {
   }
 
   checkCollisionsCoins() {
+    let c = 0;
     this.level.coins.forEach((coin) => {
       if (this.character.isColliding(coin)) {
+        this.level.coins.splice(c, 1);
         this.coinsValue += 10;
-        stopIntervalFromObject(coin.intervalId);
         this.valueOfCoin.setValueOfCoin(this.coinsValue);
-        this.ctx.clearRect(coin.x, coin.y, coin.width, coin.height);
       }
+      c++;
     });
   }
 
   checkCollisionsPoison() {
+    let p = 0;
     this.level.poisonBottle.forEach((bottle) => {
       if (this.character.isColliding(bottle)) {
+        this.level.poisonBottle.splice(p, 1);
         this.poisonValue += 20;
         this.valueOfPoison.setValueOfPoison(this.poisonValue);
       }
+      p++;
     });
   }
 

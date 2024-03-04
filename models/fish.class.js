@@ -39,4 +39,16 @@ class Fish extends MovableObject {
     setStoppableInterval(() => this.moveLeft(), 1000 / 60);
     setStoppableInterval(() => this.playAnimation(this.IMAGES_GREEN_FISH), 250);
   }
+
+  enemyFliesOutOfTheMap(characterX) {
+    this.height -= 7.5;
+    this.width -= 15;
+
+    this.y -= 70;
+    if (characterX > this.x) {
+      this.x -= 50;
+    } else {
+      this.x += 50;
+    }
+  }
 }

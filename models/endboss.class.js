@@ -4,7 +4,6 @@ class Endboss extends MovableObject {
   height = 500;
   width = 400;
   speed = 1;
-  world;
   IMAGE_INTRODUCE = [
     "./img/2.Enemy/3 Final Enemy/1.Introduce/1.png",
     "./img/2.Enemy/3 Final Enemy/1.Introduce/2.png",

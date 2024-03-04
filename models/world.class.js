@@ -11,6 +11,7 @@ class World {
   throwableObjects = [];
   coinsValue = 0;
   poisonValue = 0;
+  hitEnemy;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -19,6 +20,7 @@ class World {
     this.draw();
     this.setWorld();
     this.run();
+    
   }
 
   setWorld() {
@@ -31,6 +33,7 @@ class World {
       this.checkCollisionsCoins();
       this.checkCollisionsPoison();
       this.checkThrowObjects();
+      this.attackEnemy();
     }, 250);
   }
 
@@ -44,26 +47,26 @@ class World {
   }
 
   checkCollisionsCoins() {
-    let c = 0;
+    let i = 0;
     this.level.coins.forEach((coin) => {
       if (this.character.isColliding(coin)) {
-        this.level.coins.splice(c, 1);
+        this.level.coins.splice(i, 1);
         this.coinsValue += 10;
         this.valueOfCoin.setValueOfCoin(this.coinsValue);
       }
-      c++;
+      i++;
     });
   }
 
   checkCollisionsPoison() {
-    let p = 0;
+    let i = 0;
     this.level.poisonBottle.forEach((bottle) => {
       if (this.character.isColliding(bottle)) {
-        this.level.poisonBottle.splice(p, 1);
+        this.level.poisonBottle.splice(i, 1);
         this.poisonValue += 20;
         this.valueOfPoison.setValueOfPoison(this.poisonValue);
       }
-      p++;
+      i++;
     });
   }
 
@@ -106,6 +109,9 @@ class World {
     if (mo.otherDirection) {
       this.flipImage(mo);
     }
+    if (mo.spinObject) {
+      this.rotateImage(mo);
+    } 
     mo.draw(this.ctx);
     mo.drawFrame(this.ctx); //Rechteck
     if (mo.otherDirection) {
@@ -123,5 +129,20 @@ class World {
   flipImageBack(mo) {
     this.ctx.restore();
     mo.x = mo.x * -1;
+  }
+
+  attackEnemy() {
+    if (this.keyboard.SPACE) {
+      let i = 0;
+      this.level.enemies.forEach((enemy) => {
+        if (this.character.isColliding(enemy)) {
+          setStoppableInterval(() => enemy.enemyFliesOutOfTheMap(this.character.x), 125);
+          setTimeout(() => {
+            this.level.enemies.splice(i, 1);
+          }, 1125);
+        }
+        i++;
+      });
+    }
   }
 }

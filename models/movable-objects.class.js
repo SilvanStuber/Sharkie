@@ -10,6 +10,7 @@ class MovableObject extends DrawableObject {
   energy = 100;
   lastHit = 0;
   endbossIsPublished = false;
+  world;
 
   playAnimation(images) {
     let i = this.currentImage % images.length;

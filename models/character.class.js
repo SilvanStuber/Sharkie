@@ -81,9 +81,29 @@ class Character extends MovableObject {
     "./img/1.Sharkie/4.Attack/Fin slap/7.png",
     "./img/1.Sharkie/4.Attack/Fin slap/8.png",
   ];
+  IMAGES_GOSLEEP = [
+    "./img/1.Sharkie/2.Long_IDLE/i1.png",
+    "./img/1.Sharkie/2.Long_IDLE/i2.png",
+    "./img/1.Sharkie/2.Long_IDLE/i3.png",
+    "./img/1.Sharkie/2.Long_IDLE/i4.png",
+    "./img/1.Sharkie/2.Long_IDLE/i5.png",
+    "./img/1.Sharkie/2.Long_IDLE/i6.png",
+    "./img/1.Sharkie/2.Long_IDLE/i7.png",
+    "./img/1.Sharkie/2.Long_IDLE/i8.png",
+    "./img/1.Sharkie/2.Long_IDLE/i9.png",
+  ];
+  IMAGES_SLEEP = [
+    "./img/1.Sharkie/2.Long_IDLE/i10.png",
+    "./img/1.Sharkie/2.Long_IDLE/i11.png",
+    "./img/1.Sharkie/2.Long_IDLE/i12.png",
+    "./img/1.Sharkie/2.Long_IDLE/i13.png",
+    "./img/1.Sharkie/2.Long_IDLE/i14.png",
+  ];
   world;
   swimming_sound = new Audio("./audio/swim.mp3");
   plaAttack;
+  timeWithoutMovement = 0;
+  isAsleep = 0;
 
   constructor() {
     super().loadImage("./img/1.Sharkie/1.IDLE/1.png");
@@ -94,6 +114,8 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_POISON_DEAD);
     this.loadImages(this.IMAGES_ELECTRO_DEAD);
     this.loadImages(this.IMAGES_SLAP);
+    this.loadImages(this.IMAGES_GOSLEEP);
+    this.loadImages(this.IMAGES_SLEEP);
     this.animate();
     playGameSound();
   }
@@ -122,6 +144,8 @@ class Character extends MovableObject {
   animationCharacter() {
     this.swimming_sound.pause();
     if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
+      this.timeWithoutMovement = 0;
+      this.isAsleep = 0;
       this.playAnimation(this.IMAGES_SWIM);
       this.swimming_sound.play();
     } else if (this.isHurt()) {
@@ -131,8 +155,27 @@ class Character extends MovableObject {
       setTimeout(stopGame, 1050);
       stopGameSound();
     } else {
+      this.standingAnimation();
+    }
+  }
+
+  standingAnimation() {
+    if (this.timeWithoutMovement > 20) {
+      this.sleepAnimation();
+    } else {
       this.playAnimation(this.IMAGES_STANDING);
     }
+    setTimeout(() => {this.timeWithoutMovement++}, 1000);
+    
+  }
+
+  sleepAnimation() {
+    if (this.isAsleep > 10) {
+      this.playAnimation(this.IMAGES_SLEEP);
+    } else {
+      this.playAnimation(this.IMAGES_GOSLEEP);
+    }
+    this.isAsleep++;
   }
 
   attackAnimationCharacter() {

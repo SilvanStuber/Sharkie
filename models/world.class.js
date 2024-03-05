@@ -12,6 +12,9 @@ class World {
   coinsValue = 0;
   poisonValue = 0;
   hitEnemy;
+  coin_sound = new Audio("./audio/coin_sound.mp3");
+  poison_sound = new Audio("./audio/poison_sound.mp3");
+  bubble_sound = new Audio("./audio/bubble_sound.mp3");
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -20,7 +23,6 @@ class World {
     this.draw();
     this.setWorld();
     this.run();
-    
   }
 
   setWorld() {
@@ -50,6 +52,7 @@ class World {
     let i = 0;
     this.level.coins.forEach((coin) => {
       if (this.character.isColliding(coin)) {
+        this.coin_sound.play();
         this.level.coins.splice(i, 1);
         this.coinsValue += 10;
         this.valueOfCoin.setValueOfCoin(this.coinsValue);
@@ -62,6 +65,7 @@ class World {
     let i = 0;
     this.level.poisonBottle.forEach((bottle) => {
       if (this.character.isColliding(bottle)) {
+        this.poison_sound.play();
         this.level.poisonBottle.splice(i, 1);
         this.poisonValue += 20;
         this.valueOfPoison.setValueOfPoison(this.poisonValue);
@@ -72,6 +76,7 @@ class World {
 
   checkThrowObjects() {
     if (this.keyboard.D) {
+      this.bubble_sound.play();
       let bubble = new ThrowableObject(this.character.x + 230, this.character.y + 80);
       this.throwableObjects.push(bubble);
     }
@@ -111,7 +116,7 @@ class World {
     }
     if (mo.spinObject) {
       this.rotateImage(mo);
-    } 
+    }
     mo.draw(this.ctx);
     mo.drawFrame(this.ctx); //Rechteck
     if (mo.otherDirection) {

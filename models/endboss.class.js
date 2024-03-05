@@ -32,6 +32,7 @@ class Endboss extends MovableObject {
     "./img/2.Enemy/3 Final Enemy/2.floating/13.png",
   ];
   hadFirstContact = false;
+  hit_sound_endboss = new Audio("./audio/hit_sound_endboss.mp3");
 
   constructor() {
     super().loadImage("./img/2.Enemy/3 Final Enemy/1.Introduce/1.png");

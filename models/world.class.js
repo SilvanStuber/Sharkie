@@ -34,7 +34,6 @@ class World {
       this.checkCollisionsEnemy();
       this.checkCollisionsCoins();
       this.checkCollisionsPoison();
-      this.checkThrowObjects();
       this.attackEnemy();
     }, 250);
   }
@@ -74,13 +73,11 @@ class World {
     });
   }
 
-  checkThrowObjects() {
-    if (this.keyboard.D) {
-      this.bubble_sound.play();
-      let bubble = new ThrowableObject(this.character.x + 230, this.character.y + 80);
-      this.throwableObjects.push(bubble);
-    }
-  }
+  generateThrowObjects() {
+        this.bubble_sound.play();
+        let bubble = new ThrowableObject(this.character.x + 230, this.character.y + 80);
+        this.throwableObjects.push(bubble);
+  } 
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);

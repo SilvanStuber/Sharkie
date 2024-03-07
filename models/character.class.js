@@ -99,15 +99,25 @@ class Character extends MovableObject {
     "./img/1.Sharkie/2.Long_IDLE/i13.png",
     "./img/1.Sharkie/2.Long_IDLE/i14.png",
   ];
+  IMAGES_BLOW_UP_BUBBLE = [
+    "./img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/1.png",
+    "./img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/2.png",
+    "./img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/3.png",
+    "./img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/4.png",
+    "./img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/5.png",
+    "./img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/6.png",
+    "./img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/7.png",
+    "./img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.png",
+  ];
   world;
-  plaAttack;
+  playAttack;
   timeWithoutMovement = 0;
-  isAsleep = 0;
+  attackImageCounter = 0;
+  intervalIdBubble = [];
   swimming_sound = new Audio("./audio/swim.mp3");
   slap_sound = new Audio("./audio/slap_sound.mp3");
   sleep_sound = new Audio("./audio/sleep_sound.mp3");
   hit_sound_character = new Audio("./audio/hit_sound_chracter.mp3");
- 
 
   constructor() {
     super().loadImage("./img/1.Sharkie/1.IDLE/1.png");
@@ -120,6 +130,7 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_SLAP);
     this.loadImages(this.IMAGES_GOSLEEP);
     this.loadImages(this.IMAGES_SLEEP);
+    this.loadImages(this.IMAGES_BLOW_UP_BUBBLE);
     this.animate();
     playGameSound();
   }
@@ -129,6 +140,7 @@ class Character extends MovableObject {
     setStoppableInterval(() => this.animationCharacter(), 250);
     setStoppableInterval(() => this.attackAnimationCharacter(), 125);
     setStoppableInterval(() => this.resetSleepValue(), 125);
+    this.setStoppableIntervalBubble(() => this.animationBubble(), 125);
   }
 
   moveCharacter() {
@@ -147,7 +159,7 @@ class Character extends MovableObject {
   }
 
   animationCharacter() {
-    this.sounCharacterPause();
+    this.soundCharacterPause();
     if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
       this.playAnimation(this.IMAGES_SWIM);
       this.swimming_sound.play();
@@ -161,7 +173,40 @@ class Character extends MovableObject {
     }
   }
 
-  sounCharacterPause() {
+  animationBubble() {
+    if (this.world.keyboard.D) {
+      if (this.attackImageCounter < 1) {
+        this.attackImageCounter++;
+        this.setStoppableIntervalBubble(() => this.playAnimation(this.IMAGES_BLOW_UP_BUBBLE), 125);
+        this.generateBublle();
+      }
+       this.resetBubbleAnimation();
+    }
+   
+  }
+
+  generateBublle() {
+    setTimeout(() => {
+      world.generateThrowObjects();
+    }, 1000);
+  }
+
+  resetBubbleAnimation() {
+    setTimeout(() => {
+      this.attackImageCounter = 0;
+      this.intervalIdBubble.forEach((id) => {
+      clearInterval(id);
+      });
+    }, 500);
+  }
+
+  setStoppableIntervalBubble(fn, time) {
+    let id = setInterval(fn, time);
+    this.intervalIdBubble.push(id);
+    return id;
+  }
+
+  soundCharacterPause() {
     this.swimming_sound.pause();
     this.sleep_sound.pause();
     this.hit_sound_character.pause();
@@ -212,14 +257,13 @@ class Character extends MovableObject {
 
   attackAnimationCharacter() {
     if (!this.world.keyboard.SPACE) {
-      this.plaAttack = 0;
+      this.playAttack = 0;
     } else if (this.world.keyboard.SPACE) {
-      if (this.plaAttack < 6) {
+      if (this.playAttack < 6) {
         this.playAnimation(this.IMAGES_SLAP);
         this.slap_sound.play();
       }
     }
-    this.plaAttack++;
+    this.playAttack++;
   }
 }
-

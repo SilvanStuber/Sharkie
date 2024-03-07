@@ -181,7 +181,7 @@ class Character extends MovableObject {
       this.attackImageCounter = 0;
       setInterval(() => {
         this.generateAnimationBubble();
-      }, 250);
+      }, 125);
       this.resetBubbleAnimation();
     }
   }

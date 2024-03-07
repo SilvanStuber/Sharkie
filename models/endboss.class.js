@@ -48,7 +48,7 @@ class Endboss extends MovableObject {
       setInterval(() => {
         if (world.character.x > 1800) {
           if (i < 10 ) {
-            this.playAnimation(this.IMAGE_INTRODUCE);
+            this.playSingeleAnimation(this.IMAGE_INTRODUCE, i);
             } else {
             this.playAnimation(this.IMAGES_SWIM);
             }

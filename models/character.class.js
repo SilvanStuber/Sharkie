@@ -113,7 +113,8 @@ class Character extends MovableObject {
   playAttack;
   timeWithoutMovement = 0;
   attackImageCounter = 0;
-  intervalIdBubble = [];
+  bubbleMoves = false;
+  bubbleInflated = false;
   swimming_sound = new Audio("./audio/swim.mp3");
   slap_sound = new Audio("./audio/slap_sound.mp3");
   sleep_sound = new Audio("./audio/sleep_sound.mp3");
@@ -140,7 +141,6 @@ class Character extends MovableObject {
     setStoppableInterval(() => this.animationCharacter(), 250);
     setStoppableInterval(() => this.attackAnimationCharacter(), 125);
     setStoppableInterval(() => this.resetSleepValue(), 125);
-    this.setStoppableIntervalBubble(() => this.animationBubble(), 125);
   }
 
   moveCharacter() {
@@ -160,44 +160,46 @@ class Character extends MovableObject {
 
   animationCharacter() {
     this.soundCharacterPause();
-    if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
-      this.playAnimation(this.IMAGES_SWIM);
-      this.swimming_sound.play();
+    if (this.isDead()) {
+      this.animationDead();
     } else if (this.isHurt()) {
       this.playAnimation(this.IMAGES_ELECTRO_HURT);
       this.hit_sound_character.play();
-    } else if (this.isDead()) {
-      this.animationDead();
+    } else if (this.world.keyboard.D) {
+      this.animationBubble();
+    } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
+      this.playAnimation(this.IMAGES_SWIM);
+      this.swimming_sound.play();
     } else {
       this.standingAnimation();
     }
   }
 
   animationBubble() {
-    if (this.world.keyboard.D) {
-      if (this.attackImageCounter < 1) {
-        this.attackImageCounter++;
-        this.setStoppableIntervalBubble(() => this.playAnimation(this.IMAGES_BLOW_UP_BUBBLE), 125);
-        this.generateBublle();
-      }
-       this.resetBubbleAnimation();
+    if (!this.bubbleMoves) {
+      this.bubbleMoves = true;
+      this.attackImageCounter = 0;
+      setInterval(() => {
+        this.generateAnimationBubble();
+      }, 250);
+      this.resetBubbleAnimation();
     }
-   
   }
-
-  generateBublle() {
-    setTimeout(() => {
+  generateAnimationBubble() {
+    if (this.attackImageCounter < 8) {
+      console.log("attackImageCounter", this.attackImageCounter )
+      this.playSingeleAnimation(this.IMAGES_BLOW_UP_BUBBLE, this.attackImageCounter);
+    } 
+    if (this.attackImageCounter == 7) {
       world.generateThrowObjects();
-    }, 1000);
+    }
+    this.attackImageCounter++;
   }
 
   resetBubbleAnimation() {
-    setTimeout(() => {
-      this.attackImageCounter = 0;
-      this.intervalIdBubble.forEach((id) => {
-      clearInterval(id);
-      });
-    }, 500);
+    setTimeout(() => { 
+      this.bubbleMoves = false;
+    }, 2500);
   }
 
   setStoppableIntervalBubble(fn, time) {

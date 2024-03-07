@@ -14,9 +14,13 @@ class MovableObject extends DrawableObject {
 
   playAnimation(images) {
     let i = this.currentImage % images.length;
+    this.playSingeleAnimation(images, i);
+    this.currentImage++;
+  }
+
+  playSingeleAnimation(images, i) {
     let path = images[i];
     this.img = this.imageCache[path];
-    this.currentImage++;
   }
 
   isColliding(mo) {

@@ -7,10 +7,15 @@ class Coins extends ImmovableObject {
   ];
   height = 48;
   width = 48;
+  offsetX = 0;
+  offsetY = 0;
+  offsetWidht = 0;
+  offsetHeight = 0;
+
 
   constructor() {
     super().loadImage("./img/4. Marcadores/1. Coins/1.png");
-    this.x = 200 + Math.random() * 2100;
+    this.x = 250 + Math.random() * 2100;
     this.y = 100 + Math.random() * 250;
     this.loadImages(this.COINS_IMAGES);
     this.animate();

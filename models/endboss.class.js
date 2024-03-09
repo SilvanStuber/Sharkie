@@ -4,6 +4,11 @@ class Endboss extends MovableObject {
   height = 500;
   width = 400;
   speed = 1;
+  offsetX = -20;
+  offsetY = -220;
+  offsetWidht = 40;
+  offsetHeight = 300;
+  typOfEnemy = "endboss";
   IMAGE_INTRODUCE = [
     "./img/2.Enemy/3 Final Enemy/1.Introduce/1.png",
     "./img/2.Enemy/3 Final Enemy/1.Introduce/2.png",
@@ -37,7 +42,6 @@ class Endboss extends MovableObject {
   constructor() {
     super().loadImage("./img/2.Enemy/3 Final Enemy/1.Introduce/1.png");
     this.loadImages(this.IMAGE_INTRODUCE);
-    this.loadImages(this.IMAGES_SWIM);
     this.loadImages(this.IMAGES_SWIM);
     this.x = 2450;
     this.animate();

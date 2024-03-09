@@ -11,10 +11,14 @@ class Poison extends ImmovableObject {
   ];
   height = 96;
   width = 96;
+  offsetX = -20;
+  offsetY = 0;
+  offsetWidht = 40;
+  offsetHeight = 0;
 
   constructor() {
     super().loadImage("./img/4. Marcadores/Posión/Animada/1.png");
-    this.x = 200 + Math.random() * 2100;
+    this.x = 250 + Math.random() * 2100;
     this.y = 100 + Math.random() * 250;
     this.loadImages(this.POISON_IMAGES);
     this.animate();

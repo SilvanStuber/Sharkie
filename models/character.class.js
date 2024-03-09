@@ -185,6 +185,7 @@ class Character extends MovableObject {
       this.resetBubbleAnimation();
     }
   }
+  
   generateAnimationBubble() {
     if (this.attackImageCounter < 8) {
       console.log("attackImageCounter", this.attackImageCounter )
@@ -199,7 +200,7 @@ class Character extends MovableObject {
   resetBubbleAnimation() {
     setTimeout(() => { 
       this.bubbleMoves = false;
-    }, 2500);
+    }, 1500);
   }
 
   setStoppableIntervalBubble(fn, time) {

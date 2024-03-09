@@ -1,54 +1,64 @@
 class Fish extends MovableObject {
-  height = 60;
-  width = 100;
-  offsetX = 0;
-  offsetY = 2;
-  offsetWidht = 0;
-  offsetHeight = 10;
-  IMAGES_GREEN_FISH = [
-    "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png",
-    "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim2.png",
-    "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim3.png",
-    "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim4.png",
-    "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim5.png",
-  ];
-  IMAGES_RED_FISH = [
-    "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim1.png",
-    "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim2.png",
-    "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim3.png",
-    "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim4.png",
-    "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim5.png",
-  ];
-  IMAGES_PINK_FISH = [
-    "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim1.png",
-    "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim2.png",
-    "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim3.png",
-    "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim4.png",
-    "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim5.png",
-  ];
-  constructor() {
-    super().loadImage("./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png");
-    this.loadImages(this.IMAGES_GREEN_FISH);
-    this.x = 320 + Math.random() * 500;
-    this.y = 200 + Math.random() * 200;
-    this.speed = 0.15 + Math.random() * 0.3;
-    this.animate();
-  }
+    height = 60;
+    width = 100;
+    offsetX = 0;
+    offsetY = 2;
+    offsetWidht = 0;
+    offsetHeight = 10;
+    IMAGES_GREEN_FISH = [
+      "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png",
+      "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim2.png",
+      "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim3.png",
+      "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim4.png",
+      "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim5.png",
+    ];
+    IMAGES_RED_FISH = [
+      "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim1.png",
+      "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim2.png",
+      "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim3.png",
+      "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim4.png",
+      "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim5.png",
+    ];
+    IMAGES_PINK_FISH = [
+      "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim1.png",
+      "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim2.png",
+      "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim3.png",
+      "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim4.png",
+      "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim5.png",
+    ];
+    constructor() {
+      super();
+      let randomImage = this.generateRandomImage();
+      this.loadImage(randomImage[0]);
+      this.loadImages(randomImage);
+      this.animate(randomImage);
+    }
 
-  animate() {
-    setStoppableInterval(() => this.moveLeft(), 1000 / 60);
-    setStoppableInterval(() => this.playAnimation(this.IMAGES_GREEN_FISH), 250);
-  }
-
-  enemyFliesOutOfTheMap(characterX) {
-    this.height -= 7.5;
-    this.width -= 15;
-
-    this.y -= 70;
-    if (characterX > this.x) {
-      this.x -= 50;
-    } else {
-      this.x += 50;
+    generateRandomImage() {
+      let image = [this.IMAGES_GREEN_FISH, this.IMAGES_RED_FISH, this.IMAGES_PINK_FISH];
+      let randomIndex = Math.floor(Math.random() * image.length);
+      return image[randomIndex];
+    }
+  
+    animate(randomImage) {
+      this.x = 320 + Math.random() * 500;
+      this.y = 200 + Math.random() * 200;
+      this.speed = 0.15 + Math.random() * 0.3;
+  
+      setStoppableInterval(() => this.moveLeft(), 1000 / 60);
+      setStoppableInterval(() => this.playAnimation(randomImage), 250);
+    }
+  
+    enemyFliesOutOfTheMap(characterX) {
+      this.height -= 7.5;
+      this.width -= 15;
+  
+      this.y -= 70;
+      if (characterX > this.x) {
+        this.x -= 50;
+      } else {
+        this.x += 50;
+      }
     }
   }
-}
+  

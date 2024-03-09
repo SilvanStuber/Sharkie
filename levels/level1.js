@@ -1,5 +1,19 @@
 const level1 = new Level(
-  [new Fish(), new Fish(), new Fish(), new Endboss()],
+  [
+    new Fish(),
+    new Fish(),
+    new Fish(),
+    new Fish(),
+    new Fish(),
+    new Fish(),
+    new WeakJellyFish(),
+    new WeakJellyFish(),
+    new WeakJellyFish(),
+    new StrongJellyFish(),
+    new StrongJellyFish(),
+    new StrongJellyFish(),
+    new Endboss(),
+  ],
   [
     new BackgroundObject("./img/3. Background/Layers/5. Water/D2.png", -719),
     new BackgroundObject("./img/3. Background/Layers/4.Fondo 2/D2.png", -719),
@@ -32,23 +46,6 @@ const level1 = new Level(
     new BackgroundObject("./img/3. Background/Layers/2. Floor/D2.png", 719 * 3),
     new BackgroundObject("./img/3. Background/Legacy/Layers/1. Light/2.png", 719 * 3),
   ],
-  [
-    new Coins(),
-    new Coins(),
-    new Coins(),
-    new Coins(),
-    new Coins(),
-    new Coins(),
-    new Coins(),
-    new Coins(),
-    new Coins(),
-    new Coins()
-  ],
-  [
-    new Poison(),
-    new Poison(),
-    new Poison(),
-    new Poison(),
-    new Poison()
-  ]
+  [new Coins(), new Coins(), new Coins(), new Coins(), new Coins(), new Coins(), new Coins(), new Coins(), new Coins(), new Coins()],
+  [new Poison(), new Poison(), new Poison(), new Poison(), new Poison(), new Poison(), new Poison(), new Poison(), new Poison()]
 );

@@ -26,25 +26,19 @@ class Fish extends MovableObject {
       "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim4.png",
       "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim5.png",
     ];
+    arrayFish = [this.IMAGES_GREEN_FISH, this.IMAGES_RED_FISH, this.IMAGES_PINK_FISH];
     constructor() {
       super();
-      let randomImage = this.generateRandomImage();
+      let randomImage = this.generateRandomImage(this.arrayFish);
       this.loadImage(randomImage[0]);
       this.loadImages(randomImage);
       this.animate(randomImage);
     }
-
-    generateRandomImage() {
-      let image = [this.IMAGES_GREEN_FISH, this.IMAGES_RED_FISH, this.IMAGES_PINK_FISH];
-      let randomIndex = Math.floor(Math.random() * image.length);
-      return image[randomIndex];
-    }
   
     animate(randomImage) {
-      this.x = 320 + Math.random() * 500;
-      this.y = 200 + Math.random() * 200;
+      this.x = 320 + Math.random() * 2200;
+      this.y = 100 + Math.random() * 320;
       this.speed = 0.15 + Math.random() * 0.3;
-  
       setStoppableInterval(() => this.moveLeft(), 1000 / 60);
       setStoppableInterval(() => this.playAnimation(randomImage), 250);
     }
@@ -52,7 +46,6 @@ class Fish extends MovableObject {
     enemyFliesOutOfTheMap(characterX) {
       this.height -= 7.5;
       this.width -= 15;
-  
       this.y -= 70;
       if (characterX > this.x) {
         this.x -= 50;

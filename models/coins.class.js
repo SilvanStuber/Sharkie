@@ -1,4 +1,4 @@
-class Coins extends ImmovableObject {
+class Coins extends MovableObject {
   COINS_IMAGES = [
     "./img/4. Marcadores/1. Coins/1.png",
     "./img/4. Marcadores/1. Coins/2.png",
@@ -11,6 +11,7 @@ class Coins extends ImmovableObject {
   offsetY = 0;
   offsetWidht = 0;
   offsetHeight = 0;
+  coin = 0;
 
 
   constructor() {

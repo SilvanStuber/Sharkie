@@ -1,4 +1,4 @@
-class Poison extends ImmovableObject {
+class Poison extends MovableObject {
   POISON_IMAGES = [
     "./img/4. Marcadores/Posión/Animada/1.png",
     "./img/4. Marcadores/Posión/Animada/2.png",
@@ -15,6 +15,7 @@ class Poison extends ImmovableObject {
   offsetY = 0;
   offsetWidht = 40;
   offsetHeight = 0;
+  poison = 0;
 
   constructor() {
     super().loadImage("./img/4. Marcadores/Posión/Animada/1.png");

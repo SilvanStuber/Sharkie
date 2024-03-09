@@ -18,7 +18,7 @@ class DrawableObject {
 
   drawFrame(ctx) {
     ////////Rechteck///////////////////////
-    if (this instanceof Character || this instanceof Fish || this instanceof Coins || this instanceof Poison || this instanceof Endboss || this instanceof ThrowableObject) {
+    if (this instanceof Character || this instanceof Fish || this instanceof Coins || this instanceof Poison || this instanceof Endboss || this instanceof ThrowableObject || this instanceof StrongJellyFish || this instanceof WeakJellyFish) {
       ctx.beginPath();
       ctx.lineWidth = "5";
       ctx.strokeStyle = "blue";
@@ -34,5 +34,11 @@ class DrawableObject {
       img.src = path;
       this.imageCache[path] = img;
     });
+  }
+
+  generateRandomImage(array) {
+    let image = array;
+    let randomIndex = Math.floor(Math.random() * image.length);
+    return image[randomIndex];
   }
 }

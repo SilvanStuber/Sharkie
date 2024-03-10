@@ -8,6 +8,8 @@ class World {
   throwableObjects = [];
   checkColliding = new Collision(this.level, this.character, this.throwableObjects);
   bubble_sound = new Audio("./audio/bubble_sound.mp3");
+  bubble;
+  positionBubbleX;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -22,10 +24,23 @@ class World {
     this.character.world = this;
   }
 
-  generateThrowObjects() {
+  generateThrowObjects(key) {
     this.bubble_sound.play();
-    let bubble = new ThrowableObject(this.character.x + 230, this.character.y + 80);
-    this.throwableObjects.push(bubble);
+    this.positionBubble();
+    if (key.G) {
+      this.bubble = new BubblePoison(this.positionBubbleX, this.character.y + 80, this.character.otherDirection);
+    } else if (key.D) {
+      this.bubble = new Bubble(this.positionBubbleX, this.character.y + 80, this.character.otherDirection);
+    } 
+    this.throwableObjects.push(this.bubble);
+  }
+
+  positionBubble() {
+    if (this.character.otherDirection) {
+      this.positionBubbleX = this.character.x;
+    } else if(!this.character.otherDirection) {
+      this.positionBubbleX = this.character.x + 230
+    }
   }
 
   draw() {

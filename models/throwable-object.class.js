@@ -3,18 +3,17 @@ class ThrowableObject extends MovableObject {
     offsetY = 0;
     offsetWidht = 0;
     offsetHeight = 0;
-    constructor(x,y) {
-        super().loadImage("./img/1.Sharkie/4.Attack/Bubble trap/Bubble.png");
-        this.x = x;
-        this.y = y;
-        this.height = 80;
-        this.width = 80;
-        this.trow();
-    }
+    height = 80;
+    width = 80;
 
-    trow() {
+    trow(directionCharacter) {
         setInterval(() => {
-            this.x += 10;
+            if (directionCharacter) {
+                this.x -= 10;
+            } else if (!directionCharacter) {
+                this.x += 10;
+            }
+            
         }, 50)
     }
 }

@@ -35,18 +35,9 @@ class Character extends MovableObject {
     "./img/1.Sharkie/3.Swim/5.png",
     "./img/1.Sharkie/3.Swim/6.png",
   ];
-  IMAGES_POISON_HURT = [
-    "./img/1.Sharkie/5.Hurt/1.Poisoned/2.png",
-    "./img/1.Sharkie/5.Hurt/1.Poisoned/3.png",
-    "./img/1.Sharkie/5.Hurt/1.Poisoned/4.png",
-    "./img/1.Sharkie/5.Hurt/1.Poisoned/5.png",
-  ];
+  IMAGES_POISON_HURT = ["./img/1.Sharkie/5.Hurt/1.Poisoned/2.png", "./img/1.Sharkie/5.Hurt/1.Poisoned/3.png", "./img/1.Sharkie/5.Hurt/1.Poisoned/4.png", "./img/1.Sharkie/5.Hurt/1.Poisoned/5.png"];
 
-  IMAGES_ELECTRO_HURT = [
-    "./img/1.Sharkie/5.Hurt/2.Electric shock/1.png",
-    "./img/1.Sharkie/5.Hurt/2.Electric shock/2.png",
-    "./img/1.Sharkie/5.Hurt/2.Electric shock/3.png",
-  ];
+  IMAGES_ELECTRO_HURT = ["./img/1.Sharkie/5.Hurt/2.Electric shock/1.png", "./img/1.Sharkie/5.Hurt/2.Electric shock/2.png", "./img/1.Sharkie/5.Hurt/2.Electric shock/3.png"];
   IMAGES_POISON_DEAD = [
     "./img/1.Sharkie/6.dead/1.Poisoned/1.png",
     "./img/1.Sharkie/6.dead/1.Poisoned/2.png",
@@ -109,6 +100,16 @@ class Character extends MovableObject {
     "./img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/7.png",
     "./img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.png",
   ];
+  IMAGES_BLOW_UP_BUBBLE_POISON = [
+    "./img/1.Sharkie/4.Attack/Bubble trap/For Whale/1.png",
+    "./img/1.Sharkie/4.Attack/Bubble trap/For Whale/2.png",
+    "./img/1.Sharkie/4.Attack/Bubble trap/For Whale/3.png",
+    "./img/1.Sharkie/4.Attack/Bubble trap/For Whale/4.png",
+    "./img/1.Sharkie/4.Attack/Bubble trap/For Whale/5.png",
+    "./img/1.Sharkie/4.Attack/Bubble trap/For Whale/6.png",
+    "./img/1.Sharkie/4.Attack/Bubble trap/For Whale/7.png",
+    "./img/1.Sharkie/4.Attack/Bubble trap/For Whale/8.png",
+  ];
   world;
   playAttack;
   timeWithoutMovement = 0;
@@ -133,6 +134,7 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_GOSLEEP);
     this.loadImages(this.IMAGES_SLEEP);
     this.loadImages(this.IMAGES_BLOW_UP_BUBBLE);
+    this.loadImages(this.IMAGES_BLOW_UP_BUBBLE_POISON);
     this.animate();
     playGameSound();
   }
@@ -165,7 +167,7 @@ class Character extends MovableObject {
       this.animationDead();
     } else if (this.isHurt()) {
       this.hurtAnimation();
-    } else if (this.world.keyboard.D) {
+    } else if (this.world.keyboard.D || this.world.keyboard.G) {
       this.animationBubble();
     } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
       this.playAnimation(this.IMAGES_SWIM);
@@ -179,15 +181,25 @@ class Character extends MovableObject {
     this.hit_sound_character.play();
     if (this.damageFromWhichEnemy instanceof Fish) {
       this.playAnimation(this.IMAGES_POISON_HURT);
-    } else if (this.damageFromWhichEnemy instanceof WeakLilaJellyFish || this.damageFromWhichEnemy instanceof WeakYellowJellyFish || this.damageFromWhichEnemy instanceof StrongPinkJellyFish || this.damageFromWhichEnemy instanceof StrongGreenJellyFish) {
+    } else if (
+      this.damageFromWhichEnemy instanceof WeakLilaJellyFish ||
+      this.damageFromWhichEnemy instanceof WeakYellowJellyFish ||
+      this.damageFromWhichEnemy instanceof StrongPinkJellyFish ||
+      this.damageFromWhichEnemy instanceof StrongGreenJellyFish
+    ) {
       this.playAnimation(this.IMAGES_ELECTRO_HURT);
     }
   }
 
   animationDead() {
-    if (this.damageFromWhichEnemy instanceof Fish) {
+    if (this.damageFromWhichEnemy instanceof Fish || this.damageFromWhichEnemy instanceof Fish) {
       this.playAnimationDead(this.IMAGES_POISON_DEAD, 11);
-    } else if (this.damageFromWhichEnemy instanceof WeakLilaJellyFish || this.damageFromWhichEnemy instanceof WeakYellowJellyFish || this.damageFromWhichEnemy instanceof StrongPinkJellyFish || this.damageFromWhichEnemy instanceof StrongGreenJellyFish) {
+    } else if (
+      this.damageFromWhichEnemy instanceof WeakLilaJellyFish ||
+      this.damageFromWhichEnemy instanceof WeakYellowJellyFish ||
+      this.damageFromWhichEnemy instanceof StrongPinkJellyFish ||
+      this.damageFromWhichEnemy instanceof StrongGreenJellyFish
+    ) {
       this.playAnimationDead(this.IMAGES_ELECTRO_DEAD, 9);
     }
     setTimeout(stopGame, 3000);
@@ -220,10 +232,14 @@ class Character extends MovableObject {
 
   generateAnimationBubble() {
     if (this.attackImageCounter < 8) {
-      this.playSingeleAnimation(this.IMAGES_BLOW_UP_BUBBLE, this.attackImageCounter);
+      if (this.world.keyboard.G) {
+        this.playSingeleAnimation(this.IMAGES_BLOW_UP_BUBBLE_POISON, this.attackImageCounter);
+      } else if (this.world.keyboard.D) {
+        this.playSingeleAnimation(this.IMAGES_BLOW_UP_BUBBLE, this.attackImageCounter);
+      }
     }
     if (this.attackImageCounter == 7) {
-      world.generateThrowObjects();
+      world.generateThrowObjects(this.world.keyboard);
     }
     this.attackImageCounter++;
   }
@@ -254,6 +270,7 @@ class Character extends MovableObject {
       this.world.keyboard.DOWN ||
       this.world.keyboard.SPACE ||
       this.world.keyboard.D ||
+      this.world.keyboard.G ||
       this.isHurt() ||
       this.isDead()
     ) {

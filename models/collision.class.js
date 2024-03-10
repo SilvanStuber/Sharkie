@@ -72,20 +72,29 @@ class Collision {
     this.throwableObjects.forEach((bubble) => {
       this.level.enemies.forEach((enemy) => {
         if (bubble.isColliding(enemy)) {
-          if (
-            enemy instanceof WeakLilaJellyFish ||
-            enemy instanceof WeakYellowJellyFish ||
-            enemy instanceof StrongPinkJellyFish ||
-            enemy instanceof StrongGreenJellyFish
-          ) {
-            enemy.hitJellyFish();
-            setStoppableInterval(() => enemy.enemyFliesOutOfTheMap(this.character.x), 125);
+          if (bubble instanceof BubblePoison) {
+            this.generateBubbleCollisionWithEndboss(enemy);
+          } else if (bubble instanceof Bubble) {
+            this.generateBubbleCollisionWithJellyFish(enemy);
           }
           this.throwableObjects.splice(i, 1);
         }
       });
       i++;
     });
+  }
+
+  generateBubbleCollisionWithJellyFish(enemy) {
+    if (enemy instanceof WeakLilaJellyFish || enemy instanceof WeakYellowJellyFish || enemy instanceof StrongPinkJellyFish || enemy instanceof StrongGreenJellyFish) {
+      enemy.hitJellyFish();
+      setStoppableInterval(() => enemy.enemyFliesOutOfTheMap(this.character.x), 125);
+    }
+  }
+
+  generateBubbleCollisionWithEndboss(enemy) {
+    if (enemy instanceof Endboss) {
+      enemy.hitEndboss();
+    }
   }
 
   attackEnemy() {

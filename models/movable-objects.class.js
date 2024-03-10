@@ -11,6 +11,7 @@ class MovableObject extends DrawableObject {
   lastHit = 0;
   endbossIsPublished = false;
   world;
+  damageFromWhichEnemy;
 
   playAnimation(images) {
     let i = this.currentImage % images.length;
@@ -32,12 +33,13 @@ class MovableObject extends DrawableObject {
     );
   }
 
-  hit() {
+  hit(enemy) {
     this.energy -= 2;
     if (this.energy < 0) {
       this.energy = 0;
     } else {
       this.lastHit = new Date().getTime();
+      this.damageFromWhichEnemy = enemy;
     }
   }
 

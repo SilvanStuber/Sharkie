@@ -115,6 +115,7 @@ class Character extends MovableObject {
   attackImageCounter = 0;
   bubbleMoves = false;
   bubbleInflated = false;
+  ifDead = false;
   swimming_sound = new Audio("./audio/swim.mp3");
   slap_sound = new Audio("./audio/slap_sound.mp3");
   sleep_sound = new Audio("./audio/sleep_sound.mp3");
@@ -163,8 +164,7 @@ class Character extends MovableObject {
     if (this.isDead()) {
       this.animationDead();
     } else if (this.isHurt()) {
-      this.playAnimation(this.IMAGES_ELECTRO_HURT);
-      this.hit_sound_character.play();
+      this.hurtAnimation();
     } else if (this.world.keyboard.D) {
       this.animationBubble();
     } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
@@ -172,6 +172,39 @@ class Character extends MovableObject {
       this.swimming_sound.play();
     } else {
       this.standingAnimation();
+    }
+  }
+
+  hurtAnimation() {
+    this.hit_sound_character.play();
+    if (this.damageFromWhichEnemy instanceof Fish) {
+      this.playAnimation(this.IMAGES_POISON_HURT);
+    } else if (this.damageFromWhichEnemy instanceof WeakJellyFish || this.damageFromWhichEnemy instanceof StrongJellyFish) {
+      this.playAnimation(this.IMAGES_ELECTRO_HURT);
+    }
+  }
+
+  animationDead() {
+    if (this.damageFromWhichEnemy instanceof Fish) {
+      this.playAnimationDead(this.IMAGES_POISON_DEAD, 11);
+    } else if (this.damageFromWhichEnemy instanceof WeakJellyFish || this.damageFromWhichEnemy instanceof StrongJellyFish) {
+      this.playAnimationDead(this.IMAGES_ELECTRO_DEAD, 9);
+    }
+    setTimeout(stopGame, 3000);
+    stopGameSound();
+  }
+
+  playAnimationDead(images, counter) {
+    if (!this.ifDead) {
+      let i = 0;
+      setInterval(() => {
+        this.ifDead = true;
+        if (i < counter) {
+          this.playSingeleAnimation(images, counter);
+        }
+        console.log("iiii", i);
+        i++;
+      }, 250);
     }
   }
 
@@ -185,12 +218,11 @@ class Character extends MovableObject {
       this.resetBubbleAnimation();
     }
   }
-  
+
   generateAnimationBubble() {
     if (this.attackImageCounter < 8) {
-      console.log("attackImageCounter", this.attackImageCounter )
       this.playSingeleAnimation(this.IMAGES_BLOW_UP_BUBBLE, this.attackImageCounter);
-    } 
+    }
     if (this.attackImageCounter == 7) {
       world.generateThrowObjects();
     }
@@ -198,7 +230,7 @@ class Character extends MovableObject {
   }
 
   resetBubbleAnimation() {
-    setTimeout(() => { 
+    setTimeout(() => {
       this.bubbleMoves = false;
     }, 1500);
   }
@@ -213,12 +245,6 @@ class Character extends MovableObject {
     this.swimming_sound.pause();
     this.sleep_sound.pause();
     this.hit_sound_character.pause();
-  }
-
-  animationDead() {
-    this.playAnimation(this.IMAGES_POISON_DEAD);
-    setTimeout(stopGame, 1050);
-    stopGameSound();
   }
 
   resetSleepValue() {

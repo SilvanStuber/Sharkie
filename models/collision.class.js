@@ -33,7 +33,7 @@ class Collision {
   checkCollisionsEnemy() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
-        this.character.hit();
+        this.character.hit(enemy);
         this.valueOfLife.setValueOfLife(this.character.energy);
       }
     });

@@ -43,10 +43,25 @@ class MovableObject extends DrawableObject {
     }
   }
 
+  hitJellyFish() {
+    this.energy = 0;
+  }
+
   isHurt() {
     let timepassed = new Date().getTime() - this.lastHit;
     timepassed = timepassed / 1000;
     return timepassed < 0.5;
+  }
+
+  enemyFliesOutOfTheMap(characterX) {
+    this.height -= 7.5;
+    this.width -= 15;
+    this.y -= 70;
+    if (characterX > this.x) {
+      this.x -= 50;
+    } else {
+      this.x += 50;
+    }
   }
 
   isDead() {

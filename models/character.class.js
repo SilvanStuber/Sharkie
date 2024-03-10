@@ -153,7 +153,7 @@ class Character extends MovableObject {
       this.otherDirection = true;
     } else if (this.world.keyboard.UP && this.y > -50) {
       this.moveUp();
-    } else if (this.world.keyboard.DOWN && this.y < 250) {
+    } else if (this.world.keyboard.DOWN && this.y < 300) {
       this.moveDown();
     }
     this.world.camera_x = -this.x;
@@ -179,7 +179,7 @@ class Character extends MovableObject {
     this.hit_sound_character.play();
     if (this.damageFromWhichEnemy instanceof Fish) {
       this.playAnimation(this.IMAGES_POISON_HURT);
-    } else if (this.damageFromWhichEnemy instanceof WeakJellyFish || this.damageFromWhichEnemy instanceof StrongJellyFish) {
+    } else if (this.damageFromWhichEnemy instanceof WeakLilaJellyFish || this.damageFromWhichEnemy instanceof WeakYellowJellyFish || this.damageFromWhichEnemy instanceof StrongPinkJellyFish || this.damageFromWhichEnemy instanceof StrongGreenJellyFish) {
       this.playAnimation(this.IMAGES_ELECTRO_HURT);
     }
   }
@@ -187,7 +187,7 @@ class Character extends MovableObject {
   animationDead() {
     if (this.damageFromWhichEnemy instanceof Fish) {
       this.playAnimationDead(this.IMAGES_POISON_DEAD, 11);
-    } else if (this.damageFromWhichEnemy instanceof WeakJellyFish || this.damageFromWhichEnemy instanceof StrongJellyFish) {
+    } else if (this.damageFromWhichEnemy instanceof WeakLilaJellyFish || this.damageFromWhichEnemy instanceof WeakYellowJellyFish || this.damageFromWhichEnemy instanceof StrongPinkJellyFish || this.damageFromWhichEnemy instanceof StrongGreenJellyFish) {
       this.playAnimationDead(this.IMAGES_ELECTRO_DEAD, 9);
     }
     setTimeout(stopGame, 3000);
@@ -202,7 +202,6 @@ class Character extends MovableObject {
         if (i < counter) {
           this.playSingeleAnimation(images, counter);
         }
-        console.log("iiii", i);
         i++;
       }, 250);
     }

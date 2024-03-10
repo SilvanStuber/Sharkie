@@ -20,7 +20,7 @@ class Collision {
 
   run(keyboard) {
     this.keyboard = keyboard;
-    
+
     setInterval(() => {
       this.checkCollisionsEnemy();
       this.checkCollisionsCoins();
@@ -33,8 +33,10 @@ class Collision {
   checkCollisionsEnemy() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
-        this.character.hit(enemy);
-        this.valueOfLife.setValueOfLife(this.character.energy);
+        if (!this.keyboard.SPACE) {
+          this.character.hit(enemy);
+          this.valueOfLife.setValueOfLife(this.character.energy);
+        }
       }
     });
   }
@@ -66,17 +68,23 @@ class Collision {
   }
 
   checkCollisionsBubble() {
+    let i = 0;
     this.throwableObjects.forEach((bubble) => {
       this.level.enemies.forEach((enemy) => {
         if (bubble.isColliding(enemy)) {
-          console.log(enemy)
-          if(enemy instanceof Fish) {
-            console.log("Fisch")
-          } else if (enemy instanceof Endboss) {
-            console.log("Endboss")
-          } 
+          if (
+            enemy instanceof WeakLilaJellyFish ||
+            enemy instanceof WeakYellowJellyFish ||
+            enemy instanceof StrongPinkJellyFish ||
+            enemy instanceof StrongGreenJellyFish
+          ) {
+            enemy.hitJellyFish();
+            setStoppableInterval(() => enemy.enemyFliesOutOfTheMap(this.character.x), 125);
+          }
+          this.throwableObjects.splice(i, 1);
         }
       });
+      i++;
     });
   }
 
@@ -85,10 +93,12 @@ class Collision {
       let i = 0;
       this.level.enemies.forEach((enemy) => {
         if (this.character.isColliding(enemy)) {
-          setStoppableInterval(() => enemy.enemyFliesOutOfTheMap(this.character.x), 125);
-          setTimeout(() => {
-            this.level.enemies.splice(i, 1);
-          }, 1125);
+          if (enemy instanceof Fish) {
+            setStoppableInterval(() => enemy.enemyFliesOutOfTheMap(this.character.x), 125);
+            setTimeout(() => {
+              this.level.enemies.splice(i, 1);
+            }, 1125);
+          }
         }
         i++;
       });

@@ -9,6 +9,7 @@ class Endboss extends MovableObject {
   offsetWidht = 40;
   offsetHeight = 300;
   counterInteroduceEndboss = 0;
+  startAttackAnimation = false;
   typOfEnemy = "endboss";
   IMAGE_INTRODUCE = [
     "./img/2.Enemy/3 Final Enemy/1.Introduce/1.png",
@@ -66,21 +67,30 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_HURT);
     this.x = 2450;
     this.animate();
-    setStoppableInterval(() => this.attackEndboss(), 4000);
   }
 
   animate() {
     let id = setInterval(() => {
-      if (world.character.x > 1800) {
+      if (world.character.x > 1800 && !this.hadFirstContact) {
         this.generateInteroduceEndboss();
+      } else if (this.hadFirstContact) {
+        this.generateAnimationEndboss();
       }
     }, 250);
     intervalIds.push(id);
   }
 
+  checkIsEndbossInteroduce() {
+    if (!this.startAttackAnimation) {
+      this.startAttackAnimation = true;
+      setStoppableInterval(() => {this.thisattackFromEndboss = true}, 8000);
+    }
+  }
+
   generateInteroduceEndboss() {
     if (this.counterInteroduceEndboss < 10) {
       this.playSingeleAnimation(this.IMAGE_INTRODUCE, this.counterInteroduceEndboss);
+      this.checkIsEndbossInteroduce();
     } else {
       this.generateAnimationEndboss();
     }
@@ -95,30 +105,37 @@ class Endboss extends MovableObject {
     if (this.isDead()) {
       this.generateDeadEndboss();
     } else if (this.isHurt()) {
-      this.playAnimation(this.IMAGES_HURT);
+      this.generateHurtEndboss()
+    } else if (this.thisattackFromEndboss) {
+      this.generateAnimationAttackEndboss();
     } else {
       this.playAnimation(this.IMAGES_SWIM);
-    }
-    if (this.thisattackFromEndboss) {
-      this.playAnimation(this.IMAGES_ATTACK);
-      this.thisattackFromEndboss = false;
     }
   }
 
   generateDeadEndboss() {
-    this.playAnimation(this.IMAGES_DEAD);
-    setTimeout(() => {
-      stopGame();
-    }, 700);
+    if (this.deadIntervalCounter  > 4) {
+      this.deadIntervalCounter  = 4
+    }
+    this.playSingeleAnimation(this.IMAGES_DEAD, this.deadIntervalCounter);
+    this.deadIntervalCounter++
+    stopGame();
   }
 
-  attackEndboss() {
+  generateHurtEndboss() {
+    this.hit_sound_endboss.play();
+    this.playAnimation(this.IMAGES_HURT);
+  }
+
+  generateAnimationAttackEndboss() {
+    this.playAnimation(this.IMAGES_ATTACK);
     setTimeout(() => {
-      if (this.hadFirstContact) {
-        this.thisattackFromEndboss = true;
-        this.y = world.character.y - 145;
-        this.x = world.character.x + 220;
-      }
-    }, 4000);
+    this.y = world.character.y - 145;
+    this.x = world.character.x + 210;
+    }, 500);
+    setTimeout(() => {
+      this.thisattackFromEndboss = false;
+      this.x = world.character.x + 280;
+    }, 1000);
   }
 }

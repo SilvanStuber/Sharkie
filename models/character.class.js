@@ -35,9 +35,18 @@ class Character extends MovableObject {
     "./img/1.Sharkie/3.Swim/5.png",
     "./img/1.Sharkie/3.Swim/6.png",
   ];
-  IMAGES_POISON_HURT = ["./img/1.Sharkie/5.Hurt/1.Poisoned/2.png", "./img/1.Sharkie/5.Hurt/1.Poisoned/3.png", "./img/1.Sharkie/5.Hurt/1.Poisoned/4.png", "./img/1.Sharkie/5.Hurt/1.Poisoned/5.png"];
+  IMAGES_POISON_HURT = [
+    "./img/1.Sharkie/5.Hurt/1.Poisoned/2.png",
+    "./img/1.Sharkie/5.Hurt/1.Poisoned/3.png",
+    "./img/1.Sharkie/5.Hurt/1.Poisoned/4.png",
+    "./img/1.Sharkie/5.Hurt/1.Poisoned/5.png",
+  ];
 
-  IMAGES_ELECTRO_HURT = ["./img/1.Sharkie/5.Hurt/2.Electric shock/1.png", "./img/1.Sharkie/5.Hurt/2.Electric shock/2.png", "./img/1.Sharkie/5.Hurt/2.Electric shock/3.png"];
+  IMAGES_ELECTRO_HURT = [
+    "./img/1.Sharkie/5.Hurt/2.Electric shock/1.png",
+    "./img/1.Sharkie/5.Hurt/2.Electric shock/2.png",
+    "./img/1.Sharkie/5.Hurt/2.Electric shock/3.png",
+  ];
   IMAGES_POISON_DEAD = [
     "./img/1.Sharkie/6.dead/1.Poisoned/1.png",
     "./img/1.Sharkie/6.dead/1.Poisoned/2.png",
@@ -116,7 +125,7 @@ class Character extends MovableObject {
   attackImageCounter = 0;
   bubbleMoves = false;
   bubbleInflated = false;
-  ifDead = false;
+  chracterIsDead = false;
   swimming_sound = new Audio("./audio/swim.mp3");
   slap_sound = new Audio("./audio/slap_sound.mp3");
   sleep_sound = new Audio("./audio/sleep_sound.mp3");
@@ -147,18 +156,20 @@ class Character extends MovableObject {
   }
 
   moveCharacter() {
-    if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-      this.moveRight();
-      this.otherDirection = false;
-    } else if (this.world.keyboard.LEFT && this.x > 0) {
-      this.moveLeft();
-      this.otherDirection = true;
-    } else if (this.world.keyboard.UP && this.y > -50) {
-      this.moveUp();
-    } else if (this.world.keyboard.DOWN && this.y < 300) {
-      this.moveDown();
+    if (!this.chracterIsDead) {
+      if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+        this.moveRight();
+        this.otherDirection = false;
+      } else if (this.world.keyboard.LEFT && this.x > 0) {
+        this.moveLeft();
+        this.otherDirection = true;
+      } else if (this.world.keyboard.UP && this.y > -50) {
+        this.moveUp();
+      } else if (this.world.keyboard.DOWN && this.y < 300) {
+        this.moveDown();
+      }
+      this.world.camera_x = -this.x;
     }
-    this.world.camera_x = -this.x;
   }
 
   animationCharacter() {
@@ -179,38 +190,27 @@ class Character extends MovableObject {
 
   hurtAnimation() {
     this.hit_sound_character.play();
-    if (this.damageFromWhichEnemy instanceof Fish) {
+    if (this.checkFishAndEndbossClass()) {
       this.playAnimation(this.IMAGES_POISON_HURT);
-    } else if (
-      this.damageFromWhichEnemy instanceof WeakLilaJellyFish ||
-      this.damageFromWhichEnemy instanceof WeakYellowJellyFish ||
-      this.damageFromWhichEnemy instanceof StrongPinkJellyFish ||
-      this.damageFromWhichEnemy instanceof StrongGreenJellyFish
-    ) {
+    } else if (this.checkJellyFishClass()) {
       this.playAnimation(this.IMAGES_ELECTRO_HURT);
     }
   }
 
   animationDead() {
-    if (this.damageFromWhichEnemy instanceof Fish || this.damageFromWhichEnemy instanceof Fish) {
+    if (this.checkFishAndEndbossClass()) {
       this.playAnimationDead(this.IMAGES_POISON_DEAD, 11);
-    } else if (
-      this.damageFromWhichEnemy instanceof WeakLilaJellyFish ||
-      this.damageFromWhichEnemy instanceof WeakYellowJellyFish ||
-      this.damageFromWhichEnemy instanceof StrongPinkJellyFish ||
-      this.damageFromWhichEnemy instanceof StrongGreenJellyFish
-    ) {
+    } else if (this.checkJellyFishClass()) {
       this.playAnimationDead(this.IMAGES_ELECTRO_DEAD, 9);
     }
-    setTimeout(stopGame, 3000);
-    stopGameSound();
+    stopGame();
   }
 
   playAnimationDead(images, counter) {
-    if (!this.ifDead) {
+    if (!this.chracterIsDead) {
       let i = 0;
       setInterval(() => {
-        this.ifDead = true;
+        this.chracterIsDead = true;
         if (i < counter) {
           this.playSingeleAnimation(images, counter);
         }
@@ -263,21 +263,13 @@ class Character extends MovableObject {
   }
 
   resetSleepValue() {
-    if (
-      this.world.keyboard.RIGHT ||
-      this.world.keyboard.LEFT ||
-      this.world.keyboard.UP ||
-      this.world.keyboard.DOWN ||
-      this.world.keyboard.SPACE ||
-      this.world.keyboard.D ||
-      this.world.keyboard.G ||
-      this.isHurt() ||
-      this.isDead()
-    ) {
+    if (this.checkActivity()) {
       this.timeWithoutMovement = 0;
       this.isAsleep = 0;
     }
   }
+
+
 
   standingAnimation() {
     if (this.timeWithoutMovement > 20) {

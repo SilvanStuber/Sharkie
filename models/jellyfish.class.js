@@ -16,7 +16,6 @@ class JellyFish extends MovableObject {
     }
 
     animationCharacter(imageAlive, imaggeDead) {
-      console.log(" energy", this.energy)
       if (this.isDead()) {
         this.playAnimation(imaggeDead);
       } else {

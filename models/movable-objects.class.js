@@ -12,6 +12,7 @@ class MovableObject extends DrawableObject {
   endbossIsPublished = false;
   world;
   damageFromWhichEnemy;
+  deadIntervalCounter = 0;
 
   playAnimation(images) {
     let i = this.currentImage % images.length;
@@ -46,7 +47,7 @@ class MovableObject extends DrawableObject {
   hitJellyFish() {
     this.energy = 0;
   }
-  
+
   hitEndboss() {
     this.energy -= 20;
     if (this.energy < 0) {
@@ -91,5 +92,32 @@ class MovableObject extends DrawableObject {
 
   moveUp() {
     this.y -= this.speed;
+  }
+
+  checkActivity() {
+    return (
+      this.world.keyboard.RIGHT ||
+      this.world.keyboard.LEFT ||
+      this.world.keyboard.UP ||
+      this.world.keyboard.DOWN ||
+      this.world.keyboard.SPACE ||
+      this.world.keyboard.D ||
+      this.world.keyboard.G ||
+      this.isHurt() ||
+      this.isDead()
+    );
+  }
+
+  checkJellyFishClass() {
+    return (
+      this.damageFromWhichEnemy instanceof WeakLilaJellyFish ||
+      this.damageFromWhichEnemy instanceof WeakYellowJellyFish ||
+      this.damageFromWhichEnemy instanceof StrongPinkJellyFish ||
+      this.damageFromWhichEnemy instanceof StrongGreenJellyFish
+    );
+  }
+
+  checkFishAndEndbossClass() {
+    return this.damageFromWhichEnemy instanceof Fish || this.damageFromWhichEnemy instanceof Endboss;
   }
 }

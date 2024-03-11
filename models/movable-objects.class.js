@@ -35,12 +35,22 @@ class MovableObject extends DrawableObject {
   }
 
   hit(enemy) {
-    this.energy -= 2;
+    this.validationHit(enemy);
     if (this.energy < 0) {
       this.energy = 0;
     } else {
       this.lastHit = new Date().getTime();
       this.damageFromWhichEnemy = enemy;
+    }
+  }
+
+  validationHit(enemy) {
+    if (enemy instanceof Fish || enemy instanceof WeakLilaJellyFish || enemy instanceof WeakYellowJellyFish) {
+      this.energy -= 2;
+    } else if (enemy instanceof StrongPinkJellyFish || enemy instanceof StrongGreenJellyFish) {
+      this.energy -= 4;
+    } else if (enemy instanceof Endboss) {
+      this.energy -= 8;
     }
   }
 

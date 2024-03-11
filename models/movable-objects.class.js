@@ -13,6 +13,7 @@ class MovableObject extends DrawableObject {
   world;
   damageFromWhichEnemy;
   deadIntervalCounter = 0;
+  positionObjects = [];
 
   playAnimation(images) {
     let i = this.currentImage % images.length;
@@ -129,5 +130,28 @@ class MovableObject extends DrawableObject {
 
   checkFishAndEndbossClass() {
     return this.damageFromWhichEnemy instanceof Fish || this.damageFromWhichEnemy instanceof Endboss;
+  }
+
+  positionierungObjecteX() {
+    let index = 320 + (Math.random() * 2000);
+    this.positionObjects.forEach(position => {
+      if (position - index < 10) {
+        index + 100;
+      } 
+      this.positionObjects.push(index)
+     
+    });  
+    return index; 
+  }
+
+  positionierungObjecteY() {
+    let index = 60 + (Math.random() * 300);
+    this.positionObjects.forEach(position => {
+      if (position - index < 10) {
+        index + 80;
+      } 
+      this.positionObjects.push(index)
+    }); 
+    return index;
   }
 }

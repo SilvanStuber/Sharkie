@@ -53,10 +53,16 @@ class Endboss extends MovableObject {
     "./img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 9.png",
     "./img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.png",
   ];
-  IMAGES_HURT = ["./img/2.Enemy/3 Final Enemy/Hurt/1.png", "./img/2.Enemy/3 Final Enemy/Hurt/2.png", "./img/2.Enemy/3 Final Enemy/Hurt/3.png", "./img/2.Enemy/3 Final Enemy/Hurt/4.png"];
+  IMAGES_HURT = [
+    "./img/2.Enemy/3 Final Enemy/Hurt/1.png",
+    "./img/2.Enemy/3 Final Enemy/Hurt/2.png",
+    "./img/2.Enemy/3 Final Enemy/Hurt/3.png",
+    "./img/2.Enemy/3 Final Enemy/Hurt/4.png",
+  ];
   hadFirstContact = false;
   thisattackFromEndboss = false;
   hit_sound_endboss = new Audio("./audio/hit_sound_endboss.mp3");
+  attack_endboss = new Audio("./audio/endboss_attack.mp3");
 
   constructor() {
     super().loadImage("./img/2.Enemy/3 Final Enemy/1.Introduce/1.png");
@@ -83,7 +89,9 @@ class Endboss extends MovableObject {
   checkIsEndbossInteroduce() {
     if (!this.startAttackAnimation) {
       this.startAttackAnimation = true;
-      setStoppableInterval(() => {this.thisattackFromEndboss = true}, 8000);
+      setStoppableInterval(() => {
+        this.thisattackFromEndboss = true;
+      }, 8000);
     }
   }
 
@@ -105,7 +113,7 @@ class Endboss extends MovableObject {
     if (this.isDead()) {
       this.generateDeadEndboss();
     } else if (this.isHurt()) {
-      this.generateHurtEndboss()
+      this.generateHurtEndboss();
     } else if (this.thisattackFromEndboss) {
       this.generateAnimationAttackEndboss();
     } else {
@@ -114,11 +122,11 @@ class Endboss extends MovableObject {
   }
 
   generateDeadEndboss() {
-    if (this.deadIntervalCounter  > 4) {
-      this.deadIntervalCounter  = 4
+    if (this.deadIntervalCounter > 4) {
+      this.deadIntervalCounter = 4;
     }
     this.playSingeleAnimation(this.IMAGES_DEAD, this.deadIntervalCounter);
-    this.deadIntervalCounter++
+    this.deadIntervalCounter++;
     stopGame();
   }
 
@@ -129,9 +137,10 @@ class Endboss extends MovableObject {
 
   generateAnimationAttackEndboss() {
     this.playAnimation(this.IMAGES_ATTACK);
+    this.attack_endboss.play();
     setTimeout(() => {
-    this.y = world.character.y - 145;
-    this.x = world.character.x + 210;
+      this.y = world.character.y - 145;
+      this.x = world.character.x + 210;
     }, 500);
     setTimeout(() => {
       this.thisattackFromEndboss = false;

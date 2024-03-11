@@ -123,6 +123,7 @@ class Character extends MovableObject {
   playAttack;
   timeWithoutMovement = 0;
   attackImageCounter = 0;
+  bubbleActive = false;
   bubbleMoves = false;
   bubbleInflated = false;
   chracterIsDead = false;
@@ -130,6 +131,8 @@ class Character extends MovableObject {
   slap_sound = new Audio("./audio/slap_sound.mp3");
   sleep_sound = new Audio("./audio/sleep_sound.mp3");
   hit_sound_character = new Audio("./audio/hit_sound_chracter.mp3");
+  inhale_sound = new Audio("./audio/inhale.mp3");
+  exhale_sound = new Audio("./audio/exhale.mp3");
 
   constructor() {
     super().loadImage("./img/1.Sharkie/1.IDLE/1.png");
@@ -220,14 +223,25 @@ class Character extends MovableObject {
   }
 
   animationBubble() {
-    if (!this.bubbleMoves) {
-      this.bubbleMoves = true;
-      this.attackImageCounter = 0;
-      setInterval(() => {
-        this.generateAnimationBubble();
-      }, 125);
+    if (!this.bubbleActive) {
+      this.bubbleActive = true;
+      this.playSoundInhaleAndExhale();
+      setTimeout(() => {
+        this.bubbleMoves = true;
+        this.attackImageCounter = 0;
+        setInterval(() => {
+          this.generateAnimationBubble();
+        }, 125);
+      }, 500);
       this.resetBubbleAnimation();
     }
+  }
+
+  playSoundInhaleAndExhale() {
+    this.inhale_sound.play();
+    setTimeout(() => {
+      this.exhale_sound.play();
+    }, 800);
   }
 
   generateAnimationBubble() {
@@ -247,6 +261,7 @@ class Character extends MovableObject {
   resetBubbleAnimation() {
     setTimeout(() => {
       this.bubbleMoves = false;
+      this.bubbleActive = false;
     }, 1500);
   }
 
@@ -268,8 +283,6 @@ class Character extends MovableObject {
       this.isAsleep = 0;
     }
   }
-
-
 
   standingAnimation() {
     if (this.timeWithoutMovement > 20) {

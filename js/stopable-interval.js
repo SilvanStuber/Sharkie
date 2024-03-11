@@ -10,7 +10,7 @@ function stopGame() {
   setTimeout(() => {
     stopGameSound();
     intervalIds.forEach((intervalId) => clearInterval(intervalId));
-  }, 3000);
+  }, 2500);
 }
 
 function stopIntervalFromObject(intervalId) {

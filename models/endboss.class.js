@@ -3,7 +3,7 @@ class Endboss extends MovableObject {
   y = 0;
   height = 500;
   width = 400;
-  speed = 1;
+  speed = 0.2;
   offsetX = -20;
   offsetY = -220;
   offsetWidht = 40;
@@ -110,6 +110,7 @@ class Endboss extends MovableObject {
   }
 
   generateAnimationEndboss() {
+    this.otherDirectionEndboss();
     if (this.isDead()) {
       this.generateDeadEndboss();
     } else if (this.isHurt()) {
@@ -120,6 +121,15 @@ class Endboss extends MovableObject {
       this.playAnimation(this.IMAGES_SWIM);
     }
   }
+
+  otherDirectionEndboss() {
+    if (world.character.x > this.x - 100) {
+      this.otherDirection = true;
+    } else {
+      this.otherDirection = false;
+    }
+  }
+  
 
   generateDeadEndboss() {
     if (this.deadIntervalCounter > 4) {

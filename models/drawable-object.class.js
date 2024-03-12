@@ -35,10 +35,4 @@ class DrawableObject {
       this.imageCache[path] = img;
     });
   }
-
-  generateRandomImage(array) {
-    let image = array;
-    let randomIndex = Math.floor(Math.random() * image.length);
-    return image[randomIndex];
-  }
 }

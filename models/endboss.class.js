@@ -129,7 +129,6 @@ class Endboss extends MovableObject {
       this.otherDirection = false;
     }
   }
-  
 
   generateDeadEndboss() {
     if (this.deadIntervalCounter > 4) {

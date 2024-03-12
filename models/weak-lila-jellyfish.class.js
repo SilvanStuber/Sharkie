@@ -7,9 +7,9 @@ class WeakLilaJellyFish extends JellyFish {
     ];
     IMAGES_LILA_JELLYFISH_DEAD = [
       "./img/2.Enemy/2 Jelly fish/Dead/Lila/L1.png",
-      "./img/2.Enemy/2 Jelly fish/Dead/Lila/L1.png",
-      "./img/2.Enemy/2 Jelly fish/Dead/Lila/L1.png",
-      "./img/2.Enemy/2 Jelly fish/Dead/Lila/L1.png"
+      "./img/2.Enemy/2 Jelly fish/Dead/Lila/L2.png",
+      "./img/2.Enemy/2 Jelly fish/Dead/Lila/L3.png",
+      "./img/2.Enemy/2 Jelly fish/Dead/Lila/L4.png"
     ];
   
     constructor() {

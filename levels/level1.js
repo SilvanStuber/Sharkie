@@ -1,11 +1,11 @@
 const level1 = new Level(
   [
-    new Fish(),
-    new Fish(),
-    new Fish(),
-    new Fish(),
-    new Fish(),
-    new Fish(),
+    new FishGreen(),
+    new FishGreen(),
+    new FishPink(),
+    new FishPink(),
+    new FishRed(),
+    new FishRed(),
     new WeakLilaJellyFish(),
     new WeakLilaJellyFish(),
     new WeakYellowJellyFish(),

@@ -86,8 +86,7 @@ class Collision {
 
   generateBubbleCollisionWithJellyFish(enemy) {
     if (enemy instanceof WeakLilaJellyFish || enemy instanceof WeakYellowJellyFish || enemy instanceof StrongPinkJellyFish || enemy instanceof StrongGreenJellyFish) {
-      enemy.hitJellyFish();
-      setStoppableInterval(() => enemy.enemyFliesOutOfTheMap(this.character.x), 125);
+      enemy.hitFish();
     }
   }
 
@@ -103,7 +102,7 @@ class Collision {
       this.level.enemies.forEach((enemy) => {
         if (this.character.isColliding(enemy)) {
           if (enemy instanceof Fish) {
-            setStoppableInterval(() => enemy.enemyFliesOutOfTheMap(this.character.x), 125);
+            enemy.hitFish();
             setTimeout(() => {
               this.level.enemies.splice(i, 1);
             }, 1125);

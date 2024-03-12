@@ -14,6 +14,7 @@ class MovableObject extends DrawableObject {
   damageFromWhichEnemy;
   deadIntervalCounter = 0;
   positionObjects = [];
+  turnRight = false;
 
   playAnimation(images) {
     let i = this.currentImage % images.length;
@@ -55,7 +56,7 @@ class MovableObject extends DrawableObject {
     }
   }
 
-  hitJellyFish() {
+  hitFish() {
     this.energy = 0;
   }
 
@@ -74,15 +75,17 @@ class MovableObject extends DrawableObject {
     return timepassed < 0.5;
   }
 
-  enemyFliesOutOfTheMap(characterX) {
-    this.height -= 7.5;
-    this.width -= 15;
-    this.y -= 70;
+  fishFliesOutOfTheMap(characterX) {
+    this.y -= 40;
     if (characterX > this.x) {
-      this.x -= 50;
-    } else {
       this.x += 50;
+    } else {
+      this.x -= 50;
     }
+  }
+
+  jellyFishFliesOutOfTheMap(characterX) {
+    this.y -= 20;
   }
 
   isDead() {

@@ -61,6 +61,7 @@ class Collision {
         this.poison_sound.play();
         this.level.poisonBottle.splice(i, 1);
         this.poisonValue += 20;
+        this.character.poisonCounter++;
         this.valueOfPoison.setValueOfPoison(this.poisonValue);
       }
       i++;
@@ -85,7 +86,12 @@ class Collision {
   }
 
   generateBubbleCollisionWithJellyFish(enemy) {
-    if (enemy instanceof WeakLilaJellyFish || enemy instanceof WeakYellowJellyFish || enemy instanceof StrongPinkJellyFish || enemy instanceof StrongGreenJellyFish) {
+    if (
+      enemy instanceof WeakLilaJellyFish ||
+      enemy instanceof WeakYellowJellyFish ||
+      enemy instanceof StrongPinkJellyFish ||
+      enemy instanceof StrongGreenJellyFish
+    ) {
       enemy.hitFish();
     }
   }

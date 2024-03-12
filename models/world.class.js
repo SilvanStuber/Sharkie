@@ -31,15 +31,15 @@ class World {
       this.bubble = new BubblePoison(this.positionBubbleX, this.character.y + 80, this.character.otherDirection);
     } else if (key.D) {
       this.bubble = new Bubble(this.positionBubbleX, this.character.y + 80, this.character.otherDirection);
-    } 
-    this.throwableObjects.push(this.bubble);
+    }
+      this.throwableObjects.push(this.bubble);
   }
 
   positionBubble() {
     if (this.character.otherDirection) {
       this.positionBubbleX = this.character.x;
-    } else if(!this.character.otherDirection) {
-      this.positionBubbleX = this.character.x + 230
+    } else if (!this.character.otherDirection) {
+      this.positionBubbleX = this.character.x + 230;
     }
   }
 

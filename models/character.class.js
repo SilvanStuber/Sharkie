@@ -166,7 +166,7 @@ class Character extends MovableObject {
       } else if (this.world.keyboard.LEFT && this.x > 0) {
         this.moveLeft();
         this.otherDirection = true;
-      } else if (this.world.keyboard.UP && this.y > -50) {
+      } else if (this.world.keyboard.UP && this.y > -20) {
         this.moveUp();
       } else if (this.world.keyboard.DOWN && this.y < 300) {
         this.moveDown();

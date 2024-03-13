@@ -1,5 +1,6 @@
 class World {
   character = new Character();
+  lifeBar = new StatusBar();
   level = level1;
   canvas;
   ctx;
@@ -10,7 +11,7 @@ class World {
   bubble_sound = new Audio("./audio/bubble_sound.mp3");
   bubble;
   positionBubbleX;
-
+  
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -49,9 +50,8 @@ class World {
     this.addObjectsToMap(this.level.backgroundObjects);
     this.ctx.translate(-this.camera_x, 0);
     //----------Space for fixed objects--------------------
-    this.addToMap(this.checkColliding.valueOfLife);
-    this.addToMap(this.checkColliding.valueOfCoin);
-    this.addToMap(this.checkColliding.valueOfPoison);
+    this.addObjectsToMap(this.level.statusBar);
+    this.setValueFromStatusBar();
     this.ctx.translate(this.camera_x, 0);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
@@ -94,5 +94,20 @@ class World {
   flipImageBack(mo) {
     this.ctx.restore();
     mo.x = mo.x * -1;
+  }
+
+  setValueFromStatusBar() {
+      this.setNumberOfMap(this.character.energy, 65, 50);
+      this.setNumberOfMap(this.checkColliding.coinsValue, 205, 50);
+      this.setNumberOfMap(this.checkColliding.poisonValue, 287, 50);
+      
+ 
+  }
+
+  setNumberOfMap(value, x, y) {
+    console.log(this.lifeBar.lifeCounter)
+    this.ctx.fillStyle = 'white';
+    this.ctx.font = '40px Luckiest Guy';
+    this.ctx.fillText(value, x, y ); 
   }
 }

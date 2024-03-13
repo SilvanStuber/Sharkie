@@ -1,5 +1,6 @@
 let canvas;
 let world;
+let ctx;
 let characterPositionX = 0;
 let characterPositionY = 220;
 let keyboard = new Keyboard();

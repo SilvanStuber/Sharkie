@@ -8,7 +8,6 @@ class Character extends MovableObject {
   offsetWidht = 10;
   offsetHeight = 130;
   speed = 2;
-  poisonCounter = 0;
   IMAGES_STANDING = [
     "./img/1.Sharkie/1.IDLE/2.png",
     "./img/1.Sharkie/1.IDLE/3.png",
@@ -248,7 +247,7 @@ class Character extends MovableObject {
 
   generateAnimationBubble() {
     if (this.attackImageCounter < 8) {
-      if (this.world.keyboard.G && this.poisonCounter > 0) {
+      if (this.world.keyboard.G && poisonCounter > 0) {
         this.generatePoisonBubble();
       } else if (this.world.keyboard.D) {
         this.generateBubble();
@@ -261,7 +260,7 @@ class Character extends MovableObject {
     this.playSingeleAnimation(this.IMAGES_BLOW_UP_BUBBLE_POISON, this.attackImageCounter);
     if (this.attackImageCounter == 7) {
       world.generateThrowObjects(this.world.keyboard);
-      this.poisonCounter -= 1;
+      poisonCounter -= 1;
     }
   }
 

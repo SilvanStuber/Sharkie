@@ -1,9 +1,7 @@
 class Collision {
   coin_sound = new Audio("./audio/coin_sound.mp3");
   poison_sound = new Audio("./audio/poison_sound.mp3");
-  valueOfLife = new ValueOfLife();
-  valueOfCoin = new ValueOfCoin();
-  valueOfPoison = new ValueOfPoison();
+  lifeBar = new LifeBar();
   coinsValue = 0;
   poisonValue = 0;
   hitEnemy;
@@ -35,7 +33,6 @@ class Collision {
       if (this.character.isColliding(enemy)) {
         if (!this.keyboard.SPACE) {
           this.character.hit(enemy);
-          this.valueOfLife.setValueOfLife(this.character.energy);
         }
       }
     });
@@ -47,8 +44,7 @@ class Collision {
       if (this.character.isColliding(coin)) {
         this.coin_sound.play();
         this.level.coins.splice(i, 1);
-        this.coinsValue += 10;
-        this.valueOfCoin.setValueOfCoin(this.coinsValue);
+        this.coinsValue += 1;
       }
       i++;
     });
@@ -60,9 +56,7 @@ class Collision {
       if (this.character.isColliding(bottle)) {
         this.poison_sound.play();
         this.level.poisonBottle.splice(i, 1);
-        this.poisonValue += 20;
-        this.character.poisonCounter++;
-        this.valueOfPoison.setValueOfPoison(this.poisonValue);
+        this.poisonValue += 1;
       }
       i++;
     });

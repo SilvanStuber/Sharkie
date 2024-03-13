@@ -77,7 +77,7 @@ class Endboss extends MovableObject {
 
   animate() {
     let id = setInterval(() => {
-      if (world.character.x > 1800 && !this.hadFirstContact) {
+      if (characterPositionX > 1800 && !this.hadFirstContact) {
         this.generateInteroduceEndboss();
       } else if (this.hadFirstContact) {
         this.generateAnimationEndboss();
@@ -123,7 +123,7 @@ class Endboss extends MovableObject {
   }
 
   otherDirectionEndboss() {
-    if (world.character.x > this.x - 100) {
+    if (characterPositionX > this.x - 100) {
       this.otherDirection = true;
     } else {
       this.otherDirection = false;
@@ -148,12 +148,12 @@ class Endboss extends MovableObject {
     this.playAnimation(this.IMAGES_ATTACK);
     this.attack_endboss.play();
     setTimeout(() => {
-      this.y = world.character.y - 145;
-      this.x = world.character.x + 210;
+      this.y = characterPositionY - 145;
+      this.x = characterPositionX + 210;
     }, 500);
     setTimeout(() => {
       this.thisattackFromEndboss = false;
-      this.x = world.character.x + 280;
+      this.x = characterPositionX + 280;
     }, 1000);
   }
 }

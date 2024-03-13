@@ -79,7 +79,6 @@ class World {
       this.rotateImage(mo);
     }
     mo.draw(this.ctx);
-    mo.drawFrame(this.ctx); //Rechteck
     if (mo.otherDirection) {
       this.flipImageBack(mo);
     }

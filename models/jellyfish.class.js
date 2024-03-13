@@ -18,7 +18,7 @@ class JellyFish extends MovableObject {
     animationCharacter(imageAlive, imaggeDead) {
       if (this.isDead()) {
         this.playAnimation(imaggeDead);
-        this.jellyFishFliesOutOfTheMap(world.character.x);
+        this.jellyFishFliesOutOfTheMap(characterPositionX);
       } else {
         this.playAnimation(imageAlive);
       }

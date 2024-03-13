@@ -1,5 +1,7 @@
 let canvas;
 let world;
+let characterPositionX = 0;
+let characterPositionY = 220;
 let keyboard = new Keyboard();
 
 function init() {

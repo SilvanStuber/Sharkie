@@ -2,6 +2,9 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: 'Luckiest Guy';
+    font-style: normal;
+    font-weight: 400;
 }
 
 canvas {

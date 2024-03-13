@@ -157,6 +157,7 @@ class Character extends MovableObject {
     setStoppableInterval(() => this.animationCharacter(), 250);
     setStoppableInterval(() => this.attackAnimationCharacter(), 125);
     setStoppableInterval(() => this.resetSleepValue(), 125);
+    setStoppableInterval(() => this.setGlobalPositionCharacter(), 125);
   }
 
   moveCharacter() {
@@ -328,5 +329,10 @@ class Character extends MovableObject {
       }
     }
     this.playAttack++;
+  }
+  
+  setGlobalPositionCharacter() {
+    characterPositionX = this.x;
+    characterPositionY = this.y;
   }
 }

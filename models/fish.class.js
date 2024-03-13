@@ -12,8 +12,8 @@ class Fish extends MovableObject {
   animate(imageDEAD, imageTransition, imageTransitionSwim, imageSwim) {
     if (this.isDead()) {
       this.playAnimation(imageDEAD)
-      this.fishFliesOutOfTheMap(world.character.x, 40);
-    } else if (world.character.x + 400 < this.x) {
+      this.fishFliesOutOfTheMap(characterPositionX, 40);
+    } else if (characterPositionX + 400 < this.x) {
       this.fishTransition = true;
     } else if (this.fishTransition) {
       this.generateAnimationTransitionToBubbleFish(imageTransition, imageTransitionSwim);

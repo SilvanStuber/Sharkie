@@ -51,7 +51,7 @@ class World {
     this.ctx.translate(-this.camera_x, 0);
     //----------Space for fixed objects--------------------
     this.addObjectsToMap(this.level.statusBar);
-    this.setValueFromStatusBar();
+    this.drawValueFromStatusBar();
     this.ctx.translate(this.camera_x, 0);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
@@ -96,12 +96,10 @@ class World {
     mo.x = mo.x * -1;
   }
 
-  setValueFromStatusBar() {
+  drawValueFromStatusBar() {
       this.setNumberOfMap(this.character.energy, 65, 50);
       this.setNumberOfMap(this.checkColliding.coinsValue, 205, 50);
       this.setNumberOfMap(this.checkColliding.poisonValue, 287, 50);
-      
- 
   }
 
   setNumberOfMap(value, x, y) {

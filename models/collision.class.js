@@ -18,13 +18,12 @@ class Collision {
 
   run(keyboard) {
     this.keyboard = keyboard;
-
     setInterval(() => {
       this.checkCollisionsEnemy();
       this.checkCollisionsCoins();
       this.checkCollisionsPoison();
       this.checkCollisionsBubble();
-      this.attackEnemy();
+      this.attackEnemy();      
     }, 250);
   }
 

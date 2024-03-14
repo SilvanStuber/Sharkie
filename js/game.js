@@ -4,6 +4,8 @@ let ctx;
 let characterPositionX = 0;
 let characterPositionY = 220;
 let keyboard = new Keyboard();
+let endbossDead = false;
+let characterDead = false;
 
 function init() {
   canvas = document.getElementById("canvas");

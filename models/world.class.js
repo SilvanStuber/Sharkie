@@ -1,6 +1,5 @@
 class World {
   character = new Character();
-  lifeBar = new StatusBar();
   level = level1;
   canvas;
   ctx;
@@ -9,9 +8,10 @@ class World {
   throwableObjects = [];
   checkColliding = new Collision(this.level, this.character, this.throwableObjects);
   bubble_sound = new Audio("./audio/bubble_sound.mp3");
+  buzzer_sound = new Audio("./audio/buzzer.mp3");
   bubble;
   positionBubbleX;
-  
+
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -33,7 +33,7 @@ class World {
     } else if (key.D) {
       this.bubble = new Bubble(this.positionBubbleX, this.character.y + 80, this.character.otherDirection);
     }
-      this.throwableObjects.push(this.bubble);
+    this.throwableObjects.push(this.bubble);
   }
 
   positionBubble() {
@@ -58,12 +58,14 @@ class World {
     this.addObjectsToMap(this.level.coins);
     this.addObjectsToMap(this.level.poisonBottle);
     this.addObjectsToMap(this.throwableObjects);
+    this.addObjectsToMap(this.level.endScreen);
     this.ctx.translate(-this.camera_x, 0);
     let self = this;
     requestAnimationFrame(function () {
       self.draw();
     });
   }
+  
 
   addObjectsToMap(objects) {
     objects.forEach((o) => {
@@ -74,9 +76,6 @@ class World {
   addToMap(mo) {
     if (mo.otherDirection) {
       this.flipImage(mo);
-    }
-    if (mo.spinObject) {
-      this.rotateImage(mo);
     }
     mo.draw(this.ctx);
     if (mo.otherDirection) {
@@ -97,15 +96,27 @@ class World {
   }
 
   drawValueFromStatusBar() {
-      this.setNumberOfMap(this.character.energy, 65, 50);
-      this.setNumberOfMap(this.checkColliding.coinsValue, 205, 50);
-      this.setNumberOfMap(this.checkColliding.poisonValue, 287, 50);
+    this.setNumberOfMap(this.character.energy, 65, 50);
+    this.setNumberOfMap(this.checkColliding.coinsValue, 205, 50);
+    this.setNumberOfMapPoison(this.checkColliding.poisonValue, 287, 50);
   }
 
   setNumberOfMap(value, x, y) {
-    console.log(this.lifeBar.lifeCounter)
-    this.ctx.fillStyle = 'white';
-    this.ctx.font = '40px Luckiest Guy';
-    this.ctx.fillText(value, x, y ); 
+    this.ctx.fillStyle = "white";
+    this.ctx.font = "40px Luckiest Guy";
+    this.ctx.fillText(value, x, y);
   }
+
+  setNumberOfMapPoison(value, x, y) {
+    if (this.checkColliding.poisonValue == 0 && this.keyboard.G) {
+      this.buzzer_sound.play();
+      this.ctx.fillStyle = "red";
+    } else {
+      this.ctx.fillStyle = "white";
+    }
+    this.ctx.font = "40px Luckiest Guy";
+    this.ctx.fillText(value, x, y);
+  }
+
+
 }

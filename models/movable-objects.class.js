@@ -10,7 +10,6 @@ class MovableObject extends DrawableObject {
   energy = 100;
   lastHit = 0;
   endbossIsPublished = false;
-  world;
   damageFromWhichEnemy;
   deadIntervalCounter = 0;
   positionObjects = [];
@@ -61,9 +60,10 @@ class MovableObject extends DrawableObject {
   }
 
   hitEndboss() {
-    this.energy -= 20;
+    this.energy -= 100;
     if (this.energy < 0) {
       this.energy = 0;
+
     } else {
       this.lastHit = new Date().getTime();
     }

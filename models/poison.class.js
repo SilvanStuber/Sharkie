@@ -22,13 +22,6 @@ class Poison extends MovableObject {
     this.x = this.positionierungObjecteX();
     this.y = this.positionierungObjecteY();
     this.loadImages(this.POISON_IMAGES);
-    this.animate();
-  }
-  animate() {
-    setStoppableInterval(() => this.setCoin(), 220);
-  }
-
-  setCoin() {
-    this.playAnimation(this.POISON_IMAGES);
+    setStoppableInterval(() => this.playAnimation(this.POISON_IMAGES), 220);
   }
 }

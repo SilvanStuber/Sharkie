@@ -136,6 +136,7 @@ class Endboss extends MovableObject {
     }
     this.playSingeleAnimation(this.IMAGES_DEAD, this.deadIntervalCounter);
     this.deadIntervalCounter++;
+    endbossDead = true;
     stopGame();
   }
 

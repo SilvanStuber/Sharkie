@@ -13,19 +13,11 @@ class Coins extends MovableObject {
   offsetHeight = 0;
   coin = 0;
 
-
   constructor() {
     super().loadImage("./img/4. Marcadores/1. Coins/1.png");
     this.x = this.positionierungObjecteX();
     this.y = this.positionierungObjecteY();
     this.loadImages(this.COINS_IMAGES);
-    this.animate();
-  }
-  animate() {
-  this.intervalId = setStoppableInterval(() => this.setCoin(), 220);
-  }
-
-  setCoin() {
-    this.playAnimation(this.COINS_IMAGES);
+    setStoppableInterval(() => this.playAnimation(this.COINS_IMAGES), 220);
   }
 }

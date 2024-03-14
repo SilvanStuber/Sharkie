@@ -119,7 +119,6 @@ class Character extends MovableObject {
     "./img/1.Sharkie/4.Attack/Bubble trap/For Whale/7.png",
     "./img/1.Sharkie/4.Attack/Bubble trap/For Whale/8.png",
   ];
-  world;
   playAttack;
   timeWithoutMovement = 0;
   attackImageCounter = 0;
@@ -133,6 +132,7 @@ class Character extends MovableObject {
   hit_sound_character = new Audio("./audio/hit_sound_chracter.mp3");
   inhale_sound = new Audio("./audio/inhale.mp3");
   exhale_sound = new Audio("./audio/exhale.mp3");
+  poisonBar = new Collision();
 
   constructor() {
     super().loadImage("./img/1.Sharkie/1.IDLE/1.png");
@@ -157,6 +157,7 @@ class Character extends MovableObject {
     setStoppableInterval(() => this.attackAnimationCharacter(), 125);
     setStoppableInterval(() => this.resetSleepValue(), 125);
     setStoppableInterval(() => this.setGlobalPositionCharacter(), 125);
+    setStoppableInterval(() => this.resetBubbleAnimation(), 250);
   }
 
   moveCharacter() {
@@ -182,7 +183,7 @@ class Character extends MovableObject {
       this.animationDead();
     } else if (this.isHurt()) {
       this.hurtAnimation();
-    } else if (this.world.keyboard.D || this.world.keyboard.G) {
+    } else if (this.world.keyboard.D || (this.world.keyboard.G && world.checkColliding.poisonValue > 0)) {
       this.animationBubble();
     } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
       this.playAnimation(this.IMAGES_SWIM);
@@ -207,6 +208,7 @@ class Character extends MovableObject {
     } else if (this.checkJellyFishClass()) {
       this.playAnimationDead(this.IMAGES_ELECTRO_DEAD, 9);
     }
+    characterDead = true;
     stopGame();
   }
 
@@ -234,7 +236,6 @@ class Character extends MovableObject {
           this.generateAnimationBubble();
         }, 125);
       }, 500);
-      this.resetBubbleAnimation();
     }
   }
 
@@ -247,7 +248,7 @@ class Character extends MovableObject {
 
   generateAnimationBubble() {
     if (this.attackImageCounter < 8) {
-      if (this.world.keyboard.G && poisonCounter > 0) {
+      if (this.world.keyboard.G && world.checkColliding.poisonValue > 0) {
         this.generatePoisonBubble();
       } else if (this.world.keyboard.D) {
         this.generateBubble();
@@ -260,7 +261,7 @@ class Character extends MovableObject {
     this.playSingeleAnimation(this.IMAGES_BLOW_UP_BUBBLE_POISON, this.attackImageCounter);
     if (this.attackImageCounter == 7) {
       world.generateThrowObjects(this.world.keyboard);
-      poisonCounter -= 1;
+      world.checkColliding.poisonValue -= 1;
     }
   }
 
@@ -273,9 +274,11 @@ class Character extends MovableObject {
 
   resetBubbleAnimation() {
     setTimeout(() => {
+      if (this.bubbleMoves && this.bubbleActive && !this.world.keyboard.G && !this.world.keyboard.D) {
       this.bubbleMoves = false;
       this.bubbleActive = false;
-    }, 3000);
+      }
+    }, 4000);
   }
 
   setStoppableIntervalBubble(fn, time) {
@@ -329,7 +332,7 @@ class Character extends MovableObject {
     }
     this.playAttack++;
   }
-  
+
   setGlobalPositionCharacter() {
     characterPositionX = this.x;
     characterPositionY = this.y;

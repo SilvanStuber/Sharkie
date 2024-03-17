@@ -1,4 +1,5 @@
 class World {
+  menuScreen = new MenuScreen();
   character = new Character();
   level = level1;
   canvas;
@@ -16,9 +17,8 @@ class World {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
-    this.draw();
+    this.initGame();
     this.setWorld();
-    this.checkColliding.run(this.keyboard);
   }
 
   setWorld() {
@@ -44,7 +44,32 @@ class World {
     }
   }
 
-  draw() {
+startGame() {
+    gameHasStarted = true;
+    document.getElementById("startGameButton").classList.add('d-none')
+    this.checkColliding.run(this.keyboard);
+    playGameSound();
+    this.initGame();
+  }
+
+initGame() {
+    if (!gameHasStarted) {
+      this.drawStartScreen();
+    } else {
+      this.drawGame();
+    }
+  }
+
+  drawStartScreen() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.addToMap(this.menuScreen);
+    let self = this;
+    requestAnimationFrame(function () {
+      self.drawStartScreen();
+    });
+  }
+
+  drawGame() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
     this.addObjectsToMap(this.level.backgroundObjects);
@@ -62,7 +87,7 @@ class World {
     this.ctx.translate(-this.camera_x, 0);
     let self = this;
     requestAnimationFrame(function () {
-      self.draw();
+      self.drawGame();
     });
   }
   
@@ -118,5 +143,7 @@ class World {
     this.ctx.fillText(value, x, y);
   }
 
-
+  reset() {
+    location.reload()
+  }
 }

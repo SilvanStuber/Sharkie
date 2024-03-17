@@ -148,7 +148,6 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_BLOW_UP_BUBBLE);
     this.loadImages(this.IMAGES_BLOW_UP_BUBBLE_POISON);
     this.animate();
-    playGameSound();
   }
 
   animate() {

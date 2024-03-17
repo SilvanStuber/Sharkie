@@ -14,6 +14,7 @@ class MovableObject extends DrawableObject {
   deadIntervalCounter = 0;
   positionObjects = [];
   turnRight = false;
+  imageCounter = 0;
 
   playAnimation(images) {
     let i = this.currentImage % images.length;

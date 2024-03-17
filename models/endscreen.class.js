@@ -21,7 +21,7 @@ class EndScreen extends MovableObject {
 
   width = 480;
   height = 280;
-  imageTryAgainCounter = 0;
+  imageCounter = 0;
 
   constructor() {
     super();
@@ -50,9 +50,9 @@ class EndScreen extends MovableObject {
 
   loadTryAgain() {
     if (endbossDead || characterDead) {
-      let i = this.imageTryAgainCounter % this.IMAGE_TRY_AGAIN.length;
+      let i = this.imageCounter % this.IMAGE_TRY_AGAIN.length;
       document.getElementById("tryAgainButton").src = this.IMAGE_TRY_AGAIN[i];
-      this.imageTryAgainCounter++;
+      this.imageCounter++;
     }
   }
 }

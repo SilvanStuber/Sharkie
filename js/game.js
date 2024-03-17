@@ -6,6 +6,7 @@ let characterPositionY = 220;
 let keyboard = new Keyboard();
 let endbossDead = false;
 let characterDead = false;
+let gameHasStarted = false; 
 
 function init() {
   canvas = document.getElementById("canvas");
@@ -59,3 +60,7 @@ window.addEventListener("keyup", (e) => {
     keyboard.G = false;
   }
 });
+
+
+
+

@@ -1,13 +1,13 @@
 class World {
   menuScreen = new MenuScreen();
   character = new Character();
-  level = level1;
+  level;
   canvas;
   ctx;
   keyboard;
   camera_x = 0;
   throwableObjects = [];
-  checkColliding = new Collision(this.level, this.character, this.throwableObjects);
+  checkColliding;
   bubble_sound = new Audio("./audio/bubble_sound.mp3");
   buzzer_sound = new Audio("./audio/buzzer.mp3");
   bubble;
@@ -44,15 +44,22 @@ class World {
     }
   }
 
-startGame() {
+  startGame() {
+    this.loadDateGame();
     gameHasStarted = true;
-    document.getElementById("startGameButton").classList.add('d-none')
-    this.checkColliding.run(this.keyboard);
+    document.getElementById("startGameButton").classList.add("d-none");
     playGameSound();
     this.initGame();
   }
 
-initGame() {
+  loadDateGame() {
+    initLevel();
+    this.level = level1;
+    this.checkColliding = new Collision(this.level, this.character, this.throwableObjects);
+    this.checkColliding.run(this.keyboard);
+  }
+
+  initGame() {
     if (!gameHasStarted) {
       this.drawStartScreen();
     } else {
@@ -90,7 +97,6 @@ initGame() {
       self.drawGame();
     });
   }
-  
 
   addObjectsToMap(objects) {
     objects.forEach((o) => {
@@ -144,6 +150,6 @@ initGame() {
   }
 
   reset() {
-    location.reload()
+    location.reload();
   }
 }

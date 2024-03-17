@@ -17,6 +17,7 @@ canvas {
 
 h1 {
   font-size: 40px;
+  color: white;
 }
 
 #tryAgainButton {
@@ -32,6 +33,34 @@ h1 {
   top: 48%;
   padding-left: 250px;
   cursor: pointer;
+}
+
+.informations-container {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  padding-top: 48px;
+}
+
+.instruction-container {
+  display: flex;
+  gap: 12px;
+}
+
+.instruction-text {
+  font-size: 18px;
+  color: white;
+  width: 340px;
+}
+
+
+.arrow-key-image {
+  height: 170px;
+}
+
+.single-key-image {
+  padding-top: 18px;
+  height: 48px;
 }
 
 .d-none {

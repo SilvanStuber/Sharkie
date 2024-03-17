@@ -44,8 +44,35 @@
   <body onload="init()">
     <h1>Sharkie</h1>
     <canvas id="canvas" width="720px" height="480px"> </canvas>
-    <img id="tryAgainButton" onclick="world.reset()">
-    <img id="startGameButton" onclick="world.startGame()">
-
-  </body> 
+    <img id="tryAgainButton" onclick="world.reset()" />
+    <img id="startGameButton" onclick="world.startGame()" />
+    <div class="informations-container">
+      <div>
+        <div class="instruction-container">
+          <img img class="arrow-key-image" src="./img/6.Botones/Key/arrow keys.png" alt="Image MOVE" />
+          <p class="instruction-text">
+            USE THE ARROW KEYS TO MOVE SHARKIE IN ALL DIRECTIONS. HOWEVER, BE CAUTIOUS IN YOUR MOVEMENTS, YOUR ENEMIES ARE ON THE LOOKOUT AND WILL NOT HESITATE
+            TO PREVENT YOU FROM REACHING YOUR GOALS!
+          </p>
+        </div>
+        <div class="instruction-container">
+          <img class="single-key-image" src="./img/6.Botones/Key/Space Bar key.png" alt="Image ATTACK SPACE" />
+          <p class="instruction-text">USE SPACEBAR TO TAKE ACTION AGAINST PUFFERFISH</p>
+        </div>
+      </div>
+      <div>
+        <div class="instruction-container">
+          <img class="single-key-image" src="./img/6.Botones/Key/D key.png" alt="Image ATTACK D" />
+          <p class="instruction-text">FROM A DISTANCE, YOU CAN CAPTURE JELLYFISH WITH A BUBBLE BY PRESSING D</p>
+        </div>
+        <div class="instruction-container">
+          <img class="single-key-image" src="./img/6.Botones/Key/G Key.png" alt="Image ATTACK G" />
+          <p class="instruction-text">
+            BY COLLECTING POISON CONTAINERS, YOU CAN RELEASE POISON BUBBLES WITH G. HOWEVER, USE THEM SPARINGLY AND STRATEGICALLY AGAINST THE FINAL BOSS.
+            PUFFERFISH ARE IMMUNE TO THE POISON, AND JELLYFISH CAN CAUSE THE POISON BUBBLE TO BURST
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

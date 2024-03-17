@@ -5,11 +5,18 @@ body {
   font-family: "Luckiest Guy";
   font-style: normal;
   font-weight: 400;
-  background-image: ;
+  min-height: 100vh;
+  margin: 0;
+  background-image: url('../img/7.Menu/menu_background.jpg');
+  background-position: center;
 }
 
 canvas {
   background-color: black;
+}
+
+h1 {
+  font-size: 40px;
 }
 
 #tryAgainButton {

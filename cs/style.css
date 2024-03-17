@@ -7,8 +7,9 @@ body {
   font-weight: 400;
   min-height: 100vh;
   margin: 0;
-  background-image: url('../img/7.Menu/menu_background.jpg');
-  background-position: center;
+  background-image: url('./../img/7.menu/menu_background.jpg');
+  object-fit: cover;
+  background-size: cover;
 }
 
 canvas {
@@ -16,7 +17,7 @@ canvas {
 }
 
 h1 {
-  font-size: 40px;
+  font-size: 32px;
   color: white;
 }
 
@@ -30,7 +31,7 @@ h1 {
 #startGameButton{
   width: 200px;
   position: fixed;
-  top: 48%;
+  top: 430px;
   padding-left: 250px;
   cursor: pointer;
 }

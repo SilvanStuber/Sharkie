@@ -104,8 +104,10 @@ class Endboss extends MovableObject {
     }
     this.counterInteroduceEndboss++;
     if (!this.hadFirstContact) {
-      playGameSoundEndboss();
+      soundEndboss = true;
+      endbossGameSound();
       this.hadFirstContact = true;
+      soundEndboss = true;
     }
   }
 
@@ -141,13 +143,13 @@ class Endboss extends MovableObject {
   }
 
   generateHurtEndboss() {
-    this.hit_sound_endboss.play();
+    playInteractionSound(this.hit_sound_endboss);
     this.playAnimation(this.IMAGES_HURT);
   }
 
   generateAnimationAttackEndboss() {
     this.playAnimation(this.IMAGES_ATTACK);
-    this.attack_endboss.play();
+    playInteractionSound(this.attack_endboss);
     setTimeout(() => {
       this.y = characterPositionY - 145;
       this.x = characterPositionX + 210;

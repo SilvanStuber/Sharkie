@@ -26,7 +26,7 @@ class World {
   }
 
   generateThrowObjects(key) {
-    this.bubble_sound.play();
+    playInteractionSound(this.bubble_sound);
     this.positionBubble();
     if (key.G) {
       this.bubble = new BubblePoison(this.positionBubbleX, this.character.y + 80, this.character.otherDirection);
@@ -140,7 +140,7 @@ class World {
 
   setNumberOfMapPoison(value, x, y) {
     if (this.checkColliding.poisonValue == 0 && this.keyboard.G) {
-      this.buzzer_sound.play();
+      playInteractionSound(this.buzzer_sound);
       this.ctx.fillStyle = "red";
     } else {
       this.ctx.fillStyle = "white";

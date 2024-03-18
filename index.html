@@ -3,12 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./cs/style.css" />
-    <link rel="stylesheet" href="./cs/font.css" />
+    <link rel="stylesheet" href="./css/style.css" />
     <link rel="icon" type="image/x-icon" href="./img/1.Sharkie/1.IDLE/sharkie_pose.png" />
     <title>Sharkie</title>
     <script src="./js/stopable-interval.js"></script>
-    <script src="./levels/game-sound.js"></script>
+    <script src="./js/game-sound.js"></script>
     <script src="./models/drawable-object.class.js"></script>
     <script src="./models/movable-objects.class.js"></script>
     <script src="./models/background-object.class.js"></script>
@@ -43,9 +42,16 @@
   </head>
   <body onload="init()">
     <h1>Sharkie</h1>
-    <canvas id="canvas" width="720px" height="480px"> </canvas>
-    <img id="tryAgainButton" onclick="world.reset()" />
-    <img id="startGameButton" onclick="world.startGame()" />
+    <div id="fullscreen">
+      <canvas id="canvas" width="720px" height="480px"></canvas>
+      <img id="tryAgainButton" onclick="world.reset()" />
+      <img id="startGameButton" onclick="world.startGame()" />
+      <div class="settingContainer">
+        <img class="settingButton" id="muteButton" src="./img/6.Botones/Key/unmute.png" onclick="mute()" />
+        <img class="settingButton" id="fullScreenButton" src="./img/6.Botones/Key/fullscreen.png" onclick="fullScreen()" />
+        <img class="settingButton" id="infoButton" src="./img/6.Botones/Key/info.png" onclick="info()" />
+      </div>
+    </div>
     <div class="informations-container">
       <div>
         <div class="instruction-container">

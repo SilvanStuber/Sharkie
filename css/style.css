@@ -1,0 +1,138 @@
+@font-face {
+  font-family: 'Luckiest Guy';
+  src: url('./fonts/LuckiestGuy-Regular.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+} 
+
+canvas {
+  display: block;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Luckiest Guy", Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  min-height: 100vh;
+  margin: 0;
+  background-image: url('./../img/7.menu/menu_background.jpg');
+  object-fit: cover;
+  background-size: cover;
+}
+
+h1 {
+  font-size: 32px;
+  color: white;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+#fullscreen {
+  display: flex;
+  position: relative;
+}
+
+#tryAgainButton {
+  width: 30%;
+  position: absolute;
+  top: 80%;
+  left: 36%;
+  cursor: pointer;
+}
+
+#tryAgainButton:hover {
+  transform: scale(1.1);
+}
+
+#startGameButton {
+  width: 33%;
+  position: absolute;
+  top: 72%;
+  left: 25%;
+  padding-left: 25%;
+  cursor: pointer;
+}
+
+#startGameButton:hover {
+  transform: scale(1.1);
+}
+
+.informations-container {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 48px;
+  gap: 48px;
+}
+
+.instruction-container {
+  display: flex;
+  gap: 24px;
+}
+
+.instruction-text {
+  font-size: 18px;
+  color: white;
+  width: 340px;
+}
+
+
+.arrow-key-image {
+  height: 170px;
+}
+
+.single-key-image {
+  padding-top: 18px;
+  height: 48px;
+}
+
+.settingContainer {
+  position: absolute;
+  top: 3%;
+  right:3%;
+}
+
+.settingButton {
+  height: 48px;
+  padding-left: 12px;
+  cursor: pointer;
+}
+
+.settingButton:hover {
+   animation: tilt-shaking 1s;
+}
+
+@keyframes tilt-shaking {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(7.5deg);
+  }
+  50% {
+    transform: rotate(0eg);
+  }
+  75% {
+    transform: rotate(-7.5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.d-none {
+  display: none;
+}
+
+/*Smartphones ----------*/
+@media only screen and (max-width: 720px) {
+  #fullscreen, canvas {
+    width: 100%;
+   }
+}
+
+/*Smartphones ----------*/
+@media only screen and (max-height: 480px) {
+ canvas {
+   height: 100vh;
+  }  
+}

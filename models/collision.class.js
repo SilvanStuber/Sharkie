@@ -41,7 +41,7 @@ class Collision {
     let i = 0;
     this.level.coins.forEach((coin) => {
       if (this.character.isColliding(coin)) {
-        this.coin_sound.play();
+        playInteractionSound(this.coin_sound);
         this.level.coins.splice(i, 1);
         this.coinsValue += 1;
       }
@@ -53,7 +53,7 @@ class Collision {
     let i = 0;
     this.level.poisonBottle.forEach((bottle) => {
       if (this.character.isColliding(bottle)) {
-        this.poison_sound.play();
+        playInteractionSound(this.poison_sound);
         this.level.poisonBottle.splice(i, 1);
         this.poisonValue += 1;
       }

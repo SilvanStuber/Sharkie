@@ -12,8 +12,7 @@ class ThrowableObject extends MovableObject {
                 this.x -= 10;
             } else if (!directionCharacter) {
                 this.x += 10;
-            }
-            
+            }       
         }, 50)
     }
 }

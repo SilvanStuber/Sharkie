@@ -186,14 +186,14 @@ class Character extends MovableObject {
       this.animationBubble();
     } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
       this.playAnimation(this.IMAGES_SWIM);
-      this.swimming_sound.play();
+      playInteractionSound(this.swimming_sound);
     } else {
       this.standingAnimation();
     }
   }
 
   hurtAnimation() {
-    this.hit_sound_character.play();
+    playInteractionSound(this.hit_sound_character);
     if (this.checkFishAndEndbossClass()) {
       this.playAnimation(this.IMAGES_POISON_HURT);
     } else if (this.checkJellyFishClass()) {
@@ -239,9 +239,9 @@ class Character extends MovableObject {
   }
 
   playSoundInhaleAndExhale() {
-    this.inhale_sound.play();
+    playInteractionSound(this.inhale_sound);
     setTimeout(() => {
-      this.exhale_sound.play();
+      playInteractionSound(this.exhale_sound);
     }, 800);
   }
 
@@ -274,8 +274,8 @@ class Character extends MovableObject {
   resetBubbleAnimation() {
     setTimeout(() => {
       if (this.bubbleMoves && this.bubbleActive && !this.world.keyboard.G && !this.world.keyboard.D) {
-      this.bubbleMoves = false;
-      this.bubbleActive = false;
+        this.bubbleMoves = false;
+        this.bubbleActive = false;
       }
     }, 4000);
   }
@@ -313,7 +313,7 @@ class Character extends MovableObject {
   sleepAnimation() {
     if (this.isAsleep > 10) {
       this.playAnimation(this.IMAGES_SLEEP);
-      this.sleep_sound.play();
+      playInteractionSound(this.sleep_sound);
     } else {
       this.playAnimation(this.IMAGES_GOSLEEP);
     }
@@ -326,7 +326,7 @@ class Character extends MovableObject {
     } else if (this.world.keyboard.SPACE) {
       if (this.playAttack < 6) {
         this.playAnimation(this.IMAGES_SLAP);
-        this.slap_sound.play();
+        playInteractionSound(this.slap_sound);
       }
     }
     this.playAttack++;

@@ -9,7 +9,7 @@ class MovableObject extends DrawableObject {
   acceleration = 2.5;
   energy = 100;
   lastHit = 0;
-  endbossIsPublished = false;
+  endBossIsPublished = false;
   damageFromWhichEnemy;
   deadIntervalCounter = 0;
   positionObjects = [];

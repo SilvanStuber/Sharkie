@@ -43,41 +43,23 @@
   <body onload="init()">
     <h1>Sharkie</h1>
     <div id="fullscreen">
+      <div id="infobox" class="informations-container">
+        <div  class="instruction-container">
+          <img img class="close-image" src="./img/6.Botones/Key/close.png" alt="Image CLOSE" onclick="closeInfoBox()"/>
+          <img img class="flag-image german-flage-image" src="./img/7.menu/german.png" alt="Image GERMAN FLAG" onclick="setLanguage('german')"/>
+          <img img class="flag-image english-flage-image" src="./img/7.menu/english.png" alt="Image ENGLISH FLAG" onclick="setLanguage('english')"/>
+          <div id="instructionContent" class="informations-conten-container"></div>
+          <img id="arrowLeftInfoBox" img class="arrow-image arrow-left-image" src="./img/6.Botones/Key/arrow-left.png" alt="Image ARROW LEFT" onclick="previousNextInfoContent()"/>
+          <img id="arrowRightInfoBox" img class="arrow-image arrow-right-image" src="./img/6.Botones/Key/arrow-right.png" alt="Image ARROW RIGHT" onclick="loadNextInfoContent()"/>
+        </div>
+      </div>
       <canvas id="canvas" width="720px" height="480px"></canvas>
       <img id="tryAgainButton" onclick="world.reset()" />
       <img id="startGameButton" onclick="world.startGame()" />
       <div class="settingContainer">
-        <img class="settingButton" id="muteButton" src="./img/6.Botones/Key/unmute.png" onclick="mute()" />
-        <img class="settingButton" id="fullScreenButton" src="./img/6.Botones/Key/fullscreen.png" onclick="fullScreen()" />
-        <img class="settingButton" id="infoButton" src="./img/6.Botones/Key/info.png" onclick="info()" />
-      </div>
-    </div>
-    <div class="informations-container">
-      <div>
-        <div class="instruction-container">
-          <img img class="arrow-key-image" src="./img/6.Botones/Key/arrow keys.png" alt="Image MOVE" />
-          <p class="instruction-text">
-            USE THE ARROW KEYS TO MOVE SHARKIE IN ALL DIRECTIONS. HOWEVER, BE CAUTIOUS IN YOUR MOVEMENTS, YOUR ENEMIES ARE ON THE LOOKOUT AND WILL NOT HESITATE
-            TO PREVENT YOU FROM REACHING YOUR GOALS!
-          </p>
-        </div>
-        <div class="instruction-container">
-          <img class="single-key-image" src="./img/6.Botones/Key/Space Bar key.png" alt="Image ATTACK SPACE" />
-          <p class="instruction-text">USE SPACEBAR TO TAKE ACTION AGAINST PUFFERFISH</p>
-        </div>
-      </div>
-      <div>
-        <div class="instruction-container">
-          <img class="single-key-image" src="./img/6.Botones/Key/D key.png" alt="Image ATTACK D" />
-          <p class="instruction-text">FROM A DISTANCE, YOU CAN CAPTURE JELLYFISH WITH A BUBBLE BY PRESSING D</p>
-        </div>
-        <div class="instruction-container">
-          <img class="single-key-image" src="./img/6.Botones/Key/G Key.png" alt="Image ATTACK G" />
-          <p class="instruction-text">
-            BY COLLECTING POISON CONTAINERS, YOU CAN RELEASE POISON BUBBLES WITH G. HOWEVER, USE THEM SPARINGLY AND STRATEGICALLY AGAINST THE FINAL BOSS.
-            PUFFERFISH ARE IMMUNE TO THE POISON, AND JELLYFISH CAN CAUSE THE POISON BUBBLE TO BURST
-          </p>
-        </div>
+        <img class="settingButton" id="muteButton" src="./img/6.Botones/Key/unmute.png" onclick="mute()"/>
+        <img class="settingButton" id="fullScreenButton" src="./img/6.Botones/Key/fullscreen.png" onclick="addFullScreen()" />
+        <img class="settingButton" id="infoButton" src="./img/6.Botones/Key/info.png" onclick="openInfoBox()"/>  
       </div>
     </div>
   </body>

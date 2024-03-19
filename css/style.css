@@ -1,7 +1,7 @@
 @font-face {
-  font-family: 'Luckiest Guy';
-  src: url('./fonts/LuckiestGuy-Regular.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
-} 
+  font-family: "Luckiest Guy";
+  src: url("./fonts/LuckiestGuy-Regular.ttf") format("truetype"); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+}
 
 canvas {
   display: block;
@@ -16,7 +16,7 @@ body {
   font-weight: 400;
   min-height: 100vh;
   margin: 0;
-  background-image: url('./../img/7.menu/menu_background.jpg');
+  background-image: url("./../img/7.menu/menu_background.jpg");
   object-fit: cover;
   background-size: cover;
 }
@@ -41,7 +41,7 @@ h1 {
 }
 
 #tryAgainButton:hover {
-  transform: scale(1.1);
+  transform: scale(1.2);
 }
 
 #startGameButton {
@@ -54,30 +54,99 @@ h1 {
 }
 
 #startGameButton:hover {
-  transform: scale(1.1);
+  transform: scale(1.2);
 }
 
 .informations-container {
   display: flex;
-  justify-content: space-between;
-  padding-top: 48px;
-  gap: 48px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  height: 85%;
+  width: 90%;
+  background-color: rgb(37, 48, 146);
+  z-index: 999;
+  margin: 5%;
+  border-radius: 24px;
+  box-shadow: 10px 5px 5px rgba(37, 48, 146, 0.5);
+}
+
+.informations-conten-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85%;
+  gap: 24px;
+}
+
+.close-image {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  height: 5%;
+  cursor: pointer;
+}
+
+.close-image:hover {
+  transform: scale(1.2);
+}
+
+.flag-image {
+  width: 5%;
+  border-radius: 12px;
+  object-fit: cover;
+  cursor: pointer;
+  position: absolute;
+  top: 24px;
+}
+
+.flag-image:hover {
+  transform: scale(1.2);
+}
+
+.german-flage-image {
+  right: 64px;
+}
+
+.english-flage-image {
+  right: 24px;
+}
+
+.arrow-image {
+  position: absolute;
+  bottom: 24px;
+  height: 10%;
+  cursor: pointer;
+}
+
+.arrow-image:hover {
+  transform: scale(1.2);
+}
+
+.arrow-left-image {
+  left: 24px;
+}
+.arrow-right-image {
+  right: 24px;
 }
 
 .instruction-container {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
   gap: 24px;
+
 }
 
 .instruction-text {
   font-size: 18px;
   color: white;
-  width: 340px;
 }
 
-
 .arrow-key-image {
-  height: 170px;
+  height: 20%;
 }
 
 .single-key-image {
@@ -88,7 +157,7 @@ h1 {
 .settingContainer {
   position: absolute;
   top: 3%;
-  right:3%;
+  right: 3%;
 }
 
 .settingButton {
@@ -98,7 +167,7 @@ h1 {
 }
 
 .settingButton:hover {
-   animation: tilt-shaking 1s;
+  animation: tilt-shaking 1s;
 }
 
 @keyframes tilt-shaking {
@@ -125,14 +194,15 @@ h1 {
 
 /*Smartphones ----------*/
 @media only screen and (max-width: 720px) {
-  #fullscreen, canvas {
+  #fullscreen,
+  canvas {
     width: 100%;
-   }
+  }
 }
 
 /*Smartphones ----------*/
 @media only screen and (max-height: 480px) {
- canvas {
-   height: 100vh;
-  }  
+  canvas {
+    height: 100vh;
+  }
 }

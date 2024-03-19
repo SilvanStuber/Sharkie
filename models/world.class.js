@@ -65,6 +65,7 @@ class World {
     } else {
       this.drawGame();
     }
+    document.getElementById("infobox").classList.add("d-none");
   }
 
   drawStartScreen() {

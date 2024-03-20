@@ -209,7 +209,7 @@ function generateArrowKeyContentGerman() {
 
 function generateSpaceKeyContentEnglish() {
   return /*html*/ `
-    <img img class="arrow-key-image" src="./img/6.Botones/Key/Space Bar key.png" alt="Image ATTACK SPACE" />
+    <img img class="space-key-image" src="./img/6.Botones/Key/Space Bar key.png" alt="Image ATTACK SPACE" />
           <span class="instruction-text">
             USE SPACEBAR TO FLING PUFFERFISH. ATTACK EFFECTIVE ONLY IN CLOSE PROXIMITY.
             BE CAREFUL, APPROACH WITH CAUTION TO ACHIEVE SAFETY WITHOUT DAMAGE.
@@ -219,7 +219,7 @@ function generateSpaceKeyContentEnglish() {
 
 function generateSpaceKeyContentGerman() {
   return /*html*/ `
-    <img img class="arrow-key-image" src="./img/6.Botones/Key/Space Bar key.png" alt="Image ATTACK SPACE" />
+    <img img class="space-key-image" src="./img/6.Botones/Key/Space Bar key.png" alt="Image ATTACK SPACE" />
           <span class="instruction-text">
             VERWENDE LEERTASTE, UM KUGELFISCH WEWZUSCHLEUDERN. ANGRIFF NUR IN DIREKTER NÄHE EFFEKTIV. SEI VORSICHTIG, NÄHERE DICH BEDACHT, 
             UM OHNE SCHADEN SICHERHEIT ZU ERREICHEN.
@@ -229,7 +229,7 @@ function generateSpaceKeyContentGerman() {
 
 function generateDkeyContentEnglish() {
   return /*html*/ `
-    <img img class="arrow-key-image" src="./img/6.Botones/Key/D key.png" alt="Image ATTACK D" />
+    <img img class="d-g-key-image" src="./img/6.Botones/Key/D key.png" alt="Image ATTACK D" />
           <span class="instruction-text">
            FROM A DISTANCE, YOU CAN CATCH JELLYFISH WITH A BUBBLE BY PRESSING D. 
            THIS ATTACK METHOD IS ONLY EFFECTIVE AGAINST JELLYFISH. PUFFERFISH AND THE FINAL BOSS ARE IMMUNE AND RESPOND WITH A SMILE.
@@ -239,7 +239,7 @@ function generateDkeyContentEnglish() {
 
 function generateDkeyContentGerman() {
   return /*html*/ `
-    <img img class="arrow-key-image" src="./img/6.Botones/Key/D key.png" alt="Image ATTACK D" />
+    <img img class="d-g-key-image" src="./img/6.Botones/Key/D key.png" alt="Image ATTACK D" />
           <span class="instruction-text">
             AUS DER FERNE KANNST DU QUALLEN MIT EINER BLASE EINFANGEN, INDEM DU D DRÜCKST. DIESE ANGRIFFSMETHODE IST NUR GEGEN QUALLEN EFFEKTIV. 
             KUGELFISCHE UND DER ENDBOSS SIND IMMUN UND REAGIEREN MIT EINEM LÄCHELN.
@@ -249,7 +249,7 @@ function generateDkeyContentGerman() {
 
 function generateGkeyContentEnglish() {
   return /*html*/ `
-    <img img class="arrow-key-image" src="./img/6.Botones/Key/G Key.png" alt="Image ATTACK G" />
+    <img img class="d-g-key-image" src="./img/6.Botones/Key/G Key.png" alt="Image ATTACK G" />
           <span class="instruction-text">
            BY COLLECTING POISON CONTAINERS, YOU CAN RELEASE POISON BUBBLES WITH G. HOWEVER, USE THEM SPARINGLY AND STRATEGICALLY AGAINST THE FINAL BOSS.
            PUFFERFISH ARE IMMUNE TO THE POISON, AND JELLYFISH CAN CAUSE THE POISON BUBBLE TO BURST
@@ -259,7 +259,7 @@ function generateGkeyContentEnglish() {
 
 function generateGkeyContentGerman() {
   return /*html*/ `
-    <img img class="arrow-key-image" src="./img/6.Botones/Key/G Key.png" alt="Image ATTACK D" />
+    <img img class="d-g-key-image" src="./img/6.Botones/Key/G Key.png" alt="Image ATTACK D" />
           <span class="instruction-text">
            DURCH DAS EINSAMMELN VON GIFTBEHÄLTERN KÖNNEN SIE GIFTBLASEN MIT G FREISETZEN. SETZEN SIE DIESE JEDOCH SPARSAM UND STRATEGISCH GEGEN DEN ENDBOSS EIN.
            KUGELFISCHE SIND IMMUN GEGEN DAS GIFT, UND QUALLEN KÖNNEN DIE GIFTBLASE ZUM PLATZEN BRINGEN.

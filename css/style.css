@@ -265,13 +265,7 @@ h1 {
   }
 }
 
-@media (min-width: 720px) {
- .key-mobile {
-  display: none;
- }
-}
-
-@media (min-height: 480px) {
+@media (min-height: 800px) {
   .key-mobile {
     display: none;
    }

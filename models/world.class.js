@@ -164,4 +164,14 @@ class World {
     document.getElementById('btnKeyD').innerHTML = `<img class="key-mobile-img" src="./img/6.Botones/Key/D key.png" alt="Key D">`;
     document.getElementById('btnKeyG').innerHTML = `<img class="key-mobile-img" src="./img/6.Botones/Key/G Key.png" alt=" Key G">`;
   }
+
+  removeTouchKey() {
+    document.getElementById('btnKeyUp').innerHTML = "";
+    document.getElementById('btnKeyDown').innerHTML = "";
+    document.getElementById('btnKeyLeft').innerHTML = "";
+    document.getElementById('btnKeyRight').innerHTML = "";
+    document.getElementById('btnKeySpace').innerHTML = "";
+    document.getElementById('btnKeyD').innerHTML = "";
+    document.getElementById('btnKeyG').innerHTML =  "";
+  }
 }

@@ -62,6 +62,7 @@ class EndScreen extends MovableObject {
 
   loadTryAgain() {
     if (endbossDead || characterDead) {
+      world.removeTouchKey();
       let i = this.imageCounter % this.IMAGE_TRY_AGAIN.length;
       document.getElementById("tryAgainButton").src = this.IMAGE_TRY_AGAIN[i];
       this.imageCounter++;

@@ -160,7 +160,7 @@ class Character extends MovableObject {
   }
 
   moveCharacter() {
-    if (!this.chracterIsDead) {
+    if (!this.chracterIsDead && gameHasStarted) {
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.moveRight();
         this.otherDirection = false;
@@ -177,18 +177,20 @@ class Character extends MovableObject {
   }
 
   animationCharacter() {
-    this.soundCharacterPause();
-    if (this.isDead()) {
-      this.animationDead();
-    } else if (this.isHurt()) {
-      this.hurtAnimation();
-    } else if (this.world.keyboard.D || (this.world.keyboard.G && world.checkColliding.poisonValue > 0)) {
-      this.animationBubble();
-    } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
-      this.playAnimation(this.IMAGES_SWIM);
-      playInteractionSound(this.swimming_sound);
-    } else {
-      this.standingAnimation();
+    if (gameHasStarted) {
+      this.soundCharacterPause();
+      if (this.isDead()) {
+        this.animationDead();
+      } else if (this.isHurt()) {
+        this.hurtAnimation();
+      } else if (this.world.keyboard.D || (this.world.keyboard.G && world.checkColliding.poisonValue > 0)) {
+        this.animationBubble();
+      } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
+        this.playAnimation(this.IMAGES_SWIM);
+        playInteractionSound(this.swimming_sound);
+      } else {
+        this.standingAnimation();
+      }
     }
   }
 

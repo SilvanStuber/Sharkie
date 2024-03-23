@@ -18,10 +18,12 @@ class EndScreen extends MovableObject {
     "./img/6.Botones/Try again/Recurso 17.png",
     "./img/6.Botones/Try again/Recurso 18.png",
   ];
-
+  win_sound = new Audio("./audio/win.mp3");
+  lose_sound = new Audio("./audio/lose.mp3");
   width = 480;
   height = 280;
   imageCounter = 0;
+  playSound = false;
 
   constructor() {
     super();
@@ -36,15 +38,25 @@ class EndScreen extends MovableObject {
 
   generateWinAnimation() {
     if (endbossDead) {
+      stopGameSound();
       this.x = characterPositionX + 130;
       this.playAnimation(this.IMAGE_WIN);
+      if (!this.playSound) {
+        playInteractionSound(this.win_sound);
+        this.playSound = true;
+        }
     }
   }
 
   generateGameOverAnimation() {
     if (characterDead) {
+      stopGameSound();
       this.x = characterPositionX + 120;
       this.playAnimation(this.IMAGE_GAMEOVER);
+      if (!this.playSound) {
+      playInteractionSound(this.lose_sound);
+      this.playSound = true;
+      }
     }
   }
 

@@ -57,6 +57,7 @@ class World {
     this.level = level1;
     this.checkColliding = new Collision(this.level, this.character, this.throwableObjects);
     this.checkColliding.run(this.keyboard);
+    this.renderTouchKey();
   }
 
   initGame() {
@@ -152,5 +153,15 @@ class World {
 
   reset() {
     location.reload();
+  }
+
+  renderTouchKey() {
+    document.getElementById('btnKeyUp').innerHTML = `<img class="key-mobile-img" src="./img/6.Botones/Key/key-up.png" alt="Key Up">`;
+    document.getElementById('btnKeyDown').innerHTML = `<img class="key-mobile-img" src="./img/6.Botones/Key/key-down.png" alt="Key DOWN">`;
+    document.getElementById('btnKeyLeft').innerHTML = `<img class="key-mobile-img" src="./img/6.Botones/Key/key-left.png" alt="Key LEFT">`;
+    document.getElementById('btnKeyRight').innerHTML = `<img class="key-mobile-img" src="./img/6.Botones/Key/key-right.png" alt="Key RIGHT">`;
+    document.getElementById('btnKeySpace').innerHTML = `<img class="key-mobile-img" src="./img/6.Botones/Key/Space Bar key.png" alt="Key SPACE">`;
+    document.getElementById('btnKeyD').innerHTML = `<img class="key-mobile-img" src="./img/6.Botones/Key/D key.png" alt="Key D">`;
+    document.getElementById('btnKeyG').innerHTML = `<img class="key-mobile-img" src="./img/6.Botones/Key/G Key.png" alt=" Key G">`;
   }
 }

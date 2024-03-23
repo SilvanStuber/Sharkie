@@ -265,6 +265,18 @@ h1 {
   }
 }
 
+@media (min-width: 720px) {
+ .key-mobile {
+  display: none;
+ }
+}
+
+@media (min-height: 480px) {
+  .key-mobile {
+    display: none;
+   }
+}
+
 @media (max-width: 600px) {
   .arrow-key-image {
     height: 60px;

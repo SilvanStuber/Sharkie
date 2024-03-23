@@ -11,7 +11,7 @@ class Fish extends MovableObject {
 
   animate(imageDEAD, imageTransition, imageTransitionSwim, imageSwim) {
     if (this.isDead()) {
-      this.playAnimation(imageDEAD)
+      this.playAnimation(imageDEAD);
       this.fishFliesOutOfTheMap(characterPositionX, 40);
     } else if (characterPositionX + 400 < this.x) {
       this.fishTransition = true;

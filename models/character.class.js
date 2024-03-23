@@ -1,5 +1,5 @@
 class Character extends MovableObject {
-  x = 0;
+  x = 200;
   y = 220;
   height = 200;
   width = 300;
@@ -169,7 +169,7 @@ class Character extends MovableObject {
         this.otherDirection = true;
       } else if (this.world.keyboard.UP && this.y > -20) {
         this.moveUp();
-      } else if (this.world.keyboard.DOWN && this.y < 300) {
+      } else if (this.world.keyboard.DOWN && this.y < 220) {
         this.moveDown();
       }
       this.world.camera_x = -this.x;

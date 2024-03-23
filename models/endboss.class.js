@@ -71,14 +71,14 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_ATTACK);
     this.loadImages(this.IMAGES_DEAD);
     this.loadImages(this.IMAGES_HURT);
-    this.x = 2450;
+    this.x = 3800;
     this.animate();
   }
 
   animate() {
     let id = setInterval(() => {
-      if (characterPositionX > 1800 && !this.hadFirstContact) {
-        this.generateInteroduceEndboss();
+      if (characterPositionX > 3300 && !this.hadFirstContact) {
+          this.generateInteroduceEndboss();
       } else if (this.hadFirstContact) {
         this.generateAnimationEndboss();
       }
@@ -103,11 +103,10 @@ class Endboss extends MovableObject {
       this.generateAnimationEndboss();
     }
     this.counterInteroduceEndboss++;
-    if (!this.hadFirstContact) {
-      soundEndboss = true;
-      endbossGameSound();
+    soundEndboss = true;
+    endbossGameSound();
+    if (!this.hadFirstContact && this.counterInteroduceEndboss > 10) {
       this.hadFirstContact = true;
-      soundEndboss = true;
     }
   }
 
@@ -151,7 +150,7 @@ class Endboss extends MovableObject {
     this.playAnimation(this.IMAGES_ATTACK);
     playInteractionSound(this.attack_endboss);
     setTimeout(() => {
-      this.y = characterPositionY - 145;
+      this.y = characterPositionY - 185;
       this.x = characterPositionX + 210;
     }, 500);
     setTimeout(() => {

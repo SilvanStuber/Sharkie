@@ -137,7 +137,7 @@ class MovableObject extends DrawableObject {
   }
 
   positionierungObjecteX() {
-    let index = 320 + (Math.random() * 2000);
+    let index = 520 + (Math.random() * 3200);
     this.positionObjects.forEach(position => {
       if (position - index < 10) {
         index + 100;
@@ -149,7 +149,7 @@ class MovableObject extends DrawableObject {
   }
 
   positionierungObjecteY() {
-    let index = 60 + (Math.random() * 300);
+    let index = 60 + (Math.random() * 220);
     this.positionObjects.forEach(position => {
       if (position - index < 10) {
         index + 80;

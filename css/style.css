@@ -21,7 +21,7 @@ body {
   background-size: cover;
 }
 
-h1 {
+.headline-game-name {
   font-size: 32px;
   color: white;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
@@ -230,10 +230,20 @@ h1 {
   left: 104px;
 }
 
+.button-space-container {
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 .key-mobile-space {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
   width: 180px;
   bottom: 8px;
-  left: 250px;
 }
 
 .key-mobile-g {
@@ -250,24 +260,14 @@ h1 {
   display: none;
 }
 
-/*Smartphones ----------*/
-@media only screen and (max-width: 720px) {
-  #fullscreen,
-  canvas {
-    width: 100%;
-  }
-}
-
-/*Smartphones ----------*/
-@media only screen and (max-height: 480px) {
-  canvas {
-    height: 100vh;
-    width: 100vw;
-  }
-}
-
 @media (min-height: 800px) {
   .key-mobile {
+    display: none;
+  }
+}
+
+@media (max-height: 800px) {
+  .headline-game-name {
     display: none;
   }
 }
@@ -306,5 +306,21 @@ h1 {
 
   .german-flage-image {
     right: 50px;
+  }
+}
+
+/*Smartphones ----------*/
+@media only screen and (max-width: 720px) {
+  #fullscreen,
+  canvas {
+    width: 100%;
+  }
+}
+
+/*Smartphones ----------*/
+@media only screen and (max-height: 480px) {
+  canvas {
+    height: 100vh;
+    width: 100vw;
   }
 }

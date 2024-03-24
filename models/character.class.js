@@ -48,15 +48,15 @@ class Character extends CharacterImages {
   }
 
   /**
-   * Startet die Animationen für das Sharkie-Objekt.
+   * Starts the animations for the Sharkie object.
    */
   animate() {
     setStoppableInterval(() => this.moveCharacter(), 1000 / 60);
     setStoppableInterval(() => this.animationCharacter(), 250);
     setStoppableInterval(() => this.attackAnimationCharacter(), 125);
+    setStoppableInterval(() => this.animationBubble(), 125);
     setStoppableInterval(() => this.resetSleepValue(), 125);
     setStoppableInterval(() => this.setGlobalPositionCharacter(), 125);
-    setStoppableInterval(() => this.resetBubbleAnimation(), 250);
   }
 
   /**
@@ -166,8 +166,6 @@ class Character extends CharacterImages {
         this.animationDead();
       } else if (this.isHurt()) {
         this.hurtAnimation();
-      } else if (this.world.keyboard.D || (this.world.keyboard.G && world.checkColliding.poisonValue > 0)) {
-        this.animationBubble();
       } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
         this.playAnimation(this.IMAGES_SWIM);
         playInteractionSound(this.swimming_sound);
@@ -224,19 +222,38 @@ class Character extends CharacterImages {
   /**
    * Initiates the bubble animation.
    * If bubble is not active, activates it and starts the animation sequence.
+   * @param {boolean} d - Likely represents a parameter related to the bubble's diameter or distance it travels.
+   * @param {boolean} g - Likely represents a parameter related to the gravity or growth rate of the bubble.
    */
   animationBubble() {
     if (!this.bubbleActive) {
-      this.bubbleActive = true;
-      this.playSoundInhaleAndExhale();
-      setTimeout(() => {
-        this.bubbleMoves = true;
-        this.attackImageCounter = 0;
-        setInterval(() => {
-          this.generateAnimationBubble();
-        }, 125);
-      }, 500);
+      if (this.world.keyboard.D || (this.world.keyboard.G && world.checkColliding.poisonValue > 0)) {
+        this.bubbleActive = true;
+        this.resetBubbleAnimation();
+        if (this.world.keyboard.D) {
+          this.setIntervalBubble("normalBubble");
+        } else if (this.world.keyboard.G && world.checkColliding.poisonValue > 0) { 
+          this.setIntervalBubble("poisionBubble");
+        }
+      }
     }
+  }
+
+  /**
+   * Initializes and controls the bubble animation and sound effects related to the bubbling mechanism. First, it activates the bubbling state and plays sound effects for inhaling and exhaling. After a short delay, it sets the bubbling motion to active and resets the image counter used for attack animations. Then, at regular intervals, it calls a function to generate the bubble animation, passing two parameters that likely control aspects of the animation.
+   * @param {boolean} d - Likely represents a parameter related to the bubble's diameter or distance it travels.
+   * @param {boolean} g - Likely represents a parameter related to the gravity or growth rate of the bubble.
+   */
+  setIntervalBubble(typeOfBubble) {
+    this.playSoundInhaleAndExhale();
+    setTimeout(() => {
+      this.bubbleMoves = true;
+      this.attackImageCounter = 0;
+      let idOfInterval = setInterval(() => {
+        this.generateAnimationBubble(typeOfBubble, idOfInterval);
+        this.attackImageCounter++;
+      }, 120);
+    }, 250);
   }
 
   /**
@@ -246,22 +263,23 @@ class Character extends CharacterImages {
     playInteractionSound(this.inhale_sound);
     setTimeout(() => {
       playInteractionSound(this.exhale_sound);
-    }, 800);
+    }, 400);
   }
 
   /**
    * Generates animation frames for the bubble based on keyboard input.
    * Generates either a regular bubble or a poison bubble depending on keyboard input.
    */
-  generateAnimationBubble() {
-    if (this.attackImageCounter < 8) {
-      if (this.world.keyboard.G && world.checkColliding.poisonValue > 0) {
+  generateAnimationBubble(typeOfBubble, idOfInterval) {
+    if (this.attackImageCounter < 7) {
+      if (typeOfBubble == "poisionBubble") {
         this.generatePoisonBubble();
-      } else if (this.world.keyboard.D) {
+      } else if (typeOfBubble == "normalBubble") {
         this.generateBubble();
       }
+    } else {
+      clearInterval(idOfInterval);
     }
-    this.attackImageCounter++;
   }
 
   /**
@@ -271,8 +289,8 @@ class Character extends CharacterImages {
    */
   generatePoisonBubble() {
     this.playSingeleAnimation(this.IMAGES_BLOW_UP_BUBBLE_POISON, this.attackImageCounter);
-    if (this.attackImageCounter == 7) {
-      world.generateThrowObjects(this.world.keyboard);
+    if (this.attackImageCounter == 6) {
+      world.generateThrowObjects("poisionBubble");
       world.checkColliding.poisonValue -= 1;
     }
   }
@@ -284,8 +302,8 @@ class Character extends CharacterImages {
    */
   generateBubble() {
     this.playSingeleAnimation(this.IMAGES_BLOW_UP_BUBBLE, this.attackImageCounter);
-    if (this.attackImageCounter == 7) {
-      world.generateThrowObjects(this.world.keyboard);
+    if (this.attackImageCounter == 6) {
+      world.generateThrowObjects("normalBubble");
     }
   }
 
@@ -294,11 +312,9 @@ class Character extends CharacterImages {
    */
   resetBubbleAnimation() {
     setTimeout(() => {
-      if (this.bubbleMoves && this.bubbleActive && !this.world.keyboard.G && !this.world.keyboard.D) {
-        this.bubbleMoves = false;
-        this.bubbleActive = false;
-      }
-    }, 4000);
+      this.bubbleMoves = false;
+      this.bubbleActive = false;
+    }, 1500);
   }
 
   /**

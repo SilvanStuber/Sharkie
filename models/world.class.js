@@ -41,12 +41,12 @@ class World {
    * Generates throwable objects based on the specified key input.
    * @param {Object} key - The key input object.
    */
-  generateThrowObjects(key) {
-    playInteractionSound(this.bubble_sound);
+  generateThrowObjects(bubbleFromCharacter) {
     this.positionBubble();
-    if (key.G) {
+    playInteractionSound(this.bubble_sound);
+    if (bubbleFromCharacter == "poisionBubble") {
       this.bubble = new BubblePoison(this.positionBubbleX, this.character.y + 80, this.character.otherDirection);
-    } else if (key.D) {
+    } else if (bubbleFromCharacter == "normalBubble") {
       this.bubble = new Bubble(this.positionBubbleX, this.character.y + 80, this.character.otherDirection);
     }
     this.throwableObjects.push(this.bubble);

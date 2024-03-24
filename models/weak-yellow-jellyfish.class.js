@@ -1,3 +1,8 @@
+/**
+ * Represents a weak yellow jellyfish enemy, extending the JellyFish class.
+ * @class
+ * @extends JellyFish
+ */
 class WeakYellowJellyFish extends JellyFish {
   IMAGES_YELLOW_JELLYFISH = [
     "./img/2.Enemy/2 Jelly fish/Regular damage/Yellow 1.png",
@@ -12,6 +17,10 @@ class WeakYellowJellyFish extends JellyFish {
     "./img/2.Enemy/2 Jelly fish/Dead/Yellow/y4.png"
   ];
 
+    /**
+   * Creates an instance of WeakYellowJellyFish.
+   * @constructor
+   */
   constructor() {
     super();
     this.loadImage("./img/2.Enemy/2 Jelly fish/Regular damage/Yellow 1.png");

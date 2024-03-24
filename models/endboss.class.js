@@ -1,3 +1,7 @@
+/**
+ * Represents the end boss enemy.
+ * @class
+ */
 class Endboss extends MovableObject {
   x = 0;
   y = 0;
@@ -64,6 +68,9 @@ class Endboss extends MovableObject {
   hit_sound_endboss = new Audio("./audio/hit_sound_endboss.mp3");
   attack_endboss = new Audio("./audio/endboss_attack.mp3");
 
+  /**
+   * Initializes the end boss.
+   */
   constructor() {
     super().loadImage("./img/2.Enemy/3 Final Enemy/1.Introduce/1.png");
     this.loadImages(this.IMAGE_INTRODUCE);
@@ -75,10 +82,13 @@ class Endboss extends MovableObject {
     this.animate();
   }
 
+  /**
+   * Initiates animation for the end boss.
+   */
   animate() {
     let id = setInterval(() => {
       if (characterPositionX > 3300 && !this.hadFirstContact) {
-          this.generateInteroduceEndboss();
+        this.generateInteroduceEndboss();
       } else if (this.hadFirstContact) {
         this.generateAnimationEndboss();
       }
@@ -86,6 +96,10 @@ class Endboss extends MovableObject {
     intervalIds.push(id);
   }
 
+  /**
+   * Checks if the end boss introduction animation has started.
+   * If not, starts the animation and sets a flag to indicate it.
+   */
   checkIsEndbossInteroduce() {
     if (!this.startAttackAnimation) {
       this.startAttackAnimation = true;
@@ -95,6 +109,9 @@ class Endboss extends MovableObject {
     }
   }
 
+  /**
+   * Generates the introduction animation for the end boss.
+   */
   generateInteroduceEndboss() {
     if (this.counterInteroduceEndboss < 10) {
       this.playSingeleAnimation(this.IMAGE_INTRODUCE, this.counterInteroduceEndboss);
@@ -103,13 +120,23 @@ class Endboss extends MovableObject {
       this.generateAnimationEndboss();
     }
     this.counterInteroduceEndboss++;
-    soundEndboss = true;
-    endbossGameSound();
+    this.generateSoundEndboss();
     if (!this.hadFirstContact && this.counterInteroduceEndboss > 10) {
       this.hadFirstContact = true;
     }
   }
 
+  /**
+   * Generates the sound for the end boss.
+   */
+  generateSoundEndboss() {
+    soundEndboss = true;
+    endbossGameSound();
+  }
+
+  /**
+   * Generates the animation for the end boss.
+   */
   generateAnimationEndboss() {
     this.otherDirectionEndboss();
     if (this.isDead()) {
@@ -123,6 +150,9 @@ class Endboss extends MovableObject {
     }
   }
 
+  /**
+   * Determines if the end boss should face the other direction based on the character's position.
+   */
   otherDirectionEndboss() {
     if (characterPositionX > this.x - 100) {
       this.otherDirection = true;
@@ -131,6 +161,9 @@ class Endboss extends MovableObject {
     }
   }
 
+  /**
+   * Generates the death animation for the end boss.
+   */
   generateDeadEndboss() {
     if (this.deadIntervalCounter > 4) {
       this.deadIntervalCounter = 4;
@@ -141,11 +174,18 @@ class Endboss extends MovableObject {
     stopGame();
   }
 
+  /**
+   * Generates the hurt animation for the end boss and plays the corresponding sound.
+   */
   generateHurtEndboss() {
     playInteractionSound(this.hit_sound_endboss);
     this.playAnimation(this.IMAGES_HURT);
   }
 
+  /**
+   * Generates the attack animation for the end boss, plays the attack sound,
+   * and updates the position of the end boss during the attack.
+   */
   generateAnimationAttackEndboss() {
     this.playAnimation(this.IMAGES_ATTACK);
     playInteractionSound(this.attack_endboss);

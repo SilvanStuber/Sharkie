@@ -1,3 +1,8 @@
+/**
+ * Represents a weak lila (purple) jellyfish enemy, extending the JellyFish class.
+ * @class
+ * @extends JellyFish
+ */
 class WeakLilaJellyFish extends JellyFish {
     IMAGES_LILA_JELLYFISH = [
       "./img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png",
@@ -11,7 +16,11 @@ class WeakLilaJellyFish extends JellyFish {
       "./img/2.Enemy/2 Jelly fish/Dead/Lila/L3.png",
       "./img/2.Enemy/2 Jelly fish/Dead/Lila/L4.png"
     ];
-  
+    
+      /**
+   * Creates an instance of WeakLilaJellyFish.
+   * @constructor
+   */
     constructor() {
       super();
       this.loadImage("./img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png");

@@ -1,3 +1,8 @@
+/**
+ * Represents a character in the game.
+ * @class
+ * @extends MovableObject
+ */
 class Character extends MovableObject {
   x = 200;
   y = 220;
@@ -134,6 +139,9 @@ class Character extends MovableObject {
   exhale_sound = new Audio("./audio/exhale.mp3");
   poisonBar = new Collision();
 
+  /**
+   * Constructor for initializing Sharkie with various images and animations.
+   */
   constructor() {
     super().loadImage("./img/1.Sharkie/1.IDLE/1.png");
     this.loadImages(this.IMAGES_STANDING);
@@ -150,6 +158,9 @@ class Character extends MovableObject {
     this.animate();
   }
 
+  /**
+   * Startet die Animationen für das Sharkie-Objekt.
+   */
   animate() {
     setStoppableInterval(() => this.moveCharacter(), 1000 / 60);
     setStoppableInterval(() => this.animationCharacter(), 250);
@@ -159,6 +170,9 @@ class Character extends MovableObject {
     setStoppableInterval(() => this.resetBubbleAnimation(), 250);
   }
 
+  /**
+   * Moves the character based on keyboard input if the character is alive and the game has started.
+   */
   moveCharacter() {
     if (!this.chracterIsDead && gameHasStarted) {
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
@@ -176,6 +190,9 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * Animates the character based on game state and keyboard input.
+   */
   animationCharacter() {
     if (gameHasStarted) {
       this.soundCharacterPause();
@@ -194,6 +211,9 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * Plays the hurt animation and corresponding sound for the character.
+   */
   hurtAnimation() {
     playInteractionSound(this.hit_sound_character);
     if (this.checkFishAndEndbossClass()) {
@@ -203,6 +223,9 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * Plays the dead animation for the character and stops the game.
+   */
   animationDead() {
     if (this.checkFishAndEndbossClass()) {
       this.playAnimationDead(this.IMAGES_POISON_DEAD, 11);
@@ -213,6 +236,12 @@ class Character extends MovableObject {
     stopGame();
   }
 
+  /**
+   * Plays the dead animation for the character.
+   *
+   * @param {string[]} images - The array of images to be used in the animation.
+   * @param {number} counter - The number of times the animation should be repeated.
+   */
   playAnimationDead(images, counter) {
     if (!this.chracterIsDead) {
       let i = 0;
@@ -226,6 +255,10 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * Initiates the bubble animation.
+   * If bubble is not active, activates it and starts the animation sequence.
+   */
   animationBubble() {
     if (!this.bubbleActive) {
       this.bubbleActive = true;
@@ -240,6 +273,9 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * Plays the inhale sound followed by the exhale sound with a delay.
+   */
   playSoundInhaleAndExhale() {
     playInteractionSound(this.inhale_sound);
     setTimeout(() => {
@@ -247,6 +283,10 @@ class Character extends MovableObject {
     }, 800);
   }
 
+  /**
+   * Generates animation frames for the bubble based on keyboard input.
+   * Generates either a regular bubble or a poison bubble depending on keyboard input.
+   */
   generateAnimationBubble() {
     if (this.attackImageCounter < 8) {
       if (this.world.keyboard.G && world.checkColliding.poisonValue > 0) {
@@ -258,6 +298,11 @@ class Character extends MovableObject {
     this.attackImageCounter++;
   }
 
+  /**
+   * Generates animation frames for a poison bubble and throws poison objects when animation is complete.
+   *
+   * @param {number} attackImageCounter - The current frame of the animation.
+   */
   generatePoisonBubble() {
     this.playSingeleAnimation(this.IMAGES_BLOW_UP_BUBBLE_POISON, this.attackImageCounter);
     if (this.attackImageCounter == 7) {
@@ -266,6 +311,11 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * Generates animation frames for a regular bubble and throws objects when animation is complete.
+   *
+   * @param {number} attackImageCounter - The current frame of the animation.
+   */
   generateBubble() {
     this.playSingeleAnimation(this.IMAGES_BLOW_UP_BUBBLE, this.attackImageCounter);
     if (this.attackImageCounter == 7) {
@@ -273,6 +323,9 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * Resets the bubble animation if it's inactive and no relevant keys are pressed after a timeout.
+   */
   resetBubbleAnimation() {
     setTimeout(() => {
       if (this.bubbleMoves && this.bubbleActive && !this.world.keyboard.G && !this.world.keyboard.D) {
@@ -282,18 +335,31 @@ class Character extends MovableObject {
     }, 4000);
   }
 
+  /**
+   * Sets a stoppable interval for executing a function repeatedly at a specified time interval.
+   *
+   * @param {Function} fn - The function to execute.
+   * @param {number} time - The time interval (in milliseconds) at which to execute the function.
+   * @returns {number} The interval ID.
+   */
   setStoppableIntervalBubble(fn, time) {
     let id = setInterval(fn, time);
     this.intervalIdBubble.push(id);
     return id;
   }
 
+  /**
+   * Pauses all character-related sounds.
+   */
   soundCharacterPause() {
     this.swimming_sound.pause();
     this.sleep_sound.pause();
     this.hit_sound_character.pause();
   }
 
+  /**
+   * Resets sleep-related values if there is activity.
+   */
   resetSleepValue() {
     if (this.checkActivity()) {
       this.timeWithoutMovement = 0;
@@ -301,6 +367,9 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * Plays the standing animation or switches to sleep animation if there's no movement for a certain period.
+   */
   standingAnimation() {
     if (this.timeWithoutMovement > 20) {
       this.sleepAnimation();
@@ -312,6 +381,9 @@ class Character extends MovableObject {
     }, 1000);
   }
 
+  /**
+   * Plays the sleep animation or transition animation to sleep state.
+   */
   sleepAnimation() {
     if (this.isAsleep > 10) {
       this.playAnimation(this.IMAGES_SLEEP);
@@ -322,6 +394,10 @@ class Character extends MovableObject {
     this.isAsleep++;
   }
 
+  /**
+   * Plays the attack animation when the SPACE key is pressed.
+   * Resets the attack animation if the SPACE key is not pressed.
+   */
   attackAnimationCharacter() {
     if (!this.world.keyboard.SPACE) {
       this.playAttack = 0;
@@ -334,6 +410,9 @@ class Character extends MovableObject {
     this.playAttack++;
   }
 
+  /**
+   * Sets the global position of the character.
+   */
   setGlobalPositionCharacter() {
     characterPositionX = this.x;
     characterPositionY = this.y;

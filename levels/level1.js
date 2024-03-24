@@ -1,5 +1,10 @@
 let level1;
 
+/**
+ * Initializes the game level with various objects.
+ * Creates a new instance of Level with specified game objects.
+ * @returns {void}
+ */
 function initLevel() {
   level1 = new Level(
     [

@@ -1,3 +1,8 @@
+/**
+ * Represents a coin object.
+ * Extends the MovableObject class.
+ * @class
+ */
 class Coins extends MovableObject {
   COINS_IMAGES = [
     "./img/4. Marcadores/1. Coins/1.png",
@@ -13,6 +18,11 @@ class Coins extends MovableObject {
   offsetHeight = 0;
   coin = 0;
 
+  /**
+   * Constructs a new instance of the Coins class.
+   * Loads the initial coin image and sets its position.
+   * Also loads all coin images and starts animating them.
+   */
   constructor() {
     super().loadImage("./img/4. Marcadores/1. Coins/1.png");
     this.x = this.positionierungObjecteX();

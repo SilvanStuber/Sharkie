@@ -1,3 +1,7 @@
+/**
+ * Represents the end screen object, displaying win, game over, and try again messages.
+ * @class
+ */
 class EndScreen extends MovableObject {
   IMAGE_WIN = [
     "./img/6.Botones/Tittles/You win/Recurso 19.png",
@@ -25,6 +29,9 @@ class EndScreen extends MovableObject {
   imageCounter = 0;
   playSound = false;
 
+  /**
+   * Initializes the end screen.
+   */
   constructor() {
     super();
     this.loadImage("./img/6.Botones/Tittles/You win/Recurso 19.png");
@@ -36,6 +43,9 @@ class EndScreen extends MovableObject {
     setInterval(() => this.loadTryAgain(), 250);
   }
 
+  /**
+   * Generates the win animation and plays the win sound.
+   */
   generateWinAnimation() {
     if (endbossDead) {
       stopGameSound();
@@ -44,22 +54,28 @@ class EndScreen extends MovableObject {
       if (!this.playSound) {
         playInteractionSound(this.win_sound);
         this.playSound = true;
-        }
+      }
     }
   }
 
+  /**
+   * Generates the game over animation and plays the game over sound.
+   */
   generateGameOverAnimation() {
     if (characterDead) {
       stopGameSound();
       this.x = characterPositionX + 120;
       this.playAnimation(this.IMAGE_GAMEOVER);
       if (!this.playSound) {
-      playInteractionSound(this.lose_sound);
-      this.playSound = true;
+        playInteractionSound(this.lose_sound);
+        this.playSound = true;
       }
     }
   }
 
+  /**
+   * Loads the try again button image.
+   */
   loadTryAgain() {
     if (endbossDead || characterDead) {
       world.removeTouchKey();

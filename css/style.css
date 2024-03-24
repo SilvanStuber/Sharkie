@@ -106,7 +106,7 @@ h1 {
 }
 
 .german-flage-image {
-  right: 64px;
+  right: 80px;
 }
 
 .english-flage-image {
@@ -127,6 +127,7 @@ h1 {
 .arrow-left-image {
   left: 24px;
 }
+
 .arrow-right-image {
   right: 24px;
 }
@@ -198,7 +199,7 @@ h1 {
 
 .key-mobile {
   position: absolute;
-  background: none; 
+  background: none;
   border: none;
   padding: 0;
   margin: 0;
@@ -211,38 +212,38 @@ h1 {
 
 .key-mobile-up {
   bottom: 52px;
-  left: 60px
+  left: 60px;
 }
 
 .key-mobile-down {
   bottom: 8px;
-  left: 60px
+  left: 60px;
 }
 
 .key-mobile-left {
   bottom: 8px;
-  left: 16px
+  left: 16px;
 }
 
 .key-mobile-right {
   bottom: 8px;
-  left: 104px
+  left: 104px;
 }
 
 .key-mobile-space {
   width: 180px;
   bottom: 8px;
-  left: 250px
+  left: 250px;
 }
 
 .key-mobile-g {
   bottom: 8px;
-  right: 16px
+  right: 16px;
 }
 
 .key-mobile-d {
   bottom: 8px;
-  right: 70px
+  right: 70px;
 }
 
 .d-none {
@@ -268,7 +269,7 @@ h1 {
 @media (min-height: 800px) {
   .key-mobile {
     display: none;
-   }
+  }
 }
 
 @media (max-width: 600px) {

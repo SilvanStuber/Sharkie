@@ -1,3 +1,7 @@
+/**
+ * Represents a red fish enemy.
+ * @class
+ */
 class FishRed extends Fish {
   IMAGES_RED_FISH_SWIM = [
     "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim1.png",
@@ -26,6 +30,9 @@ class FishRed extends Fish {
     "./img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/2.2.png",
   ];
 
+  /**
+   * Initializes the red fish enemy.
+   */
   constructor() {
     super().loadImage("./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim1.png");
     this.loadImages(this.IMAGES_RED_FISH_SWIM);

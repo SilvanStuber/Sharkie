@@ -1,3 +1,7 @@
+/**
+ * Represents a keyboard controller.
+ * @class
+ */
 class Keyboard {
   LEFT;
   RIGHT;
@@ -5,11 +9,17 @@ class Keyboard {
   DOWN;
   SPACE;
 
+  /**
+   * Creates a new Keyboard instance.
+   */
   constructor() {
     this.pressKeyEvent();
     this.touchKeyEvent();
   }
 
+  /**
+   * Listens for key press events and updates corresponding key states.
+   */
   pressKeyEvent() {
     window.addEventListener("keydown", (e) => {
       if (e.keyCode == 39) {
@@ -60,6 +70,9 @@ class Keyboard {
     });
   }
 
+  /**
+   * Listens for touch events and updates corresponding key states.
+   */
   touchKeyEvent() {
     document.getElementById("btnKeyRight").addEventListener("touchstart", (e) => {
       e.preventDefault();

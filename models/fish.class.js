@@ -1,3 +1,7 @@
+/**
+ * Represents a fish enemy.
+ * @class
+ */
 class Fish extends MovableObject {
   height = 60;
   width = 100;
@@ -9,6 +13,13 @@ class Fish extends MovableObject {
   transistionCounter = 0;
   deadCounter = 0;
 
+  /**
+   * Animates the fish enemy.
+   * @param {string[]} imageDEAD - The array of images for the dead animation.
+   * @param {string[]} imageTransition - The array of images for the transition animation.
+   * @param {string[]} imageTransitionSwim - The array of images for the transition swim animation.
+   * @param {string[]} imageSwim - The array of images for the swim animation.
+   */
   animate(imageDEAD, imageTransition, imageTransitionSwim, imageSwim) {
     if (this.isDead()) {
       this.playAnimation(imageDEAD);
@@ -22,6 +33,11 @@ class Fish extends MovableObject {
     }
   }
 
+  /**
+   * Generates the animation transition to bubble fish.
+   * @param {string[]} imageTransition - The array of images for the transition animation.
+   * @param {string[]} imageTransitionSwim - The array of images for the transition swim animation.
+   */
   generateAnimationTransitionToBubbleFish(imageTransition, imageTransitionSwim) {
     if (this.transistionCounter < 3) {
       this.playSingeleAnimation(imageTransition, this.transistionCounter);

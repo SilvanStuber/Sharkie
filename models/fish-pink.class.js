@@ -1,3 +1,7 @@
+/**
+ * Represents a pink fish enemy.
+ * @class
+ */
 class FishPink extends Fish {
   IMAGES_PINK_FISH_SWIM = [
     "./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim1.png",
@@ -26,6 +30,9 @@ class FishPink extends Fish {
     "./img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/3.2.png",
   ];
 
+  /**
+   * Initializes the pink fish enemy.
+   */
   constructor() {
     super().loadImage("./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim1.png");
     this.loadImages(this.IMAGES_PINK_FISH_SWIM);
@@ -36,6 +43,9 @@ class FishPink extends Fish {
     this.y = this.positionierungObjecteY();
     this.speed = 0.15 + Math.random() * 0.3;
     setStoppableInterval(() => this.moveLeft(), 1000 / 60);
-    setStoppableInterval(() => this.animate(this.IMAGES_PINK_FISH_DEAD, this.IMAGES_PINK_FISH_TRANSITION, this.IMAGES_PINK_FISH_BUBBLE_SWIM, this.IMAGES_PINK_FISH_SWIM), 125);
+    setStoppableInterval(
+      () => this.animate(this.IMAGES_PINK_FISH_DEAD, this.IMAGES_PINK_FISH_TRANSITION, this.IMAGES_PINK_FISH_BUBBLE_SWIM, this.IMAGES_PINK_FISH_SWIM),
+      125
+    );
   }
 }

@@ -1,3 +1,8 @@
+/**
+ * Represents a poison object, extending the MovableObject class.
+ * @class
+ * @extends MovableObject
+ */
 class Poison extends MovableObject {
   POISON_IMAGES = [
     "./img/4. Marcadores/Posión/Animada/1.png",
@@ -17,6 +22,10 @@ class Poison extends MovableObject {
   offsetHeight = 0;
   poison = 0;
 
+  /**
+   * Creates an instance of Poison.
+   * @constructor
+   */
   constructor() {
     super().loadImage("./img/4. Marcadores/Posión/Animada/1.png");
     this.x = this.positionierungObjecteX();

@@ -232,7 +232,7 @@ class Character extends CharacterImages {
         this.resetBubbleAnimation();
         if (this.world.keyboard.D) {
           this.setIntervalBubble("normalBubble");
-        } else if (this.world.keyboard.G && world.checkColliding.poisonValue > 0) { 
+        } else if (this.world.keyboard.G && world.checkColliding.poisonValue > 0) {
           this.setIntervalBubble("poisionBubble");
         }
       }

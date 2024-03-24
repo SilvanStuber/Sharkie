@@ -75,6 +75,7 @@ class Keyboard {
    */
   touchKeyEvent() {
     document.getElementById("btnKeyRight").addEventListener("touchstart", (e) => {
+      e.preventDefault();
       this.RIGHT = true;
     });
     document.getElementById("btnKeyRight").addEventListener("touchend", (e) => {

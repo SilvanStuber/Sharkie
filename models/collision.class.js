@@ -50,10 +50,10 @@ class Collision {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
         if (enemy.energy > 0) {
-        if (!this.keyboard.SPACE) {
-          this.character.hit(enemy);
+          if (!this.keyboard.SPACE) {
+            this.character.hit(enemy);
+          }
         }
-      }
       }
     });
   }

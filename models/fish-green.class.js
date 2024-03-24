@@ -43,6 +43,9 @@ class FishGreen extends Fish {
     this.y = this.positionierungObjecteY();
     this.speed = 0.15 + Math.random() * 0.3;
     setStoppableInterval(() => this.moveLeft(), 1000 / 60);
-    setStoppableInterval(() => this.animate(this.IMAGES_GREEN_FISH_DEAD, this.IMAGES_GREEN_FISH_TRANSITION, this.IMAGES_GREEN_FISH_BUBBLE_SWIM, this.IMAGES_GREEN_FISH_SWIM), 125);
+    setStoppableInterval(
+      () => this.animate(this.IMAGES_GREEN_FISH_DEAD, this.IMAGES_GREEN_FISH_TRANSITION, this.IMAGES_GREEN_FISH_BUBBLE_SWIM, this.IMAGES_GREEN_FISH_SWIM),
+      125
+    );
   }
 }

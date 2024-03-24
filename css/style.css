@@ -280,6 +280,10 @@ h1 {
   .instruction-text {
     font-size: 12px;
   }
+
+  .german-flage-image {
+    right: 60px;
+  }
 }
 
 @media (max-width: 400px) {
@@ -298,5 +302,9 @@ h1 {
 
   .d-g-key-image {
     height: 32px;
+  }
+
+  .german-flage-image {
+    right: 50px;
   }
 }

@@ -203,6 +203,7 @@ body {
   border: none;
   padding: 0;
   margin: 0;
+  z-index: 999;
 }
 
 .key-mobile-img {
@@ -256,8 +257,21 @@ body {
   right: 70px;
 }
 
+.image-turn-screen {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  height: 90px;
+}
+
 .d-none {
   display: none;
+}
+
+@media (min-width: 800px) {
+  .image-turn-screen {
+    display: none;
+  }
 }
 
 @media (min-height: 800px) {

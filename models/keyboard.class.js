@@ -79,42 +79,55 @@ class Keyboard {
       this.RIGHT = true;
     });
     document.getElementById("btnKeyRight").addEventListener("touchend", (e) => {
+      e.preventDefault();
       this.RIGHT = false;
     });
     document.getElementById("btnKeyLeft").addEventListener("touchstart", (e) => {
+      e.preventDefault();
       this.LEFT = true;
     });
     document.getElementById("btnKeyLeft").addEventListener("touchend", (e) => {
+      e.preventDefault();
       this.LEFT = false;
     });
     document.getElementById("btnKeyUp").addEventListener("touchstart", (e) => {
+      e.preventDefault();
       this.UP = true;
     });
     document.getElementById("btnKeyUp").addEventListener("touchend", (e) => {
+      e.preventDefault();
       this.UP = false;
     });
     document.getElementById("btnKeyDown").addEventListener("touchstart", (e) => {
+      e.preventDefault();
       this.DOWN = true;
     });
     document.getElementById("btnKeyDown").addEventListener("touchend", (e) => {
+      e.preventDefault();
       this.DOWN = false;
     });
     document.getElementById("btnKeySpace").addEventListener("touchstart", (e) => {
+      e.preventDefault();
       this.SPACE = true;
     });
     document.getElementById("btnKeySpace").addEventListener("touchend", (e) => {
+      e.preventDefault();
       this.SPACE = false;
     });
     document.getElementById("btnKeyD").addEventListener("touchstart", (e) => {
+      e.preventDefault();
       this.D = true;
     });
     document.getElementById("btnKeyD").addEventListener("touchend", (e) => {
+      e.preventDefault();
       this.D = false;
     });
     document.getElementById("btnKeyG").addEventListener("touchstart", (e) => {
+      e.preventDefault();
       this.G = true;
     });
     document.getElementById("btnKeyG").addEventListener("touchend", (e) => {
+      e.preventDefault();
       this.G = false;
     });
   }

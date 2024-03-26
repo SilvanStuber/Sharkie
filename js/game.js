@@ -13,6 +13,7 @@ let arrowInfoContent = true;
 let spaceInfoContent = false;
 let dInfoContent = false;
 let gInfoContent = false;
+let intervalStop = false;
 
 /**
  * Initializes the game world and canvas. Assumes global `keyboard` for input handling.
@@ -87,6 +88,33 @@ function closeFullscreen() {
 }
 
 /**
+ * Attaches an event listener to the window that listens for resize events.
+ * This event listener is used to execute the `checkAndToggleIntervals` function
+ * whenever the window is resized.
+ */
+window.addEventListener("resize", checkAndToggleIntervals);
+
+/**
+ * Checks the current device and screen orientation. Based on these checks,
+ * it decides whether to start or stop intervals. Specifically:
+ * - If on a touch device (e.g., smartphones, tablets), it further checks the screen orientation.
+ * - For portrait orientation, it stops intervals using `stopIntervalFromArray()`.
+ * - For landscape orientation, if the game has started and intervals are stopped,
+ *   it starts intervals using `startIntervalFromArray()`.
+ */
+function checkAndToggleIntervals() {
+  if ('ontouchstart' in window|/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    if (window.matchMedia("(orientation: portrait)").matches) {
+      stopIntervalFromArray();
+    } else {
+      if (gameHasStarted && intervalStop) {
+        startIntervalFromArray();
+      }
+    }
+  }
+}
+
+/**
  * Sets the application's language based on the given parameter and then opens the information box.
  * If the language is set to "german", it sets `languageEnglish` to false, otherwise true.
  *
@@ -107,6 +135,8 @@ function setLanguage(language) {
  * Finally, it generates and displays the new content within the info box.
  */
 function openInfoBox() {
+  intervalStop = true;
+  stopIntervalFromArray();
   removeStyleInfoBox();
   if (arrowInfoContent) {
     document.getElementById("arrowLeftInfoBox").classList.add("d-none");
@@ -134,7 +164,11 @@ function removeStyleInfoBox() {
 function closeInfoBox() {
   document.getElementById("infobox").classList.add("d-none");
   resetVariablesInfoContent();
+  if (gameHasStarted) {
+    startIntervalFromArray();
+  }
   arrowInfoContent = true;
+  intervalStop = false;
 }
 
 /**

@@ -26,6 +26,14 @@ class StrongPinkJellyFish extends JellyFish {
     this.loadImage("./img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png");
     this.loadImages(this.IMAGES_PINK_JELLYFISH);
     this.loadImages(this.IMAGES_PINK_JELLYFISH_DEAD);
-    this.animate(this.IMAGES_PINK_JELLYFISH, this.IMAGES_PINK_JELLYFISH_DEAD);
+    this.animateContent();
+  }
+  
+  /**
+   * Animates content by initiating two key animations: moving an object left and cycling through character animations.
+   */
+  animateContent() {
+    setStoppableInterval(() => this.moveLeft(), 1000 / 60);
+    setStoppableInterval(() => this.animationCharacter(this.IMAGES_PINK_JELLYFISH, this.IMAGES_PINK_JELLYFISH_DEAD), 250);
   }
 }

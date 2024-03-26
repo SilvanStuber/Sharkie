@@ -28,6 +28,13 @@ class Coins extends MovableObject {
     this.x = this.positionierungObjecteX();
     this.y = this.positionierungObjecteY();
     this.loadImages(this.COINS_IMAGES);
+    this.animateContent();
+  }
+  
+  /**
+   * Initiates an animation sequence for displaying coin images. This method leverages `setStoppableInterval` to cycle through an array of coin images, creating an animation effect.
+   */
+  animateContent() {
     setStoppableInterval(() => this.playAnimation(this.COINS_IMAGES), 220);
   }
 }

@@ -22,8 +22,8 @@ function initLevel() {
       new StrongPinkJellyFish(),
       new StrongGreenJellyFish(),
       new StrongGreenJellyFish(),
-      new Endboss(),
     ],
+    [new Endboss()],
     [
       new BackgroundObject("./img/3. Background/Layers/5. Water/D2.png", -719),
       new BackgroundObject("./img/3. Background/Layers/4.Fondo 2/D2.png", -719),

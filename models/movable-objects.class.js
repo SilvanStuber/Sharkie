@@ -62,12 +62,14 @@ class MovableObject extends DrawableObject {
    * @param {Enemy} enemy - The enemy that inflicted the hit.
    */
   hit(enemy) {
-    this.validationHit(enemy);
-    if (this.energy < 0) {
-      this.energy = 0;
-    } else {
-      this.lastHit = new Date().getTime();
-      this.damageFromWhichEnemy = enemy;
+    if (!intervalStop) {
+      this.validationHit(enemy);
+      if (this.energy < 0) {
+        this.energy = 0;
+      } else {
+        this.lastHit = new Date().getTime();
+        this.damageFromWhichEnemy = enemy;
+      }
     }
   }
 

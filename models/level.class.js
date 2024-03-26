@@ -16,8 +16,9 @@ class Level {
    * @param {Object} statusBar - Status bar object.
    * @param {Object} endScreen - End screen object.
    */
-  constructor(enemies, backgroundObjects, coins, poisonBottle, statusBar, endScreen) {
+  constructor(enemies, endboss, backgroundObjects, coins, poisonBottle, statusBar, endScreen) {
     this.enemies = enemies;
+    this.endboss = endboss;
     this.backgroundObjects = backgroundObjects;
     this.coins = coins;
     this.poisonBottle = poisonBottle;

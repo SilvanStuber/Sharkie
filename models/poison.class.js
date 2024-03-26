@@ -31,6 +31,13 @@ class Poison extends MovableObject {
     this.x = this.positionierungObjecteX();
     this.y = this.positionierungObjecteY();
     this.loadImages(this.POISON_IMAGES);
+    this.animateContent();
+  }
+  
+  /**
+   * Initiates an animation sequence for displaying a series of poison images, creating a visual effect of a poison or hazardous substance animation.
+   */
+  animateContent() {
     setStoppableInterval(() => this.playAnimation(this.POISON_IMAGES), 220);
   }
 }

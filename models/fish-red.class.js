@@ -42,6 +42,13 @@ class FishRed extends Fish {
     this.x = this.positionierungObjecteX();
     this.y = this.positionierungObjecteY();
     this.speed = 0.15 + Math.random() * 0.3;
+    this.animateContent();
+  }
+
+  /**
+   * Animates content by initiating two key animations: moving an object left and cycling through character animations.
+   */
+  animateContent() {
     setStoppableInterval(() => this.moveLeft(), 1000 / 60);
     setStoppableInterval(
       () => this.animate(this.IMAGES_RED_FISH_DEAD, this.IMAGES_RED_FISH_TRANSITION, this.IMAGES_RED_FISH_BUBBLE_SWIM, this.IMAGES_RED_FISH_SWIM),

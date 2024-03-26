@@ -19,8 +19,6 @@ class JellyFish extends MovableObject {
     this.x = this.positionierungObjecteX();
     this.y = this.positionierungObjecteY();
     this.speed = 0.15 + Math.random() * 0.3;
-    setStoppableInterval(() => this.moveLeft(), 1000 / 60);
-    setStoppableInterval(() => this.animationCharacter(imageAlive, imaggeDead), 250);
   }
 
   /**

@@ -72,6 +72,7 @@ class World {
     document.getElementById("startGameButton").classList.add("d-none");
     playGameSound();
     this.initGame();
+    checkTheScreenAndSetContent();
   }
 
   /**

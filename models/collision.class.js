@@ -34,10 +34,12 @@ class Collision {
   run(keyboard) {
     this.keyboard = keyboard;
     setInterval(() => {
-      this.checkCollisionsEnemy();
+      this.checkCollisionsEnemy(this.level.enemies);
+      this.checkCollisionsEnemy(this.level.endboss);
       this.checkCollisionsCoins();
       this.checkCollisionsPoison();
-      this.checkCollisionsBubble();
+      this.checkCollisionsBubble(this.level.enemies);
+      this.checkCollisionsBubble(this.level.endboss);
       this.attackEnemy();
     }, 250);
   }
@@ -46,8 +48,8 @@ class Collision {
    * Checks for collisions between the character and enemies.
    * If a collision occurs and the SPACE key is not pressed, the character is hit by the enemy.
    */
-  checkCollisionsEnemy() {
-    this.level.enemies.forEach((enemy) => {
+  checkCollisionsEnemy(enemies) {
+    enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
         if (enemy.energy > 0) {
           if (!this.keyboard.SPACE) {
@@ -92,10 +94,10 @@ class Collision {
   /**
    * Checks for collisions between throwable objects (bubbles) and enemies, and generates collision reactions.
    */
-  checkCollisionsBubble() {
+  checkCollisionsBubble(enemies) {
     let i = 0;
     this.throwableObjects.forEach((bubble) => {
-      this.level.enemies.forEach((enemy) => {
+      enemies.forEach((enemy) => {
         this.generateCollodingReactionEnemy(i, bubble, enemy);
       });
       i++;

@@ -39,6 +39,7 @@
     <script src="./models/endscreen.class.js"></script>
     <script src="./levels/level1.js"></script>
     <script src="./models/keyboard.class.js" defer></script>
+    <script src="./js/game-html.js" defer></script>
     <script src="./js/game.js" defer></script>
   </head>
   <body onload="init()">
@@ -76,7 +77,7 @@
         <img class="settingButton" id="fullScreenButton" src="./img/6.Botones/Key/fullscreen.png" onclick="addFullScreen()" />
         <img class="settingButton" id="infoButton" src="./img/6.Botones/Key/info.png" onclick="openInfoBox()" />
       </div>
-      <div>
+      <div id="touchButton">
         <button id="btnKeyUp" class="key-mobile key-mobile-up"></button>
         <button id="btnKeyDown" class="key-mobile key-mobile-down"></button>
         <button id="btnKeyLeft" class="key-mobile key-mobile-left"></button>
@@ -84,10 +85,10 @@
         <button id="btnKeyD" class="key-mobile key-mobile-d"></button>
         <button id="btnKeyG" class="key-mobile key-mobile-g"></button>
       </div>
-      <div class="button-space-container">
+      <div id="touchButtonSpace" class="button-space-container">
         <button id="btnKeySpace" class="key-mobile-space"></button>
       </div>
-      <img class="image-turn-screen" src="./img/7.menu/turnscreen.png" alt="turn screen" />
+      <img id="turnScreen" class="image-turn-screen" src="./img/7.menu/turnscreen.png" alt="turn screen" />
     </div>
   </body>
 </html>

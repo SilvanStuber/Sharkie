@@ -23,7 +23,6 @@ class Character extends CharacterImages {
   swimming_sound = new Audio("./audio/swim.mp3");
   slap_sound = new Audio("./audio/slap_sound.mp3");
   sleep_sound = new Audio("./audio/sleep_sound.mp3");
-  hit_sound_character = new Audio("./audio/hit_sound_chracter.mp3");
   inhale_sound = new Audio("./audio/inhale.mp3");
   exhale_sound = new Audio("./audio/exhale.mp3");
   poisonBar = new Collision();
@@ -179,7 +178,7 @@ class Character extends CharacterImages {
    * Plays the hurt animation and corresponding sound for the character.
    */
   hurtAnimation() {
-    playInteractionSound(this.hit_sound_character);
+    hurtSoundCharacter();
     if (this.checkFishAndEndbossClass()) {
       this.playAnimation(this.IMAGES_POISON_HURT);
     } else if (this.checkJellyFishClass()) {
@@ -336,7 +335,6 @@ class Character extends CharacterImages {
   soundCharacterPause() {
     this.swimming_sound.pause();
     this.sleep_sound.pause();
-    this.hit_sound_character.pause();
   }
 
   /**

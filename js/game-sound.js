@@ -1,6 +1,7 @@
 let GAME_SOUND = new Audio("./audio/game_loop.mp3");
 let GAME_SOUND_LAUGH = new Audio("./audio/laugh.mp3");
 let GAME_SOUND_ENDBOSS = new Audio("./audio/end_game_loop.mp3");
+let hit_sound_character = new Audio("./audio/hit_sound_chracter.mp3");
 let muteSound = false;
 let soundEndboss = false;
 
@@ -76,6 +77,7 @@ function stopGameSound() {
   GAME_SOUND_ENDBOSS.loop = false;
   GAME_SOUND.pause();
   GAME_SOUND_ENDBOSS.pause();
+  hit_sound_character.pause();
 }
 
 /**
@@ -108,5 +110,14 @@ function mute() {
 function playInteractionSound(sound) {
   if (!muteSound) {
     sound.play();
+  }
+}
+
+/**
+ * Plays the character's hurt sound effect if sound is not muted.
+ */
+function hurtSoundCharacter() {
+  if (!muteSound) {
+    hit_sound_character.play();
   }
 }

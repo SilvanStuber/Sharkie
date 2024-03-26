@@ -25,11 +25,12 @@ function stopGame() {
 }
 
 /**
- * Stops all intervals identified by their IDs stored in the `intervalIds` array. This function iterates through the array, 
- * calling `clearInterval()` on each ID, effectively stopping the execution of the associated intervals. 
+ * Stops all intervals identified by their IDs stored in the `intervalIds` array. This function iterates through the array,
+ * calling `clearInterval()` on each ID, effectively stopping the execution of the associated intervals.
  */
 function stopIntervalFromArray() {
   intervalStop = true;
+  stopGameSound();
   intervalIds.forEach((intervalId) => stopIntervalFromObject(intervalId));
 }
 
@@ -46,12 +47,13 @@ function stopIntervalFromObject(intervalId) {
  * Starts game intervals for characters, enemies, coins, poison bottles, and the end boss. It sets `intervalStop` to false.
  */
 function startIntervalFromArray() {
- world.character.animate();
- startArrayInterval(world.level.enemies);
- startArrayInterval(world.level.coins);
- startArrayInterval(world.level.poisonBottle);
- world.level.endboss[0].animate();
- intervalStop = false;
+  intervalStop = false;
+  playGameSound();
+  world.character.animate();
+  startArrayInterval(world.level.enemies);
+  startArrayInterval(world.level.coins);
+  startArrayInterval(world.level.poisonBottle);
+  world.level.endboss[0].animate();
 }
 
 /**
@@ -60,6 +62,6 @@ function startIntervalFromArray() {
  */
 function startArrayInterval(arrayContent) {
   for (let i = 0; i < arrayContent.length; i++) {
-    arrayContent[i].animateContent();    
+    arrayContent[i].animateContent();
   }
 }

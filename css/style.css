@@ -10,6 +10,7 @@ canvas {
 body {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   font-family: "Luckiest Guy", Arial, Helvetica, sans-serif;
   font-style: normal;
@@ -266,7 +267,7 @@ body {
   position: absolute;
   height: 60%;
   width: 90%;
-  background-color: rgba(0,255,255, 0.7);
+  background-color: rgba(0,255,255, 0.8);
   padding-top: 12px;
   border-radius: 24px;
 }

@@ -335,6 +335,7 @@ class Character extends CharacterImages {
   soundCharacterPause() {
     this.swimming_sound.pause();
     this.sleep_sound.pause();
+    hurtSoundCharacterStop();
   }
 
   /**

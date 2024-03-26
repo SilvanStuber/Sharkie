@@ -121,3 +121,10 @@ function hurtSoundCharacter() {
     hit_sound_character.play();
   }
 }
+
+/**
+ * Stop the character's hurt sound effect.
+ */
+function hurtSoundCharacterStop() {
+    hit_sound_character.pause();
+}

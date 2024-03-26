@@ -103,7 +103,7 @@ window.addEventListener("resize", checkAndToggleIntervals);
  *   it starts intervals using `startIntervalFromArray()`.
  */
 function checkAndToggleIntervals() {
-  if ('ontouchstart' in window|/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+  if (("ontouchstart" in window) | /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
     if (window.matchMedia("(orientation: portrait)").matches) {
       stopIntervalFromArray();
     } else {

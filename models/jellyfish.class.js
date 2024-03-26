@@ -15,7 +15,7 @@ class JellyFish extends MovableObject {
    * @param {string[]} imageAlive - The array of images for the alive animation.
    * @param {string[]} imageDead - The array of images for the dead animation.
    */
-  animate(imageAlive, imaggeDead) {
+  animate() {
     this.x = this.positionierungObjecteX();
     this.y = this.positionierungObjecteY();
     this.speed = 0.15 + Math.random() * 0.3;

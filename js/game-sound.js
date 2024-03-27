@@ -79,6 +79,7 @@ function stopGameSound() {
   GAME_SOUND.pause();
   GAME_SOUND_ENDBOSS.pause();
   hit_sound_character.pause();
+  sleep_sound.pause();
 }
 
 /**

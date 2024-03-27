@@ -20,7 +20,9 @@ function setStoppableInterval(fn, time) {
 function stopGame() {
   setTimeout(() => {
     stopGameSound();
-    this.stopIntervalFromArray();
+    stopIntervalFromArray();
+    gameHasStarted = false;
+    gameIsFinished = true;
   }, 2500);
 }
 
@@ -48,13 +50,15 @@ function stopIntervalFromObject(intervalId) {
  * Starts game intervals for characters, enemies, coins, poison bottles, and the end boss. It sets `intervalStop` to false.
  */
 function startIntervalFromArray() {
-  intervalStop = false;
-  playGameSound();
-  world.character.animate();
-  startArrayInterval(world.level.enemies);
-  startArrayInterval(world.level.coins);
-  startArrayInterval(world.level.poisonBottle);
-  world.level.endboss[0].animate();
+  if (gameHasStarted) {
+    intervalStop = false;
+    playGameSound();
+    world.character.animate();
+    startArrayInterval(world.level.enemies);
+    startArrayInterval(world.level.coins);
+    startArrayInterval(world.level.poisonBottle);
+    world.level.endboss[0].animate();
+  }
 }
 
 /**

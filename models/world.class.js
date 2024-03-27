@@ -68,6 +68,7 @@ class World {
    */
   startGame() {
     this.loadDateGame();
+    gameIsFinished = false;
     gameHasStarted = true;
     document.getElementById("startGameButton").classList.add("d-none");
     playGameSound();

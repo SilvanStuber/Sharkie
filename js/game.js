@@ -7,6 +7,7 @@ let keyboard = new Keyboard();
 let endbossDead = false;
 let characterDead = false;
 let gameHasStarted = false;
+let gameIsFinished = false;
 let fullScreenIsActive = false;
 let languageEnglish = true;
 let arrowInfoContent = true;
@@ -14,6 +15,7 @@ let spaceInfoContent = false;
 let dInfoContent = false;
 let gInfoContent = false;
 let intervalStop = false;
+let infoBoxOpen = false;
 
 /**
  * Initializes the application, setting up the canvas, world, and UI elements for the game.
@@ -93,11 +95,12 @@ function closeFullscreen() {
 
 /**
  * Periodically checks the screen and sets content accordingly.
- * @function
  */
 function checkScreen() {
   setInterval(() => {
-    checkTheScreenAndSetContent();
+    if (!infoBoxOpen && !gameIsFinished) {
+      checkTheScreenAndSetContent();
+    } 
   }, 125);
 }
 
@@ -193,6 +196,8 @@ function setLanguage(language) {
  * Finally, it generates and displays the new content within the info box.
  */
 function openInfoBox() {
+  infoBoxOpen = true;
+  stopIntervalFromArray();
   removeStyleInfoBox();
   if (arrowInfoContent) {
     document.getElementById("arrowLeftInfoBox").classList.add("d-none");
@@ -221,6 +226,8 @@ function closeInfoBox() {
   document.getElementById("infobox").classList.add("d-none");
   resetVariablesInfoContent();
   arrowInfoContent = true;
+  startIntervalFromArray();
+  infoBoxOpen = false;
 }
 
 /**

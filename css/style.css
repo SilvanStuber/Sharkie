@@ -29,8 +29,10 @@ body {
 }
 
 #fullscreen {
-  display: flex;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #tryAgainButton {
@@ -259,17 +261,11 @@ body {
   right: 70px;
 }
 
- #fullscreen {
-  display: flex;
-  justify-content: center;
-  align-items: center;
- }
-
 .image-turn-screen {
   position: absolute;
   height: 90%;
   width: 90%;
-  background-color: rgb(4,84,147, 0.9);
+  background-color: rgb(4, 84, 147, 0.9);
   box-shadow: 10px 5px 5px rgba(4, 84, 147, 0.5);
   padding-top: 12px;
   border-radius: 24px;

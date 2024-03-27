@@ -114,7 +114,7 @@ function checkScreen() {
  */
 function checkTheScreenAndSetContent() {
   if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-    setTouchConent();
+    setTouchConent();  
   } else {
     removeTouchContent();
     if (gameHasStarted && intervalStop) {
@@ -131,6 +131,7 @@ function checkTheScreenAndSetContent() {
  * turn device prompt.
  */
 function setTouchConent() {
+  document.getElementById("fullScreenButton").classList.add("d-none");
   if (window.matchMedia("(orientation: portrait)").matches) {
     addTurnDevice();
     stopIntervalFromArray();
@@ -154,9 +155,8 @@ function addTurnDevice() {
 }
 
 /**
- * Hides the device rotation prompt and shows touch interaction elements by managing CSS classes. It reverses the actions taken by the `addTurnDevice` function,
- * making it suitable for scenarios where the device orientation is now acceptable, or touch interactions are required.
- *
+ * Removes the "turn device" screen by hiding the turn screen element and making both the touch button and the touch button space visible.
+ * This is typically used to adapt the UI when the device orientation or a specific condition triggers the need to switch from a "turn device" prompt to interactive elements.
  */
 function removeTurnDevice() {
   document.getElementById("turnScreen").classList.add("d-none");
@@ -173,6 +173,7 @@ function removeTouchContent() {
   document.getElementById("turnScreen").classList.add("d-none");
   document.getElementById("touchButton").classList.add("d-none");
   document.getElementById("touchButtonSpace").classList.add("d-none");
+  document.getElementById("fullScreenButton").classList.remove("d-none");
 }
 
 /**

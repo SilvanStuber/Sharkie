@@ -29,9 +29,10 @@ function stopGame() {
  * calling `clearInterval()` on each ID, effectively stopping the execution of the associated intervals.
  */
 function stopIntervalFromArray() {
-  intervalStop = true;
   stopGameSound();
   intervalIds.forEach((intervalId) => stopIntervalFromObject(intervalId));
+  intervalStop = true;
+  intervalIds = [];
 }
 
 /**

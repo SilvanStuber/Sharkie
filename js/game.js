@@ -92,9 +92,8 @@ function closeFullscreen() {
 }
 
 /**
- * Attaches an event listener to the window that listens for resize events.
- * This event listener is used to execute the `checkAndToggleIntervals` function
- * whenever the window is resized.
+ * Periodically checks the screen and sets content accordingly.
+ * @function
  */
 function checkScreen() {
   setInterval(() => {
@@ -122,8 +121,11 @@ function checkTheScreenAndSetContent() {
 }
 
 /**
- * Adjusts the UI and functionality for touch-enabled devices based on the current orientation. In portrait mode, prompts users to turn their device and stops intervals.
- * In landscape mode, resumes intervals if conditions are met and removes the turn device prompt.
+ * Adjusts the UI and functionality for touch-enabled devices based on the 
+ * current orientation. In portrait mode, prompts users to turn their device 
+ * and stops intervals.
+ * In landscape mode, resumes intervals if conditions are met and removes the 
+ * turn device prompt.
  */
 function setTouchConent() {
   if (window.matchMedia("(orientation: portrait)").matches) {
@@ -191,8 +193,6 @@ function setLanguage(language) {
  * Finally, it generates and displays the new content within the info box.
  */
 function openInfoBox() {
-  intervalStop = true;
-  stopIntervalFromArray();
   removeStyleInfoBox();
   if (arrowInfoContent) {
     document.getElementById("arrowLeftInfoBox").classList.add("d-none");
@@ -220,11 +220,7 @@ function removeStyleInfoBox() {
 function closeInfoBox() {
   document.getElementById("infobox").classList.add("d-none");
   resetVariablesInfoContent();
-  if (gameHasStarted) {
-    startIntervalFromArray();
-  }
   arrowInfoContent = true;
-  intervalStop = false;
 }
 
 /**

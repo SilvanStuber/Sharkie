@@ -24,6 +24,7 @@ function init() {
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);
   removeTouchContent();
+  checkScreen();
 }
 
 /**
@@ -95,7 +96,11 @@ function closeFullscreen() {
  * This event listener is used to execute the `checkAndToggleIntervals` function
  * whenever the window is resized.
  */
-window.addEventListener("resize", checkTheScreenAndSetContent);
+function checkScreen() {
+  setInterval(() => {
+    checkTheScreenAndSetContent();
+  }, 125);
+}
 
 /**
  * Checks the current screen's touch capability and user agent to determine content and functionality adjustments based on device orientation. It triggers different actions for touch-based devices depending on whether the device is in portrait or landscape mode. For non-touch devices, it removes touch-specific content.
@@ -117,7 +122,7 @@ function checkTheScreenAndSetContent() {
 }
 
 /**
- * Adjusts the UI and functionality for touch-enabled devices based on the current orientation. In portrait mode, prompts users to turn their device and stops intervals. 
+ * Adjusts the UI and functionality for touch-enabled devices based on the current orientation. In portrait mode, prompts users to turn their device and stops intervals.
  * In landscape mode, resumes intervals if conditions are met and removes the turn device prompt.
  */
 function setTouchConent() {

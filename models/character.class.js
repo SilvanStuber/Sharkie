@@ -16,13 +16,13 @@ class Character extends CharacterImages {
   playAttack;
   timeWithoutMovement = 0;
   attackImageCounter = 0;
+  isAsleep = 0;
   bubbleActive = false;
   bubbleMoves = false;
   bubbleInflated = false;
   chracterIsDead = false;
   swimming_sound = new Audio("./audio/swim.mp3");
   slap_sound = new Audio("./audio/slap_sound.mp3");
-  sleep_sound = new Audio("./audio/sleep_sound.mp3");
   inhale_sound = new Audio("./audio/inhale.mp3");
   exhale_sound = new Audio("./audio/exhale.mp3");
   poisonBar = new Collision();
@@ -334,7 +334,7 @@ class Character extends CharacterImages {
    */
   soundCharacterPause() {
     this.swimming_sound.pause();
-    this.sleep_sound.pause();
+    sleepSoundCharacterStop();
     hurtSoundCharacterStop();
   }
 
@@ -368,7 +368,7 @@ class Character extends CharacterImages {
   sleepAnimation() {
     if (this.isAsleep > 10) {
       this.playAnimation(this.IMAGES_SLEEP);
-      playInteractionSound(this.sleep_sound);
+      sleepSoundCharacter();
     } else {
       this.playAnimation(this.IMAGES_GOSLEEP);
     }

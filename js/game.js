@@ -305,5 +305,3 @@ function resetVariablesInfoContent() {
   dInfoContent = false;
   gInfoContent = false;
 }
-
-

@@ -2,6 +2,7 @@ let GAME_SOUND = new Audio("./audio/game_loop.mp3");
 let GAME_SOUND_LAUGH = new Audio("./audio/laugh.mp3");
 let GAME_SOUND_ENDBOSS = new Audio("./audio/end_game_loop.mp3");
 let hit_sound_character = new Audio("./audio/hit_sound_chracter.mp3");
+let sleep_sound = new Audio("./audio/sleep_sound.mp3");
 let muteSound = false;
 let soundEndboss = false;
 
@@ -127,4 +128,20 @@ function hurtSoundCharacter() {
  */
 function hurtSoundCharacterStop() {
     hit_sound_character.pause();
+}
+
+/**
+ * Plays the character's sleep sound effect if sound is not muted.
+ */
+function sleepSoundCharacter() {
+  if (!muteSound) {
+    sleep_sound.play();
+  }
+}
+
+/**
+ * Stop the character's sleep sound effect.
+ */
+function sleepSoundCharacterStop() {
+  sleep_sound.pause();
 }

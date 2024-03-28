@@ -124,11 +124,10 @@ function checkTheScreenAndSetContent() {
 }
 
 /**
- * Adjusts the UI and functionality for touch-enabled devices based on the 
- * current orientation. In portrait mode, prompts users to turn their device 
- * and stops intervals.
- * In landscape mode, resumes intervals if conditions are met and removes the 
- * turn device prompt.
+ * Adjusts the UI for touch interactions and manages game intervals based on device orientation.
+ * It hides the full screen button. If the device is in portrait orientation, it prompts the user to turn the device
+ * and stops any ongoing intervals. If in landscape orientation and the game has started with intervals stopped, it restarts the intervals.
+ * Finally, it ensures the UI is adjusted for gameplay by calling removeTurnDevice in landscape mode.
  */
 function setTouchConent() {
   document.getElementById("fullScreenButton").classList.add("d-none");

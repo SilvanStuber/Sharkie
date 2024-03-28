@@ -28,6 +28,8 @@ class World {
     this.keyboard = keyboard;
     this.initGame();
     this.setWorld();
+    this.loadDateGame();
+    stopIntervalFromArray();
   }
 
   /**
@@ -67,7 +69,6 @@ class World {
    * Starts the game by loading game data, setting the game state, hiding the start game button, playing game sounds, and initializing the game.
    */
   startGame() {
-    this.loadDateGame();
     gameIsFinished = false;
     gameHasStarted = true;
     document.getElementById("startGameButton").classList.add("d-none");

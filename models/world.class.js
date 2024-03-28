@@ -75,6 +75,7 @@ class World {
     playGameSound();
     this.initGame();
     checkTheScreenAndSetContent();
+    this.renderTouchKey();
   }
 
   /**
@@ -85,7 +86,6 @@ class World {
     this.level = level1;
     this.checkColliding = new Collision(this.level, this.character, this.throwableObjects);
     this.checkColliding.run(this.keyboard);
-    this.renderTouchKey();
   }
 
   /**

@@ -51,9 +51,9 @@ class Character extends CharacterImages {
    */
   animate() {
     setStoppableInterval(() => this.moveCharacter(), 1000 / 60);
-    setStoppableInterval(() => this.animationCharacter(), 250);
+    setStoppableInterval(() => this.animationCharacter(), 500);
     setStoppableInterval(() => this.attackAnimationCharacter(), 125);
-    setStoppableInterval(() => this.animationBubble(), 125);
+    setStoppableInterval(() => this.animationBubble(), 1000 / 60);
     setStoppableInterval(() => this.resetSleepValue(), 125);
     setStoppableInterval(() => this.setGlobalPositionCharacter(), 125);
   }
@@ -159,7 +159,7 @@ class Character extends CharacterImages {
    * Animates the character based on game state and keyboard input.
    */
   animationCharacter() {
-    if (gameHasStarted) {
+    if (gameHasStarted && !this.bubbleActive) {
       this.soundCharacterPause();
       if (this.isDead()) {
         this.animationDead();
@@ -270,7 +270,7 @@ class Character extends CharacterImages {
    * Generates either a regular bubble or a poison bubble depending on keyboard input.
    */
   generateAnimationBubble(typeOfBubble, idOfInterval) {
-    if (this.attackImageCounter < 7) {
+    if (this.attackImageCounter < 8) {
       if (typeOfBubble == "poisionBubble") {
         this.generatePoisonBubble();
       } else if (typeOfBubble == "normalBubble") {
@@ -288,7 +288,7 @@ class Character extends CharacterImages {
    */
   generatePoisonBubble() {
     this.playSingeleAnimation(this.IMAGES_BLOW_UP_BUBBLE_POISON, this.attackImageCounter);
-    if (this.attackImageCounter == 6) {
+    if (this.attackImageCounter == 7) {
       world.generateThrowObjects("poisionBubble");
       world.checkColliding.poisonValue -= 1;
     }
@@ -301,7 +301,7 @@ class Character extends CharacterImages {
    */
   generateBubble() {
     this.playSingeleAnimation(this.IMAGES_BLOW_UP_BUBBLE, this.attackImageCounter);
-    if (this.attackImageCounter == 6) {
+    if (this.attackImageCounter == 7) {
       world.generateThrowObjects("normalBubble");
     }
   }
